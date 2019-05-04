@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:droptune/models/track.dart';
 
 class Playlist{
 
-  Playlist(this.id, this.name, this.tracks);
+  Playlist({this.id, @required this.name, @required this.tracks});
 
   final int id;
   final String name;
