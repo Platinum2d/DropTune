@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:droptune/models/Artist.dart';
+import 'package:droptune/models/author.dart';
 
 class Track {
   Track(
@@ -18,6 +18,6 @@ class Track {
   final String name;
   final int duration;
   final String path;
-  final List<Artist> authors;
+  final List<Author> authors;
 /*final User user;*/
 }

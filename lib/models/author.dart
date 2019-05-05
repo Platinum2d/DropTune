@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:droptune/models/track.dart';
 
-class Artist{
+class Author{
 
-  Artist({this.id, @required this.name, @required this.tracks});
+  Author({this.id, @required this.name, @required this.tracks});
 
   final int id;
   final String name;
