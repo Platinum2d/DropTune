@@ -45,8 +45,11 @@ flutter:
     - assets/images/droptune_logo.png
     - assets/images/login_background.png
     - assets/images/droptune_logo_login.png
+    - assets/images/default_song_image.jpg
+    - assets/images/all_tracks.png
     - assets/fonts/Poppins-Regular.ttf
     - assets/fonts/Poppins-Bold.ttf
+    - assets/fonts/Poppins-Medium.ttf
 
   #  - images/a_dot_ham.jpeg
 
@@ -65,8 +68,8 @@ flutter:
   - family: Poppins
     fonts:
     - asset: assets/fonts/Poppins-Regular.ttf
-    - asset: assets/fonts/Poppins-Bold.ttf
-      weight: 700
+    - asset: assets/fonts/Poppins-Medium.ttf
+      weight: 300
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages

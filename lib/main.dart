@@ -17,18 +17,21 @@ void main() {
 }
 
 class DroptuneApp extends StatelessWidget {
-  double inputRadius = 30.0;
-  double buttonRadius = 20.0;
+  final double inputRadius = 30.0;
+  final double buttonRadius = 20.0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+          backgroundColor: Colors.white,
           primaryColor: Color(getColor("#11d6f8")),
           brightness: Brightness.light,
           fontFamily: "Poppins",
           buttonColor: Color(getColor("#d9ffff")),
+          appBarTheme:
+              AppBarTheme(color: Color(getColor("#fcfcfc")), elevation: 0),
           buttonTheme: ButtonThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(buttonRadius))),

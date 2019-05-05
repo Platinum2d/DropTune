@@ -1,3 +1,6 @@
+import 'package:droptune/interfaces/pages/music_page.dart';
+import 'package:droptune/interfaces/pages/playlist_page.dart';
+import 'package:droptune/interfaces/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,16 +21,33 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<Widget> _pages = [
-    Center(
-      child: Text("Musica"),
-    ),
-    Center(
-      child: Text("Playlist"),
-    ),
-    Center(
-      child: Text("Profilo"),
-    )
+    MusicPage(),
+    PlaylistPage(),
+    ProfilePage()
   ];
+
+  BottomNavigationBar _buildNavigationBar(){
+    return BottomNavigationBar(
+        onTap: (currentIndex) {
+          _pageController.animateToPage(currentIndex,
+              duration: Duration(microseconds: 500), curve: Curves.easeInSine);
+        },
+        currentIndex: _currentIndex,
+        items: _navigationBarItems);
+  }
+
+  PageView _buildPageView(){
+    return PageView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: _pageController,
+      onPageChanged: (newIndex) {
+        setState(() {
+          _currentIndex = newIndex;
+        });
+      },
+      children: _pages,
+    );
+  }
 
   @override
   void initState() {
@@ -44,25 +64,11 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Droptune"),
+        centerTitle: true,
+        title: Text("Droptune", style: TextStyle(fontWeight: FontWeight.w500),),
       ),
-      body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        onPageChanged: (newIndex) {
-          setState(() {
-            _currentIndex = newIndex;
-          });
-        },
-        children: _pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (currentIndex) {
-            _pageController.animateToPage(currentIndex,
-                duration: Duration(microseconds: 500), curve: Curves.easeInSine);
-          },
-          currentIndex: _currentIndex,
-          items: _navigationBarItems),
+      body: _buildPageView(),
+      bottomNavigationBar: _buildNavigationBar(),
     );
   }
 }
