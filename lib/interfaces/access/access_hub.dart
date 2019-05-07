@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AccessBridgePage extends StatelessWidget {
+class AccessHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +23,10 @@ class AccessBridgePage extends StatelessWidget {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(bottom: 15),
+                  padding: EdgeInsets.only(bottom: 25),
                   child: SizedBox(
                     width: 270,
-                    height: 40,
+                    height: 45,
                     child: FlatButton(
                       color: Colors.lightBlue,
                       child: Text(
@@ -42,20 +42,40 @@ class AccessBridgePage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 25),
+                  child: SizedBox(
+                    width: 270,
+                    height: 45,
+                    child: FlatButton(
+                      color: Colors.white,
+                      child: Text(
+                        "SIGN IN",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 15),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/access/login');
+                      },
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: 270,
-                  height: 40,
+                  height: 45,
                   child: FlatButton(
-                    color: Colors.white70,
+                    color: Colors.white54,
                     child: Text(
-                      "SIGN IN",
+                      "USE OFFLINE",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.black54,
                           fontSize: 15),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/access/login');
+                      Navigator.of(context).pushReplacementNamed('/pages/main_page');
                     },
                   ),
                 )

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:droptune/interfaces/splash.dart';
 import 'package:droptune/interfaces/access/login.dart';
 import 'package:droptune/interfaces/access/register.dart';
-import 'package:droptune/interfaces/access/access_bridge.dart';
+import 'package:droptune/interfaces/access/access_hub.dart';
 import 'package:droptune/interfaces/pages/main_page.dart';
 
 int getColor(String hex) {
@@ -54,7 +54,7 @@ class DroptuneApp extends StatelessWidget {
         '/home': (BuildContext context) => SplashPage(),
         '/access/login': (BuildContext context) => LoginPage(),
         '/access/register': (BuildContext context) => RegisterPage(),
-        '/access/access_bridge': (BuildContext context) => AccessBridgePage(),
+        '/access/access_bridge': (BuildContext context) => AccessHubPage(),
         '/pages/main_page': (BuildContext context) => MainPage()
       },
     );
