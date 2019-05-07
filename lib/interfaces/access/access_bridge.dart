@@ -48,7 +48,7 @@ class AccessBridgePage extends StatelessWidget {
                   child: FlatButton(
                     color: Colors.white70,
                     child: Text(
-                      "LOGIN",
+                      "SIGN IN",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,

@@ -4,9 +4,10 @@ import 'package:droptune/models/track.dart';
 
 class Playlist{
 
-  Playlist({this.id, @required this.name, @required this.tracks});
+  Playlist({this.id, @required this.coverImage, @required this.name, @required this.tracks});
 
   final int id;
+  final AssetImage coverImage;
   final String name;
   final List<Track> tracks;
 }

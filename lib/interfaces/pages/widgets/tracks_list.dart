@@ -28,9 +28,12 @@ class TracksList extends StatelessWidget {
     if (tracks.length > 0)
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          return TrackEntry(
-            track: tracks[index],
-            trailingAction: trailingAction,
+          return Padding(
+            child: TrackEntry(
+              track: tracks[index],
+              trailingAction: trailingAction,
+            ),
+            padding: EdgeInsets.only(bottom: 7),
           );
         },
         itemCount: tracks.length,

@@ -46,6 +46,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  marquee:
+    dependency: "direct main"
+    description:
+      name: marquee
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
+  marquee_flutter:
+    dependency: "direct main"
+    description:
+      name: marquee_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   matcher:
     dependency: transitive
     description:

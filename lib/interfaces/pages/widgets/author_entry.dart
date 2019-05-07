@@ -32,18 +32,19 @@ class AuthorEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          leading: _buildLeadingText(),
-          title: Text(author.name),
-          trailing:
-              IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
-        ),
-        Divider(
-          color: Colors.grey,
-        )
-      ],
-    );
+    return
+      Padding(
+        padding: EdgeInsets.only(top: 10),
+        child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: _buildLeadingText(),
+            title: Text(author.name),
+            trailing:
+            IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 10),)
+        ],
+      ),);
   }
 }

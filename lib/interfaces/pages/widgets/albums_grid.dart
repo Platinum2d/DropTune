@@ -24,15 +24,17 @@ class AlbumsGrid extends StatelessWidget {
       authors += author.name + ", ";
     });
 
-    return authors.substring(0, authors.length - 2);
+    return authors.length > 0 ? authors.substring(0, authors.length - 2) : "";
   }
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return Padding(
+      padding: EdgeInsets.only(bottom: 40),
+      child: GridView.builder(
         itemCount: albums.length,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,17 +43,17 @@ class AlbumsGrid extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 10),
                 child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  'assets/images/default_song_image.jpg',
-                  height: 100,
-                  width: 100,
-                ),
-              ),),
+                  borderRadius: BorderRadius.circular(60),
+                  child: Image.asset(
+                    'assets/images/default_song_image.jpg',
+                    height: 120,
+                    width: 120,
+                  ),
+                ),),
               Text(albums[index].name),
               Text(_buildAuthorsLabel(albums[index]))
             ],
           );
-        });
+        }),);
   }
 }

@@ -24,9 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
     return SizedBox(
       height: 40,
       width: 150,
-      child: RaisedButton(
-        color: Colors.white,
-        elevation: 0,
+      child: FlatButton(
+        color: Colors.white70,
         child: Text(
           "REGISTER",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -48,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: validator,
         onSaved: onSaved,
-        decoration: InputDecoration(labelText: text),
+        decoration: InputDecoration(hintText: text),
         obscureText: isPassword,
       ),
     );

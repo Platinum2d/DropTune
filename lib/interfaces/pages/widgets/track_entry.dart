@@ -17,7 +17,7 @@ class TrackEntry extends StatelessWidget {
       authors += author.name + ", ";
     });
 
-    return authors.substring(0, authors.length - 2);
+    return authors.length >= 2 ? authors.substring(0, authors.length - 2) : "Unknown";
   }
 
   @override
@@ -36,9 +36,7 @@ class TrackEntry extends StatelessWidget {
           trailing:
               IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
         ),
-        Divider(
-          color: Colors.grey,
-        )
+        //Padding(padding: EdgeInsets.only(bottom: 7),)
       ],
     );
   }

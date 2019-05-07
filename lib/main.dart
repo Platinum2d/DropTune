@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 import 'package:droptune/interfaces/splash.dart';
 import 'package:droptune/interfaces/access/login.dart';
@@ -17,11 +18,16 @@ void main() {
 }
 
 class DroptuneApp extends StatelessWidget {
-  final double inputRadius = 30.0;
+  final double inputRadius = 50.0;
   final double buttonRadius = 20.0;
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -36,10 +42,12 @@ class DroptuneApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(buttonRadius))),
           inputDecorationTheme: InputDecorationTheme(
+              isDense: true,
               isCollapsed: true,
               filled: true,
               fillColor: Color(getColor("#99f2fa")),
               border: OutlineInputBorder(
+                borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(inputRadius)))),
       home: SplashPage(),
       routes: {

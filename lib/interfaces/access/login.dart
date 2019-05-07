@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       child: TextFormField(
         validator: validator,
         onSaved: onSaved,
-        decoration: InputDecoration(labelText: text),
+        decoration: InputDecoration(hintText: text),
         obscureText: isPassword,
       ),
     );
