@@ -16,7 +16,7 @@ class Track {
   final AssetImage coverImage;
   final int remoteId;
   final String name;
-  final int duration;
+  final Duration duration;
   final String path;
   final List<Author> authors;
 /*final User user;*/

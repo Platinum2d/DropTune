@@ -1,8 +1,10 @@
 import 'package:droptune/interfaces/pages/music_page.dart';
+import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/playlist_page.dart';
 import 'package:droptune/interfaces/pages/profile_page.dart';
+import 'package:droptune/models/author.dart';
+import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -33,16 +35,24 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildNavigationBar() {
-    return Stack(
-      overflow: Overflow.visible,
-      alignment: new FractionalOffset(0, 0.0),
+    Track t = Track(
+        coverImage: AssetImage("assets/images/the_razors_edge.png"),
+        name: "The Razor's Edge",
+        duration: Duration(minutes: 3, seconds: 1),
+        path: '',
+        authors: <Author>[Author(name: 'AC/DC', tracks: <Track>[])]);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Visibility(
-          child: Positioned(
-            width: MediaQuery.of(context).size.width,
-            bottom: 60,
-            height: 50,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PlayingPage(t)));
+          },
+          child: Visibility(
             child: Container(
+              height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -74,8 +84,8 @@ class _MainPageState extends State<MainPage> {
               decoration: BoxDecoration(color: Color(0xfff4f8f9)),
               //decoration: BoxDecoration(color: Colors.red),
             ),
+            visible: overlayVisibility,
           ),
-          visible: overlayVisibility,
         ),
         BottomNavigationBar(
             onTap: (currentIndex) {

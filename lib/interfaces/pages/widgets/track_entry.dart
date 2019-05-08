@@ -1,3 +1,4 @@
+import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,11 @@ class TrackEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     String authors = _buildAuthorsLabel(track.authors);
 
-    return Column(
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlayingPage(track)));
+      },
+      child: Column(
       children: <Widget>[
         ListTile(
           leading: CircleAvatar(
@@ -34,10 +39,10 @@ class TrackEntry extends StatelessWidget {
           title: Text(track.name),
           subtitle: Text(authors),
           trailing:
-              IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
+          IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
         ),
         //Padding(padding: EdgeInsets.only(bottom: 7),)
       ],
-    );
+    ),);
   }
 }

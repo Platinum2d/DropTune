@@ -25,265 +25,187 @@ class _PlaylistPageState extends State<PlaylistPage> {
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
           Track(
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
               name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
-              path: "",
-              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
-          Track(
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              name: "The Razor's Edge",
-              duration: 0,
+              duration: Duration(minutes: 3, seconds: 1),
               path: "",
               authors: <Author>[Author(name: "AC/DC", tracks: [])]),
         ]),
@@ -353,7 +275,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   Widget _buildEmptyElement() {
     return Padding(
-        padding: EdgeInsets.only(right: 20),
+        padding: EdgeInsets.only(right: 0),
         child: Container(
             decoration: BoxDecoration(
                 border: Border(bottom: BorderSide(color: Colors.grey[300])))));
@@ -379,7 +301,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         ));
   }
 
-  Widget _buildAddPlaylistElement(){
+  Widget _buildAddPlaylistElement() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -402,23 +324,20 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 30),
-      child: GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) return _buildAllTracksElement();
-          if (index == 1) return _buildEmptyElement();
-          if (index == playlists.length + 2) return _buildAddPlaylistElement();
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (BuildContext context, int index) {
+        if (index == 0) return _buildAllTracksElement();
+        if (index == 1) return _buildEmptyElement();
+        if (index == playlists.length + 2) return _buildAddPlaylistElement();
 
-          Image image = _buildImage();
-          Text underText = _buildUnderText(index - 2);
+        Image image = _buildImage();
+        Text underText = _buildUnderText(index - 2);
 
-          return _buildGridItem(image, underText, playlists[index - 2]);
-        },
-        itemCount: playlists.length + 3,
-      ),
+        return _buildGridItem(image, underText, playlists[index - 2]);
+      },
+      itemCount: playlists.length + 3,
     );
   }
 }

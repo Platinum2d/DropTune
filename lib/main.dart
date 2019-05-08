@@ -13,7 +13,6 @@ int getColor(String hex) {
 }
 
 void main() {
-  //debugPaintSizeEnabled = true;
   runApp(DroptuneApp());
 }
 
@@ -47,7 +46,7 @@ class DroptuneApp extends StatelessWidget {
               filled: true,
               fillColor: Color(getColor("#99f2fa")),
               border: OutlineInputBorder(
-                borderSide: BorderSide.none,
+                  borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(inputRadius)))),
       home: SplashPage(),
       routes: {
@@ -55,7 +54,7 @@ class DroptuneApp extends StatelessWidget {
         '/access/login': (BuildContext context) => LoginPage(),
         '/access/register': (BuildContext context) => RegisterPage(),
         '/access/access_bridge': (BuildContext context) => AccessHubPage(),
-        '/pages/main_page': (BuildContext context) => MainPage()
+        '/pages/main_page': (BuildContext context) => MainPage(),
       },
     );
   }
