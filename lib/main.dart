@@ -8,10 +8,6 @@ import 'package:droptune/interfaces/access/register.dart';
 import 'package:droptune/interfaces/access/access_hub.dart';
 import 'package:droptune/interfaces/pages/main_page.dart';
 
-int getColor(String hex) {
-  return int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000;
-}
-
 void main() {
   runApp(DroptuneApp());
 }
@@ -31,12 +27,12 @@ class DroptuneApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           backgroundColor: Colors.white,
-          primaryColor: Color(getColor("#11d6f8")),
+          primaryColor: Color(0xff11d6f8),
           brightness: Brightness.light,
           fontFamily: "Poppins",
-          buttonColor: Color(getColor("#d9ffff")),
+          buttonColor: Color(0xffd9ffff),
           appBarTheme:
-              AppBarTheme(color: Color(getColor("#fcfcfc")), elevation: 0),
+              AppBarTheme(color: Color(0xfffcfcfc), elevation: 0),
           buttonTheme: ButtonThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(buttonRadius))),
@@ -44,7 +40,7 @@ class DroptuneApp extends StatelessWidget {
               isDense: true,
               isCollapsed: true,
               filled: true,
-              fillColor: Color(getColor("#99f2fa")),
+              fillColor: Color(0xff99f2fa),
               border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(inputRadius)))),
