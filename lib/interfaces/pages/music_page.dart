@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/widgets/albums_grid.dart';
+import 'package:droptune/interfaces/pages/albums_grid.dart';
 import 'package:droptune/interfaces/pages/widgets/authors_list.dart';
 import 'package:droptune/interfaces/pages/widgets/tracks_list.dart';
 import 'package:droptune/models/album.dart';
@@ -191,46 +191,61 @@ class MusicPage extends StatefulWidget {
   ];
 
   final List<Album> albums = [
-    Album(name: "The Razor's edge", tracks: <Track>[
-      Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          authors: <Author>[Author(name: "AC/DC", tracks: [])])
-    ]),
-    Album(name: "The Razor's edge", tracks: <Track>[
-      Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          authors: <Author>[Author(name: "AC/DC", tracks: [])])
-    ]),
-    Album(name: "The Razor's edge", tracks: <Track>[
-      Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          authors: <Author>[Author(name: "AC/DC", tracks: [])])
-    ]),
-    Album(name: "The Razor's edge", tracks: <Track>[
-      Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          authors: <Author>[Author(name: "AC/DC", tracks: [])])
-    ]),
-    Album(name: "The Razor's edge", tracks: <Track>[
-      Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          authors: <Author>[Author(name: "AC/DC", tracks: [])])
-    ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
   ];
 
   final List<Author> authors = [

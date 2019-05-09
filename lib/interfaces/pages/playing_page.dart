@@ -1,4 +1,3 @@
-import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +54,7 @@ class _PlayingPageState extends State<PlayingPage> {
       child: Slider(
           value: _sliderProgress,
           max: 100,
-          inactiveColor: Colors.transparent,
+          inactiveColor: Colors.grey[400],
           onChanged: (double newProgress) {
             setState(() {
               _sliderProgress = newProgress;
@@ -87,7 +86,25 @@ class _PlayingPageState extends State<PlayingPage> {
             flex: 40,
             child: Padding(
               padding: EdgeInsets.all(15),
-              child: Image.asset('assets/images/pause_play_button.png'),
+              child: GestureDetector(
+                onTap: (){
+                },
+                child: Container(
+                  alignment: Alignment(0, 0),
+                  child: Icon(
+                    Icons.pause,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          alignment: Alignment(0, 0),
+                          image: AssetImage(
+                              'assets/images/pause_play_button.png'))),
+                ),
+              ),
             )),
         Flexible(
             flex: 20,
@@ -133,7 +150,7 @@ class _PlayingPageState extends State<PlayingPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.only(bottom: 45),
                     child: _buildTitleAndSettings(),
                   ),
                   Padding(
