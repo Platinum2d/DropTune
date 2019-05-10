@@ -52,6 +52,7 @@ class _PlayingPageState extends State<PlayingPage> {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Slider(
+          activeColor: Colors.cyan,
           value: _sliderProgress,
           max: 100,
           inactiveColor: Colors.grey[400],
@@ -70,7 +71,7 @@ class _PlayingPageState extends State<PlayingPage> {
         Flexible(
             flex: 11,
             child: Padding(
-              padding: EdgeInsets.all(7),
+              padding: EdgeInsets.all(9),
               child: Image.asset('assets/images/shuffle_icon.png'),
             )),
         Flexible(
@@ -87,8 +88,7 @@ class _PlayingPageState extends State<PlayingPage> {
             child: Padding(
               padding: EdgeInsets.all(15),
               child: GestureDetector(
-                onTap: (){
-                },
+                onTap: () {},
                 child: Container(
                   alignment: Alignment(0, 0),
                   child: Icon(
@@ -115,7 +115,7 @@ class _PlayingPageState extends State<PlayingPage> {
         Flexible(
             flex: 11,
             child: Padding(
-              padding: EdgeInsets.all(7),
+              padding: EdgeInsets.all(9),
               child: Image.asset('assets/images/repeat_icon.png'),
             )),
       ],
@@ -147,6 +147,7 @@ class _PlayingPageState extends State<PlayingPage> {
                       image: currentTrack.coverImage,
                       fit: BoxFit.cover)),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Padding(
@@ -158,9 +159,17 @@ class _PlayingPageState extends State<PlayingPage> {
                     child: _buildSlider(context),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 45, left: 20, right: 20),
+                    padding: EdgeInsets.only(bottom: 20, left: 25, right: 25),
                     child: _buildControls(),
                   ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.black45,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      })
                 ],
               ),
             )

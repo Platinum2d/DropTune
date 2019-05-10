@@ -39,7 +39,7 @@ class AlbumDetails extends StatelessWidget{
               ),
             ];
           },
-          body: TracksList(tracks: album.tracks, trailingAction: () {},),
+          body: TracksList(tracks: album.tracks,),
         ));
   }
 }

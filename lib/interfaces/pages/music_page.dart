@@ -289,7 +289,6 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
         body: TabBarView(controller: controller, children: <Widget>[
           TracksList(
             tracks: widget.tracks,
-            trailingAction: () {},
           ),
           AlbumsGrid(
             albums: widget.albums,

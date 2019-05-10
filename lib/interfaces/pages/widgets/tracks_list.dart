@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class TracksList extends StatelessWidget {
   final List<Track> tracks;
-  final Function trailingAction;
 
-  TracksList({@required this.tracks, @required this.trailingAction});
+  TracksList({@required this.tracks});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,6 @@ class TracksList extends StatelessWidget {
           return Padding(
             child: TrackEntry(
               track: tracks[index],
-              trailingAction: trailingAction,
             ),
             padding: EdgeInsets.only(bottom: 7),
           );
