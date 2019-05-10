@@ -32,7 +32,7 @@ class DroptuneApp extends StatelessWidget {
           fontFamily: "Poppins",
           buttonColor: Color(0xffd9ffff),
           appBarTheme:
-              AppBarTheme(color: Color(0xfffcfcfc), elevation: 0),
+              AppBarTheme(color: Color(0xfffafafa), elevation: 0),
           buttonTheme: ButtonThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(buttonRadius))),
