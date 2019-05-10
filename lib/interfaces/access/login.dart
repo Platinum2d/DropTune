@@ -13,6 +13,8 @@ class _LoginPageState extends State<LoginPage> {
   bool _granted = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool dismissed = false;
+
   Widget _verticalSpace(double requiredSpace) {
     return SizedBox(
       height: requiredSpace,
@@ -31,7 +33,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           if (!_formKey.currentState.validate() || !_granted) return;
-          Navigator.of(context).popUntil(ModalRoute.withName('/access/access_bridge'));
+          Navigator.of(context)
+              .popUntil(ModalRoute.withName('/access/access_bridge'));
           Navigator.of(context).pushReplacementNamed('/pages/main_page');
         },
       ),
@@ -111,13 +114,23 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/images/login_background.png"))),
-      child: _buildForm(context),
-    ));
+    return Dismissible(
+        direction: DismissDirection.horizontal,
+        onResize: () {
+          if (dismissed) return;
+          Navigator.of(context).pop();
+          dismissed = true;
+        },
+        background:
+            DecoratedBox(decoration: BoxDecoration(color: Colors.white)),
+        key: Key('login'),
+        child: Scaffold(
+            body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/login_background.png"))),
+          child: _buildForm(context),
+        )));
   }
 }

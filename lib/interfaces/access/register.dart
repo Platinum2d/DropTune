@@ -14,6 +14,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String _confirmPassword = "";
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool dismissed = false;
+
   Widget _verticalSpace(double requiredSpace) {
     return SizedBox(
       height: requiredSpace,
@@ -111,13 +113,23 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/images/login_background.png"))),
-      child: _buildForm(),
-    ));
+    return Dismissible(
+        background:
+            DecoratedBox(decoration: BoxDecoration(color: Colors.white)),
+        onResize: () {
+          if (dismissed) return;
+          Navigator.of(context).pop();
+          dismissed = true;
+        },
+        direction: DismissDirection.horizontal,
+        key: Key('register'),
+        child: Scaffold(
+            body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/login_background.png"))),
+          child: _buildForm(),
+        )));
   }
 }
