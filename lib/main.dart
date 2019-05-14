@@ -1,3 +1,4 @@
+import 'package:droptune/misc/no_glow_scroll_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,13 @@ class DroptuneApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Droptune',
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: NoGlowScrollBehavior(),
+          child: child,
+        );
+      },
       theme: ThemeData(
           backgroundColor: Colors.white,
           primaryColor: Color(0xff03b8fa),
