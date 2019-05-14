@@ -324,20 +324,25 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   @override
   Widget build(BuildContext context) {
+    final int addingItems = 3;
+    final int lastIndex = playlists.length + addingItems - 1;
+    
     return GridView.builder(
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) return _buildAllTracksElement();
         if (index == 1) return _buildEmptyElement();
-        if (index == playlists.length + 2) return _buildAddPlaylistElement();
+        if (index == lastIndex) return _buildAddPlaylistElement();
+
+        int currentIndex = index - (addingItems - 1);
 
         Image image = _buildImage();
-        Text underText = _buildUnderText(index - 2);
+        Text underText = _buildUnderText(currentIndex);
 
-        return _buildGridItem(image, underText, playlists[index - 2]);
+        return _buildGridItem(image, underText, playlists[currentIndex]);
       },
-      itemCount: playlists.length + 3,
+      itemCount: playlists.length + addingItems,
     );
   }
 }
