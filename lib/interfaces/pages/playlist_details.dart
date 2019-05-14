@@ -14,6 +14,9 @@ class PlaylistDetailsPage extends StatelessWidget {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
+            iconTheme: IconThemeData(
+                color: innerBoxIsScrolled ? Colors.black : Colors.white),
+            elevation: 0,
             expandedHeight: 330.0,
             floating: false,
             pinned: true,
@@ -39,7 +42,9 @@ class PlaylistDetailsPage extends StatelessWidget {
           ),
         ];
       },
-      body: TracksList(tracks: playlist.tracks,),
+      body: TracksList(
+        tracks: playlist.tracks,
+      ),
     ));
   }
 }
