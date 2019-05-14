@@ -194,6 +194,7 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
+        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -319,17 +320,7 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              authors: <Author>[Author(name: "AC/DC", tracks: [])])
-        ]),
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
+        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -341,6 +332,7 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
+        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -352,6 +344,19 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
+        author: Author(name: "AC/DC", tracks: []),
+        tracks: <Track>[
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+        ]),
+    Album(
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        name: "The Razor's edge",
+        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
