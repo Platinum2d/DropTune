@@ -200,7 +200,121 @@ class MusicPage extends StatefulWidget {
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              authors: <Author>[Author(name: "AC/DC", tracks: [])])
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+          Track(
+              name: "Thunderstruck",
+              path: "",
+              duration: Duration(minutes: 3, seconds: 1),
+              coverImage: AssetImage('assets/images/default_song_image.jpg'),
+              authors: <Author>[Author(name: "AC/DC", tracks: [])]),
         ]),
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
@@ -295,7 +409,6 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
           ),
           AuthorsList(
             authors: widget.authors,
-            trailingAction: () {},
           )
         ]));
   }

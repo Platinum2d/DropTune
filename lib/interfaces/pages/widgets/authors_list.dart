@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class AuthorsList extends StatelessWidget {
   final List<Author> authors;
-  final Function trailingAction;
 
-  AuthorsList({@required this.authors, @required this.trailingAction});
+  AuthorsList({@required this.authors});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class AuthorsList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return AuthorEntry(
             author: authors[index],
-            trailingAction: trailingAction,
           );
         },
         itemCount: authors.length,

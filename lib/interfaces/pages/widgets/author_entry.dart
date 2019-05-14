@@ -1,13 +1,10 @@
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
-import 'package:droptune/models/track.dart';
-
 class AuthorEntry extends StatelessWidget {
   final Author author;
-  final Function trailingAction;
 
-  AuthorEntry({@required this.author, @required this.trailingAction});
+  AuthorEntry({@required this.author});
 
   Widget _buildLeadingText() {
     return Container(
@@ -32,19 +29,21 @@ class AuthorEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Padding(
-        padding: EdgeInsets.only(top: 10),
-        child: Column(
+    return Padding(
+      padding: EdgeInsets.only(top: 10),
+      child: Column(
         children: <Widget>[
           ListTile(
             leading: _buildLeadingText(),
             title: Text(author.name),
-            trailing:
-            IconButton(icon: Icon(Icons.settings), onPressed: trailingAction),
+            trailing: IconButton(
+                icon: Icon(Icons.settings), onPressed: (){},),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10),)
+          Padding(
+            padding: EdgeInsets.only(bottom: 10),
+          )
         ],
-      ),);
+      ),
+    );
   }
 }
