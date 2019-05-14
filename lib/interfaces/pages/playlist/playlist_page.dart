@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/playlist_details.dart';
+import 'package:droptune/interfaces/pages/playlist/playlist_details.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';

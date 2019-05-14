@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/album_details.dart';
+import 'package:droptune/interfaces/pages/album/album_details.dart';
 import 'package:droptune/models/album.dart';
 import 'package:flutter/material.dart';
 
