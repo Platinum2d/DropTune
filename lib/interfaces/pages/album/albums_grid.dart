@@ -34,7 +34,7 @@ class AlbumsGrid extends StatelessWidget {
                       )),
                 ),
               ),
-              Text(albums[index].author.name),
+              Text(albums[index].name),
             ],
           );
         });
