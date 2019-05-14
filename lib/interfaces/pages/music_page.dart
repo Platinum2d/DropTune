@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/albums_grid.dart';
+import 'package:droptune/interfaces/pages/album/albums_grid.dart';
 import 'package:droptune/interfaces/pages/widgets/authors_list.dart';
 import 'package:droptune/interfaces/pages/widgets/tracks_list.dart';
 import 'package:droptune/models/album.dart';
