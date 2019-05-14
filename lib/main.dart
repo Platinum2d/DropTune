@@ -27,7 +27,7 @@ class DroptuneApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           backgroundColor: Colors.white,
-          primaryColor: Color(0xff11d6f8),
+          primaryColor: Color(0xff03b8fa),
           brightness: Brightness.light,
           fontFamily: "Poppins",
           buttonColor: Color(0xffd9ffff),

@@ -48,43 +48,71 @@ class TrackEntry extends StatelessWidget {
         radius: 20,
         builder: (context) {
           return Container(
-            height: 300,
+              height: 300,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(100),
                       topRight: Radius.circular(100))),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: ListView(
-                  primary: false,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: _buildImageAndTitle(),
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: _buildImageAndTitle(),),
+                  Divider(
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      print("1");
+                    },
+                    leading: Image(
+                      alignment: Alignment(0, 0),
+                      image: AssetImage('assets/images/plus_icon.png'),
+                      height: 25,
+                      width: 25,
                     ),
-                    Divider(
-                      color: Colors.grey,
+                    title: Text("Add to playlist"),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      print("2");
+                    },
+                    leading: Image(
+                      color: Color(0xff03b8fa),
+                      alignment: Alignment(0, 0),
+                      image: AssetImage('assets/images/queue_icon.png'),
+                      height: 25,
+                      width: 25,
                     ),
-                    ListTile(
-                      onTap: () {},
-                      leading: Text("+"),
-                      title: Text("Add to playlist"),
+                    title: Text("Add to queue"),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      print("3");
+                    },
+                    leading: Image(
+                      alignment: Alignment(0, 0),
+                      image: AssetImage('assets/images/rename_icon.png'),
+                      height: 25,
+                      width: 25,
                     ),
-                    ListTile(
-                      onTap: () {},
-                      leading: Text("A|"),
-                      title: Text("Rename"),
+                    title: Text("Rename"),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      print("4");
+                    },
+                    leading: Image(
+                      alignment: Alignment(0, 0),
+                      image: AssetImage('assets/images/sync_icon.png'),
+                      height: 25,
+                      width: 25,
                     ),
-                    ListTile(
-                      onTap: () {},
-                      leading: Text("+"),
-                      title: Text("Synchronize"),
-                    ),
-                  ],
-                ),
+                    title: Text("Synchronize"),
+                  ),
+                ],
               ));
         });
   }

@@ -33,6 +33,11 @@ flutter:
     - assets/images/shuffle_icon.png
     - assets/images/pause_play_button.png
     - assets/images/the_razors_edge.png
+    - assets/images/desync_icon.png
+    - assets/images/sync_icon.png
+    - assets/images/plus_icon.png
+    - assets/images/rename_icon.png
+    - assets/images/queue_icon.png
     - assets/fonts/Poppins-Regular.ttf
     - assets/fonts/Poppins-Bold.ttf
     - assets/fonts/Poppins-Medium.ttf
