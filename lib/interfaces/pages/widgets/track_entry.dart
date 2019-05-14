@@ -1,5 +1,5 @@
 import 'package:droptune/interfaces/pages/playing_page.dart';
-import 'package:droptune/models/author.dart';
+import 'package:droptune/misc/droptune_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_modal/rounded_modal.dart';
 
@@ -9,18 +9,6 @@ class TrackEntry extends StatelessWidget {
   final Track track;
 
   TrackEntry({@required this.track});
-
-  String _buildAuthorsLabel(List<Author> authors) {
-    String authors = "";
-
-    track.authors.forEach((author) {
-      authors += author.name + ", ";
-    });
-
-    return authors.length >= 2
-        ? authors.substring(0, authors.length - 2)
-        : "Unknown";
-  }
 
   Widget _buildImageAndTitle() {
     return Row(
@@ -46,7 +34,7 @@ class TrackEntry extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              _buildAuthorsLabel(track.authors),
+              DroptuneUtils.buildAuthorsLabel(track),
             )
           ],
         )
@@ -103,7 +91,7 @@ class TrackEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String authors = _buildAuthorsLabel(track.authors);
+    String authors = DroptuneUtils.buildAuthorsLabel(track);
 
     return GestureDetector(
       child: Column(

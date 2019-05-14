@@ -1,3 +1,4 @@
+import 'package:droptune/misc/droptune_utils.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +20,6 @@ class _PlayingPageState extends State<PlayingPage> {
 
   _PlayingPageState(this.currentTrack);
 
-  String _buildAuthorsLabel(Track track) {
-    String authors = "";
-
-    track.authors.forEach((author) {
-      authors += author.name + ", ";
-    });
-
-    return authors.length >= 2
-        ? authors.substring(0, authors.length - 2)
-        : "Unknown";
-  }
-
   Widget _buildTitleAndSettings() {
     return Column(
       children: <Widget>[
@@ -39,7 +28,7 @@ class _PlayingPageState extends State<PlayingPage> {
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
         ),
-        Text(_buildAuthorsLabel(currentTrack),
+        Text(DroptuneUtils.buildAuthorsLabel(currentTrack),
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
