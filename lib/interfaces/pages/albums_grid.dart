@@ -42,27 +42,25 @@ class AlbumsGrid extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 10),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(60),
+                  borderRadius: BorderRadius.circular(15),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AlbumDetails(
-                                album: albums[index],
-                              )));
-                    },
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AlbumDetailsPage(
+                              album: albums[index],
+                              index: index,
+                            ))),
                     child: Hero(
                       tag: index,
-                      child: Image.asset(
-                        'assets/images/default_song_image.jpg',
-                        height: 120,
-                        width: 120,
+                      child: Image(
+                        image: albums[index].coverImage,
+                        height: 150,
+                        width: 150,
                       ),
                     ),
                   ),
                 ),
               ),
-              Text(albums[index].name),
-              Text(_buildAuthorsLabel(albums[index]))
+              Text(_buildAuthorsLabel(albums[index])),
             ],
           );
         });
