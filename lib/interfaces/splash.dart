@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
-  bool _isLogged = false;
+  final bool _isLogged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class SplashPage extends StatelessWidget {
     ));
 
     load(context);
-    
+
     return built;
   }
 
-  void load(BuildContext context) async{
+  void load(BuildContext context) async {
     await sleep();
     if (!_isLogged)
       Navigator.of(context).pushReplacementNamed('/access/access_bridge');
