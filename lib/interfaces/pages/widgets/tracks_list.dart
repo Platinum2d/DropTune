@@ -1,11 +1,13 @@
 import 'package:droptune/interfaces/pages/widgets/track_entry.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class TracksList extends StatelessWidget {
   final List<Track> tracks;
+  final Playlist playlist;
 
-  TracksList({@required this.tracks});
+  TracksList({@required this.tracks, this.playlist});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class TracksList extends StatelessWidget {
           return Padding(
             child: TrackEntry(
               track: tracks[index],
+              playlist: playlist,
             ),
             padding: EdgeInsets.only(bottom: 7),
           );

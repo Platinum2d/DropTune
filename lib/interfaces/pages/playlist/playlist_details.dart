@@ -44,6 +44,7 @@ class PlaylistDetailsPage extends StatelessWidget {
       },
       body: TracksList(
         tracks: playlist.tracks,
+        playlist: playlist,
       ),
     ));
   }

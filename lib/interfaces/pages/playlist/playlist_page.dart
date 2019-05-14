@@ -14,7 +14,110 @@ class PlaylistPage extends StatefulWidget {
 class _PlaylistPageState extends State<PlaylistPage> {
   final Playlist mainPlaylist = Playlist(
       name: "All tracks",
-      tracks: [],
+      tracks: [
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+        Track(
+            coverImage: AssetImage('assets/images/default_song_image.jpg'),
+            name: "The Razor's Edge",
+            duration: Duration(minutes: 3, seconds: 1),
+            path: "",
+            authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      ],
       coverImage: AssetImage('assets/images/all_tracks.png'));
 
   final List<Playlist> playlists = [
@@ -326,7 +429,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
   Widget build(BuildContext context) {
     final int addingItems = 3;
     final int lastIndex = playlists.length + addingItems - 1;
-    
+
     return GridView.builder(
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),

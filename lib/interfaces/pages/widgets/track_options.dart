@@ -1,5 +1,4 @@
 import 'package:droptune/misc/droptune_utils.dart';
-import 'package:droptune/misc/no_glow_scroll_behavior.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +63,7 @@ class TrackOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height: 335,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -103,6 +102,15 @@ class TrackOptions extends StatelessWidget {
                 },
                 leadingImage: AssetImage('assets/images/sync_icon.png'),
                 title: Text("Synchronize")),
+
+            playlist != null && playlist.name != "All tracks"
+                ? _buildTile(
+                    action: () {
+                      print("5");
+                    },
+                    leadingImage: AssetImage('assets/images/remove_icon.png'),
+                    title: Text("Remove from " + playlist.name))
+                : Container(),
           ],
         ));
   }

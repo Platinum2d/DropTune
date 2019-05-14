@@ -38,6 +38,7 @@ flutter:
     - assets/images/plus_icon.png
     - assets/images/rename_icon.png
     - assets/images/queue_icon.png
+    - assets/images/remove_icon.png
     - assets/fonts/Poppins-Regular.ttf
     - assets/fonts/Poppins-Bold.ttf
     - assets/fonts/Poppins-Medium.ttf
