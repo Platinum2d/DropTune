@@ -1,8 +1,11 @@
 import 'package:droptune/interfaces/pages/playlist/playlist_details.dart';
+import 'package:droptune/interfaces/pages/widgets/playlist_edit.dart';
+import 'package:droptune/interfaces/pages/widgets/track_options.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
+import 'package:rounded_modal/rounded_modal.dart';
 
 class PlaylistPage extends StatefulWidget {
   @override
@@ -350,7 +353,8 @@ class _PlaylistPageState extends State<PlaylistPage> {
     return Text(playlists[index].name);
   }
 
-  Widget _buildGridItem(Image image, Text underText, [Playlist playlist]) {
+  Widget _buildGridElement(Image image, Text underText, BuildContext context,
+      [Playlist playlist]) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -360,6 +364,16 @@ class _PlaylistPageState extends State<PlaylistPage> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: GestureDetector(
+              onLongPress: () {
+                showRoundedModalBottomSheet(
+                    context: context,
+                    radius: 20,
+                    builder: (context) {
+                      return PlaylistEditPage(
+                        playlist: playlist,
+                      );
+                    });
+              },
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => PlaylistDetailsPage(
                         playlist: playlist,
@@ -388,39 +402,72 @@ class _PlaylistPageState extends State<PlaylistPage> {
     return Padding(
         padding: EdgeInsets.only(left: 0),
         child: Container(
-          decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey[300]))),
-          child: _buildGridItem(
-              Image.asset(
-                'assets/images/all_tracks.png',
-                height: 135,
-                width: 135,
-              ),
-              Text(
-                "All tracks",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              mainPlaylist),
-        ));
+            decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey[300]))),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => PlaylistDetailsPage(
+                                playlist: mainPlaylist,
+                              ))),
+                      child: Hero(
+                        tag: mainPlaylist.name,
+                        child: Image.asset(
+                          'assets/images/all_tracks.png',
+                          height: 135,
+                          width: 135,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  "All tracks",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            )));
   }
 
-  Widget _buildAddPlaylistElement() {
+  Widget _buildAddPlaylistElement(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          child: Image.asset(
-            "assets/images/add_playlist_button.png",
-            height: 100,
-            width: 100,
-          ),
+          child: FlatButton(
+              onPressed: () {
+                showRoundedModalBottomSheet(
+                    context: context,
+                    radius: 20,
+                    builder: (context) {
+                      return PlaylistEditPage(
+                        playlist: null,
+                      );
+                    });
+              },
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    "assets/images/add_playlist_button.png",
+                    height: 80,
+                    width: 80,
+                  ),
+                  Text(
+                    "Add a playlist",
+                    style: TextStyle(color: Colors.grey[500]),
+                  )
+                ],
+              )),
           padding: EdgeInsets.only(bottom: 10),
         ),
-        Text(
-          "Add a playlist",
-          style: TextStyle(color: Colors.grey[500]),
-        )
       ],
     );
   }
@@ -436,14 +483,15 @@ class _PlaylistPageState extends State<PlaylistPage> {
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) return _buildAllTracksElement();
         if (index == 1) return _buildEmptyElement();
-        if (index == lastIndex) return _buildAddPlaylistElement();
+        if (index == lastIndex) return _buildAddPlaylistElement(context);
 
         int currentIndex = index - (addingItems - 1);
 
         Image image = _buildImage();
         Text underText = _buildUnderText(currentIndex);
 
-        return _buildGridItem(image, underText, playlists[currentIndex]);
+        return _buildGridElement(
+            image, underText, context, playlists[currentIndex]);
       },
       itemCount: playlists.length + addingItems,
     );
