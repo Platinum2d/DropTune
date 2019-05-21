@@ -1,4 +1,6 @@
+import 'package:droptune/interfaces/pages/queue_page.dart';
 import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,93 @@ class PlayingPage extends StatefulWidget {
 }
 
 class _PlayingPageState extends State<PlayingPage> {
+  List<Track> _trackss = [
+    Track(
+        id: 1,
+        name: "Thunderstruck",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 2,
+        name: "Dio cane",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 3,
+        name: "Dio boia",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 4,
+        name: "Porco dio",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 5,
+        name: "Dio porco",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 6,
+        name: "Dio negro",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 7,
+        name: "Dio a",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 8,
+        name: "Dio b",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 9,
+        name: "Dio c",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 10,
+        name: "Dio d",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 11,
+        name: "Dio e",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    Track(
+        id: 12,
+        name: "Dio f",
+        path: "",
+        duration: Duration(minutes: 3, seconds: 1),
+        coverImage: AssetImage('assets/images/default_song_image.jpg'),
+        authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+  ];
+
   Track currentTrack;
   double _sliderProgress = 0;
   bool dismissed = false;
@@ -152,7 +241,7 @@ class _PlayingPageState extends State<PlayingPage> {
                           Navigator.of(context).pop();
                         }),
                     widget.playlist != null &&
-                        widget.playlist.name != "All tracks"
+                            widget.playlist.name != "All tracks"
                         ? Column(
                             children: <Widget>[
                               Text(
@@ -172,11 +261,19 @@ class _PlayingPageState extends State<PlayingPage> {
                       child: Padding(
                         padding:
                             EdgeInsets.only(right: 15, top: 10, bottom: 10),
-                        child: Image(
-                          color: Colors.black54,
-                          image: AssetImage("assets/images/queue_icon.png"),
-                          width: 21,
-                          height: 21,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return QueuePage(_trackss);
+                            }));
+                          },
+                          child: Image(
+                            color: Colors.black54,
+                            image: AssetImage("assets/images/queue_icon.png"),
+                            width: 21,
+                            height: 21,
+                          ),
                         ),
                       ),
                     )
