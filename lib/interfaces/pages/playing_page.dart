@@ -1,11 +1,13 @@
 import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class PlayingPage extends StatefulWidget {
   final Track currentTrackArtifical;
+  final Playlist playlist;
 
-  PlayingPage(this.currentTrackArtifical);
+  PlayingPage(this.currentTrackArtifical, {this.playlist});
 
   @override
   State createState() {
@@ -123,7 +125,8 @@ class _PlayingPageState extends State<PlayingPage> {
       key: Key('playing page'),
       direction: DismissDirection.vertical,
       child: Scaffold(
-        body: Container(
+        body: SafeArea(
+            child: Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -136,29 +139,73 @@ class _PlayingPageState extends State<PlayingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 45),
-                child: _buildTitleAndSettings(),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.black45,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                    widget.playlist != null &&
+                        widget.playlist.name != "All tracks"
+                        ? Column(
+                            children: <Widget>[
+                              Text(
+                                "Reproducing from playlist",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 13),
+                              ),
+                              Text(
+                                widget.playlist.name,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500, fontSize: 15),
+                              )
+                            ],
+                          )
+                        : Container(),
+                    Container(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(right: 15, top: 10, bottom: 10),
+                        child: Image(
+                          color: Colors.black54,
+                          image: AssetImage("assets/images/queue_icon.png"),
+                          width: 21,
+                          height: 21,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: _buildSlider(context),
+              Flexible(
+                flex: 20,
+                child: Container(),
               ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20, left: 25, right: 25),
-                child: _buildControls(),
-              ),
-              IconButton(
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.black45,
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 45),
+                    child: _buildTitleAndSettings(),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  })
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: _buildSlider(context),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20, left: 25, right: 25),
+                    child: _buildControls(),
+                  ),
+                ],
+              )
             ],
           ),
-        ),
+        )),
       ),
     );
   }

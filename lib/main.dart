@@ -10,6 +10,7 @@ import 'package:droptune/interfaces/access/access_hub.dart';
 import 'package:droptune/interfaces/pages/main_page.dart';
 
 void main() {
+
   runApp(DroptuneApp());
 }
 
@@ -25,6 +26,7 @@ class DroptuneApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Droptune',
       builder: (context, child) {
         return ScrollConfiguration(

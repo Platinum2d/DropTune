@@ -35,7 +35,7 @@ class TrackEntry extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PlayingPage(track)));
+                  MaterialPageRoute(builder: (context) => PlayingPage(track, playlist: playlist,)));
             },
             leading: CircleAvatar(
               backgroundImage: track.coverImage,

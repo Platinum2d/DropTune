@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage> {
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PlayingPage(t)));
+                builder: (context) => PlayingPage(t))); /* the current playlist MUST be passed! */
           },
           child: Visibility(
             child: Container(

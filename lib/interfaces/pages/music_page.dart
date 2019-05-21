@@ -3,6 +3,7 @@ import 'package:droptune/interfaces/pages/widgets/authors_list.dart';
 import 'package:droptune/interfaces/pages/widgets/tracks_list.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
@@ -408,6 +409,7 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
         body: TabBarView(controller: controller, children: <Widget>[
           TracksList(
             tracks: widget.tracks,
+            playlist: Playlist(name: "All tracks"),
           ),
           AlbumsGrid(
             albums: widget.albums,
