@@ -123,46 +123,41 @@ class _PlayingPageState extends State<PlayingPage> {
       key: Key('playing page'),
       direction: DismissDirection.vertical,
       child: Scaffold(
-        body: Stack(
-          overflow: Overflow.clip,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(
-                      colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.15), BlendMode.dstATop),
-                      image: currentTrack.coverImage,
-                      fit: BoxFit.cover)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 45),
-                    child: _buildTitleAndSettings(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    child: _buildSlider(context),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 20, left: 25, right: 25),
-                    child: _buildControls(),
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.black45,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      })
-                ],
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.15), BlendMode.dstATop),
+                  image: currentTrack.coverImage,
+                  fit: BoxFit.cover)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(bottom: 45),
+                child: _buildTitleAndSettings(),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                child: _buildSlider(context),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, left: 25, right: 25),
+                child: _buildControls(),
+              ),
+              IconButton(
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.black45,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ],
+          ),
         ),
       ),
     );
