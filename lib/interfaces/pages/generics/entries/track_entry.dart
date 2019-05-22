@@ -34,8 +34,11 @@ class TrackEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PlayingPage(track, playlist: playlist,)));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PlayingPage(
+                        track,
+                        playlist: playlist,
+                      )));
             },
             leading: CircleAvatar(
               backgroundImage: track.coverImage,
@@ -43,11 +46,29 @@ class TrackEntry extends StatelessWidget {
             ),
             title: Text(track.name),
             subtitle: Text(authors),
-            trailing: IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  _buildTrackOptions(context);
-                }),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  height: 50,
+                  width: 50,
+                  padding: EdgeInsets.only(right: 3, top: 10, bottom: 10),
+                  child: InkWell(
+                  borderRadius: BorderRadius.circular(50),
+                  onTap: () {},
+                  child: Image(
+                      height: 30,
+                      width: 30,
+                      image: AssetImage("assets/images/desync_icon.png")),
+                ),),
+                IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      _buildTrackOptions(context);
+                    })
+              ],
+            ),
           ),
         ],
       ),
