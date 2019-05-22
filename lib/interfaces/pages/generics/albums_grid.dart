@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/album/album_details.dart';
+import 'package:droptune/interfaces/pages/generics/details_pages/album_details.dart';
 import 'package:droptune/models/album.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +29,8 @@ class AlbumsGrid extends StatelessWidget {
                   child: Hero(
                       tag: index,
                       child: CircleAvatar(
-                        radius: 60,
-                        backgroundImage: albums[index].coverImage
-                      )),
+                          radius: 60,
+                          backgroundImage: albums[index].coverImage)),
                 ),
               ),
               Text(albums[index].name),

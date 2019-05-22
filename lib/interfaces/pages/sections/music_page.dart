@@ -1,6 +1,6 @@
-import 'package:droptune/interfaces/pages/album/albums_grid.dart';
-import 'package:droptune/interfaces/pages/widgets/authors_list.dart';
-import 'package:droptune/interfaces/pages/widgets/tracks_list.dart';
+import 'package:droptune/interfaces/pages/generics/albums_grid.dart';
+import 'package:droptune/interfaces/pages/generics/lists/authors_list.dart';
+import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';

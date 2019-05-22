@@ -1,6 +1,5 @@
-import 'package:droptune/interfaces/pages/playlist/playlist_details.dart';
-import 'package:droptune/interfaces/pages/widgets/playlist_edit.dart';
-import 'package:droptune/interfaces/pages/widgets/track_options.dart';
+import 'package:droptune/interfaces/pages/generics/details_pages/playlist_details.dart';
+import 'package:droptune/interfaces/pages/generics/playlist_edit.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';

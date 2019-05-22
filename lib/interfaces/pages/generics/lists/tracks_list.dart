@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/widgets/track_entry.dart';
+import 'package:droptune/interfaces/pages/generics/entries/track_entry.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
