@@ -1,3 +1,4 @@
+import 'package:droptune/interfaces/pages/generics/details_pages/author_details.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +35,13 @@ class AuthorEntry extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return AuthorDetailsPage(author);
+              }));
+            },
             leading: _buildLeadingText(),
             title: Text(author.name),
-            trailing: IconButton(
-                icon: Icon(Icons.settings), onPressed: (){},),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 10),

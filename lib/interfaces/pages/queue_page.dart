@@ -44,6 +44,7 @@ class _QueuePageState extends State<QueuePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Queue"),
       ),
       body: ReorderableListView(

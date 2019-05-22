@@ -369,7 +369,86 @@ class MusicPage extends StatefulWidget {
   ];
 
   final List<Author> authors = [
-    Author(name: "Michael Jackson", tracks: <Track>[]),
+    Author(name: "Michael Jackson", tracks: <Track>[
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+      Track(
+          name: "Thunderstruck",
+          path: "",
+          duration: Duration(minutes: 3, seconds: 1),
+          coverImage: AssetImage('assets/images/default_song_image.jpg'),
+          authors: <Author>[Author(name: "AC/DC", tracks: [])]),
+    ]),
     Author(name: "AC/DC", tracks: <Track>[]),
     Author(name: "Caparezza", tracks: <Track>[]),
   ];
