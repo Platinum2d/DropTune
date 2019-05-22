@@ -1,13 +1,18 @@
+import 'package:droptune/interfaces/pages/sections/profile/change_password.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatefulWidget {
-  @override
-  State createState() {
-    return _ProfilePageState();
-  }
-}
+import 'package:rounded_modal/rounded_modal.dart';
 
-class _ProfilePageState extends State<ProfilePage> {
+class ProfilePage extends StatelessWidget {
+  void _showChangePassword(context) {
+    showRoundedModalBottomSheet(
+        radius: 15,
+        context: context,
+        builder: (BuildContext context) {
+          return ChangePasswordPage();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.transparent,
               child: InkWell(
                   onTap: () {
-                    print("tapped");
+                    _showChangePassword(context);
                   },
                   borderRadius: BorderRadius.circular(60),
                   child: Container(

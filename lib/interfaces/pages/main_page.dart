@@ -1,7 +1,7 @@
 import 'package:droptune/interfaces/pages/sections/music_page.dart';
 import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/sections/playlist_page.dart';
-import 'package:droptune/interfaces/pages/sections/profile_page.dart';
+import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';

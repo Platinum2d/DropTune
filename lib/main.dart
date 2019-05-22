@@ -26,7 +26,7 @@ class DroptuneApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       title: 'Droptune',
       builder: (context, child) {
         return ScrollConfiguration(
