@@ -1,3 +1,4 @@
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -23,7 +24,7 @@ class SplashPage extends StatelessWidget {
   void load(BuildContext context) async {
     await sleep();
     if (!_isLogged)
-      Navigator.of(context).pushReplacementNamed('/access/access_bridge');
+      Routing.goToAccessHub(context, clearStack: true);
   }
 
   Future sleep() {

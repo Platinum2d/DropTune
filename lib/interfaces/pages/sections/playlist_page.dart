@@ -1,5 +1,6 @@
 import 'package:droptune/interfaces/pages/generics/details_pages/playlist_details.dart';
 import 'package:droptune/interfaces/pages/generics/playlist_edit.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
@@ -373,10 +374,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                       );
                     });
               },
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PlaylistDetailsPage(
-                        playlist: playlist,
-                      ))),
+              onTap: () => Routing.goToPlaylistDetails(context, playlist, clearStack: false),
               child: Hero(
                 tag: playlist.name,
                 child: image,
@@ -397,7 +395,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 border: Border(bottom: BorderSide(color: Colors.grey[300])))));
   }
 
-  Widget _buildAllTracksElement() {
+  Widget _buildAllTracksElement(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: 0),
         child: Container(
@@ -412,10 +410,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PlaylistDetailsPage(
-                                playlist: mainPlaylist,
-                              ))),
+                      onTap: () => Routing.goToPlaylistDetails(context, mainPlaylist, clearStack: false),
                       child: Hero(
                         tag: mainPlaylist.name,
                         child: Image.asset(
@@ -480,7 +475,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
-        if (index == 0) return _buildAllTracksElement();
+        if (index == 0) return _buildAllTracksElement(context);
         if (index == 1) return _buildEmptyElement();
         if (index == lastIndex) return _buildAddPlaylistElement(context);
 

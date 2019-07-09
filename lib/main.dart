@@ -1,4 +1,5 @@
 import 'package:droptune/misc/no_glow_scroll_behavior.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,8 @@ import 'package:droptune/interfaces/access/login.dart';
 import 'package:droptune/interfaces/access/register.dart';
 import 'package:droptune/interfaces/access/access_hub.dart';
 import 'package:droptune/interfaces/pages/main_page.dart';
+
+import 'package:droptune/misc/routing/routes.dart';
 
 void main() {
 
@@ -24,6 +27,8 @@ class DroptuneApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    Routes.configureRoutes(Routing.router);
 
     return MaterialApp(
       debugShowCheckedModeBanner: true,

@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/generics/details_pages/album_details.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/album.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +21,9 @@ class AlbumsGrid extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 10),
                 child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AlbumDetailsPage(
-                            album: albums[index],
-                            index: index,
-                          ))),
+                  onTap: () => Routing.goToAlbumDetails(
+                      context, albums[index], index,
+                      clearStack: false),
                   child: Hero(
                       tag: index,
                       child: CircleAvatar(

@@ -1,4 +1,5 @@
 import 'package:droptune/interfaces/pages/generics/details_pages/author_details.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
@@ -36,9 +37,7 @@ class AuthorEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return AuthorDetailsPage(author);
-              }));
+              Routing.goToAuthorDetails(context, author, clearStack: false);
             },
             leading: _buildLeadingText(),
             title: Text(author.name),

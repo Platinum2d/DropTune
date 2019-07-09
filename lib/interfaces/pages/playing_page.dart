@@ -1,5 +1,6 @@
 import 'package:droptune/interfaces/pages/queue_page.dart';
 import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
@@ -263,10 +264,8 @@ class _PlayingPageState extends State<PlayingPage> {
                             EdgeInsets.only(right: 15, top: 10, bottom: 10),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return QueuePage(_trackss);
-                            }));
+                            Routing.goToQueue(context, _trackss,
+                                clearStack: false);
                           },
                           child: Image(
                             color: Colors.black54,

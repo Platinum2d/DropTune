@@ -1,3 +1,4 @@
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,9 +34,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           if (!_formKey.currentState.validate() || !_granted) return;
-          Navigator.of(context)
+
+          /*Navigator.of(context)
               .popUntil(ModalRoute.withName('/access/access_bridge'));
-          Navigator.of(context).pushReplacementNamed('/pages/main_page');
+          //Navigator.of(context).pushReplacementNamed('/pages/main_page');*/
+          Routing.goToMainPage(context, clearStack: true);
         },
       ),
     );

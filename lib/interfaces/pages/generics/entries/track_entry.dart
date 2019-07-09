@@ -1,6 +1,7 @@
 import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/generics/track_options.dart';
 import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_modal/rounded_modal.dart';
@@ -34,11 +35,7 @@ class TrackEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PlayingPage(
-                        track,
-                        playlist: playlist,
-                      )));
+              Routing.goToPlayingPage(context, track, playlist, clearStack: false);
             },
             leading: CircleAvatar(
               backgroundImage: track.coverImage,

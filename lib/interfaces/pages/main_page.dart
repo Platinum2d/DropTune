@@ -2,7 +2,9 @@ import 'package:droptune/interfaces/pages/sections/music_page.dart';
 import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/sections/playlist_page.dart';
 import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   PageController _pageController;
   bool overlayVisibility = true;
+  List<Widget> _appBarActions = [];
 
   List<BottomNavigationBarItem> _navigationBarItems = [
     BottomNavigationBarItem(title: Text("Music"), icon: Icon(Icons.music_note)),
@@ -34,6 +37,21 @@ class _MainPageState extends State<MainPage> {
     overlayVisibility = true;
   }
 
+  void _hideSettingsAction() {
+    _appBarActions.removeWhere((Widget widget) {
+      ValueKey<String> key = widget.key;
+      return identical(key.value, 'settings');
+    });
+  }
+
+  void _showSettingsAction() {
+    _appBarActions.add(IconButton(
+        key: Key("settings"),
+        color: Colors.grey,
+        icon: Icon(Icons.settings),
+        onPressed: () {}));
+  }
+
   Widget _buildNavigationBar() {
     Track t = Track(
         coverImage: AssetImage("assets/images/the_razors_edge.png"),
@@ -47,8 +65,8 @@ class _MainPageState extends State<MainPage> {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PlayingPage(t))); /* the current playlist MUST be passed! */
+            Routing.goToPlayingPage(context, t, null,
+                clearStack: false); /* the current playlist MUST be passed! */
           },
           child: Visibility(
             child: Container(
@@ -106,10 +124,13 @@ class _MainPageState extends State<MainPage> {
       onPageChanged: (newIndex) {
         setState(() {
           _currentIndex = newIndex;
-          if (newIndex == 2)
+          if (newIndex == 2) {
             _hideOverlay();
-          else
+            _showSettingsAction();
+          } else {
+            _hideSettingsAction();
             _showOverlay();
+          }
         });
       },
       children: _pages,
@@ -131,6 +152,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: _appBarActions,
         title: Text("Droptune"),
         centerTitle: true,
       ),

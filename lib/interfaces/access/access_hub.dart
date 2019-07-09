@@ -1,3 +1,4 @@
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:flutter/material.dart';
 
 class AccessHubPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class AccessHubPage extends StatelessWidget {
                             fontSize: 15),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/access/register');
+                        Routing.goToRegister(context, clearStack: false);
                       },
                     ),
                   ),
@@ -57,7 +58,7 @@ class AccessHubPage extends StatelessWidget {
                             fontSize: 15),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/access/login');
+                        Routing.goToLogin(context, clearStack: false);
                       },
                     ),
                   ),
@@ -75,7 +76,7 @@ class AccessHubPage extends StatelessWidget {
                           fontSize: 15),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/pages/main_page');
+                      Routing.goToMainPage(context, clearStack: true);
                     },
                   ),
                 )
