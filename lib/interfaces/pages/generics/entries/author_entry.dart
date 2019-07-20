@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/generics/details_pages/author_details.dart';
+import 'package:droptune/interfaces/pages/generics/details/author_details.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';

@@ -1,25 +1,36 @@
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/no_glow_scroll_behavior.dart';
+import 'package:droptune/misc/permissions/permissions_hub.dart';
 import 'package:droptune/misc/routing/routing.dart';
+import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-
 import 'package:droptune/interfaces/splash.dart';
-import 'package:droptune/interfaces/access/login.dart';
-import 'package:droptune/interfaces/access/register.dart';
-import 'package:droptune/interfaces/access/access_hub.dart';
-import 'package:droptune/interfaces/pages/main_page.dart';
-
 import 'package:droptune/misc/routing/routes.dart';
 
 void main() {
-
   runApp(DroptuneApp());
 }
 
 class DroptuneApp extends StatelessWidget {
   final double inputRadius = 50.0;
   final double buttonRadius = 20.0;
+
+  Future<List<Song>> loadTracks() async {
+    List<Song> songs;
+    try {
+      songs = await MusicFinder.allSongs();
+      return songs;
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  void registerSingletons(){
+    GetItReference.getIt.registerSingleton<PermissionsHub>(PermissionsHub());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +40,7 @@ class DroptuneApp extends StatelessWidget {
     ]);
 
     Routes.configureRoutes(Routing.router);
+    registerSingletons();
 
     return MaterialApp(
       debugShowCheckedModeBanner: true,
@@ -59,13 +71,6 @@ class DroptuneApp extends StatelessWidget {
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(inputRadius)))),
       home: SplashPage(),
-      routes: {
-        '/home': (BuildContext context) => SplashPage(),
-        '/access/login': (BuildContext context) => LoginPage(),
-        '/access/register': (BuildContext context) => RegisterPage(),
-        '/access/access_bridge': (BuildContext context) => AccessHubPage(),
-        '/pages/main_page': (BuildContext context) => MainPage(),
-      },
     );
   }
 }

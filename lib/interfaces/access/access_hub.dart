@@ -1,9 +1,17 @@
+import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/permissions/permissions_hub.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AccessHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    WidgetsBinding.instance.addPostFrameCallback((duration) {
+      PermissionsHub.showStoragePermissonDialog(context);
+    });
+
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(
