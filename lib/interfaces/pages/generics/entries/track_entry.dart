@@ -28,8 +28,6 @@ class TrackEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String authors = DroptuneUtils.buildAuthorsLabel(track);
-
     return GestureDetector(
       child: Column(
         children: <Widget>[
@@ -42,7 +40,7 @@ class TrackEntry extends StatelessWidget {
               radius: 25,
             ),
             title: Text(track.name),
-            subtitle: Text(authors),
+            subtitle: Text(track.author.name),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,

@@ -33,7 +33,7 @@ class TrackOptions extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              DroptuneUtils.buildAuthorsLabel(track),
+              track.author.name
             )
           ],
         )

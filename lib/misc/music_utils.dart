@@ -15,7 +15,7 @@ class MusicUtils {
             name: adapter.getName(),
             duration: adapter.getDuration(),
             path: adapter.getPath(),
-            authors: null);
+            author: null);
         tracks.add(t);
       }
     });

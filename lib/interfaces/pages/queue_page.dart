@@ -27,7 +27,6 @@ class _QueuePageState extends State<QueuePage> {
   }
 
   Widget _buildTile(Track t) {
-    String authors = DroptuneUtils.buildAuthorsLabel(t);
     return ListTile(
       key: Key(t.id.toString()),
       leading: CircleAvatar(
@@ -35,7 +34,7 @@ class _QueuePageState extends State<QueuePage> {
         radius: 25,
       ),
       title: Text(t.name),
-      subtitle: Text(authors),
+      subtitle: Text(t.author.name),
       trailing: Icon(Icons.reorder),
     );
   }

@@ -10,7 +10,7 @@ class Track {
       @required this.name,
       @required this.duration,
       @required this.path,
-      @required this.authors});
+      @required this.author});
 
   final int id;
   final AssetImage coverImage;
@@ -18,6 +18,6 @@ class Track {
   final String name;
   final Duration duration;
   final String path;
-  final List<Author> authors;
+  final Author author;
 /*final User user;*/
 }

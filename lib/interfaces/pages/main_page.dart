@@ -63,7 +63,7 @@ class _MainPageState extends State<MainPage> {
         name: "The Razor's Edge",
         duration: Duration(minutes: 3, seconds: 1),
         path: '',
-        authors: <Author>[Author(name: 'AC/DC', tracks: <Track>[])]);
+        author: Author(name: 'AC/DC', tracks: <Track>[]));
 
     return Column(
       mainAxisSize: MainAxisSize.min,

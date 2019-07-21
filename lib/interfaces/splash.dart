@@ -5,8 +5,6 @@ import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
-  final bool _isLogged = false;
-
   @override
   Widget build(BuildContext context) {
     Widget built = Scaffold(
@@ -31,9 +29,5 @@ class SplashPage extends StatelessWidget {
       Routing.goToAccessHub(context, clearStack: true);
     });
 
-  }
-
-  Future sleep() {
-    return new Future.delayed(Duration(seconds: 1));
   }
 }
