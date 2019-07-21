@@ -1,4 +1,7 @@
+import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/music_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
+import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -22,9 +25,12 @@ class SplashPage extends StatelessWidget {
   }
 
   void load(BuildContext context) async {
-    await sleep();
-    if (!_isLogged)
+    MusicUtils.getAllTracks().then((tracks){
+      List<Track> allTracks = tracks;
+      GetItReference.getIt.registerSingleton(allTracks);
       Routing.goToAccessHub(context, clearStack: true);
+    });
+
   }
 
   Future sleep() {

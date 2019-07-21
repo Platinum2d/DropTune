@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class SongTrackAdapter implements TrackActions{
   Song song;
 
+  SongTrackAdapter(this.song);
+
   @override
   int getId() {
     return song.id;
