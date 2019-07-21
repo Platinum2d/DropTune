@@ -1,5 +1,5 @@
 import 'package:droptune/misc/get_it_reference.dart';
-import 'package:droptune/misc/track_utils.dart';
+import 'package:droptune/misc/utils/track_utils.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/track.dart';
 

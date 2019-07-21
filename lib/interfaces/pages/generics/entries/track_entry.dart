@@ -1,6 +1,6 @@
 import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/generics/track_options.dart';
-import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
-import 'package:droptune/misc/album_utils.dart';
+import 'package:droptune/misc/utils/album_utils.dart';
 import 'package:droptune/misc/get_it_reference.dart';
-import 'package:droptune/misc/track_utils.dart';
+import 'package:droptune/misc/utils/track_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/track.dart';

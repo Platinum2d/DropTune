@@ -1,5 +1,5 @@
 import 'package:droptune/interfaces/pages/queue_page.dart';
-import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';

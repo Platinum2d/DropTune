@@ -1,5 +1,5 @@
 import 'package:droptune/interfaces/pages/generics/entries/track_entry.dart';
-import 'package:droptune/misc/droptune_utils.dart';
+import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
