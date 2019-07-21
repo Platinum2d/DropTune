@@ -15,7 +15,7 @@ class PlaylistDetailsPage extends StatelessWidget {
         return <Widget>[
           SliverAppBar(
             iconTheme: IconThemeData(
-                color: innerBoxIsScrolled ? Colors.black : Colors.white),
+                color: innerBoxIsScrolled ? Colors.black : Colors.grey),
             elevation: 0,
             expandedHeight: 330.0,
             floating: false,
@@ -24,7 +24,7 @@ class PlaylistDetailsPage extends StatelessWidget {
                 centerTitle: true,
                 title: Text(playlist.name,
                     style: TextStyle(
-                      color: innerBoxIsScrolled ? Colors.black : Colors.white,
+                      color: innerBoxIsScrolled ? Colors.black : Colors.grey,
                       fontSize: 16.0,
                     )),
                 background: Hero(

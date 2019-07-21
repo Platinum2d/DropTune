@@ -10,21 +10,28 @@ class AlbumDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String nameToShow = album.name.length > 30 ? album.name.substring(0, 30) : album.name;
+    if (nameToShow != album.name)
+      nameToShow = nameToShow.replaceRange(nameToShow.length - 3, nameToShow.length, "...");
+
     return Scaffold(
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
             iconTheme: IconThemeData(
-                color: innerBoxIsScrolled ? Colors.black : Colors.white),
+                color: innerBoxIsScrolled ? Colors.black : Colors.grey),
             expandedHeight: 330.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text(album.name,
+                title: Text(nameToShow,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: innerBoxIsScrolled ? Colors.black : Colors.white,
+                      color: innerBoxIsScrolled ? Colors.black : Colors.grey,
                       fontSize: 16.0,
                     )),
                 background: Hero(

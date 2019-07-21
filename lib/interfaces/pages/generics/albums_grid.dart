@@ -19,7 +19,9 @@ class AlbumsGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.only(
+                  bottom: 10,
+                ),
                 child: GestureDetector(
                   onTap: () => Routing.goToAlbumDetails(
                       context, albums[index], index,
@@ -31,7 +33,15 @@ class AlbumsGrid extends StatelessWidget {
                           backgroundImage: albums[index].coverImage)),
                 ),
               ),
-              Text(albums[index].name),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  albums[index].name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(),
+                ),
+              ),
             ],
           );
         });
