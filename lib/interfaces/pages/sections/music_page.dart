@@ -52,7 +52,6 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -99,7 +98,6 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -111,7 +109,6 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -123,7 +120,6 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",
@@ -135,7 +131,6 @@ class MusicPage extends StatefulWidget {
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
         name: "The Razor's edge",
-        author: Author(name: "AC/DC", tracks: []),
         tracks: <Track>[
           Track(
               name: "Thunderstruck",

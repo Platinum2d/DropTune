@@ -8,13 +8,11 @@ class Album {
     this.id,
     @required this.coverImage,
     @required this.name,
-    @required this.author,
     @required this.tracks,
   });
 
   final int id;
   final AssetImage coverImage;
   final String name;
-  final Author author;
   final List<Track> tracks;
 }
