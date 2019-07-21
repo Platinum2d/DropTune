@@ -15,9 +15,13 @@ class MusicUtils {
             name: adapter.getName(),
             duration: adapter.getDuration(),
             path: adapter.getPath(),
-            author: null);
+            author: adapter.getAuthor());
         tracks.add(t);
       }
+    });
+
+    tracks.sort((Track a, Track b){
+      return a.name.compareTo(b.name);
     });
 
     return tracks;
