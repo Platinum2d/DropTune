@@ -1,4 +1,3 @@
-import 'package:droptune/misc/droptune_utils.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
@@ -10,34 +9,35 @@ class TrackOptions extends StatelessWidget {
   TrackOptions({@required this.track, this.playlist});
 
   Widget _buildImageAndTitle() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(right: 15),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image(
-              image: track.coverImage,
-              height: 70,
-              width: 70,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 15),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image(
+                image: track.coverImage,
+                height: 70,
+                width: 70,
+              ),
             ),
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              track.name,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              track.author.name
-            )
-          ],
-        )
-      ],
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                track.name,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(track.author.name)
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -102,7 +102,6 @@ class TrackOptions extends StatelessWidget {
                 },
                 leadingImage: AssetImage('assets/images/sync_icon.png'),
                 title: Text("Synchronize")),
-
             playlist != null && playlist.name != "All tracks"
                 ? _buildTile(
                     action: () {

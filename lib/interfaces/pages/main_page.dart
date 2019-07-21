@@ -21,7 +21,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   PageController _pageController;
   bool overlayVisibility = true;
   List<Widget> _appBarActions = [];
@@ -144,7 +144,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController(initialPage: 1);
     super.initState();
   }
 

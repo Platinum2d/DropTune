@@ -1,5 +1,6 @@
 import 'package:droptune/interfaces/pages/generics/details/playlist_details.dart';
 import 'package:droptune/interfaces/pages/generics/playlist_edit.dart';
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -17,108 +18,7 @@ class PlaylistPage extends StatefulWidget {
 class _PlaylistPageState extends State<PlaylistPage> {
   final Playlist mainPlaylist = Playlist(
       name: "All tracks",
-      tracks: [Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
-          name: "Thunderstruck",
-          path: "",
-          duration: Duration(minutes: 3, seconds: 1),
-          coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),
-      ],
+      tracks: GetItReference.getIt.get<List<Track>>(),
       coverImage: AssetImage('assets/images/all_tracks.png'));
 
   final List<Playlist> playlists = [

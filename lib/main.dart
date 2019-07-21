@@ -1,3 +1,7 @@
+import 'package:droptune/interfaces/access/access_hub.dart';
+import 'package:droptune/interfaces/access/login.dart';
+import 'package:droptune/interfaces/access/register.dart';
+import 'package:droptune/interfaces/pages/main_page.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/no_glow_scroll_behavior.dart';
 import 'package:droptune/misc/permissions/permissions_hub.dart';
