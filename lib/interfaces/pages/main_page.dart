@@ -3,6 +3,7 @@ import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/sections/playlist_page.dart';
 import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
 import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/permissions/permissions_helper.dart';
 import 'package:droptune/misc/permissions/permissions_hub.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
@@ -155,7 +156,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((duration) {
-      PermissionsHub.showStoragePermissonDialog(context);
+      PermissionsHelper.showStoragePermissonDialog(context);
     });
 
     return Scaffold(
