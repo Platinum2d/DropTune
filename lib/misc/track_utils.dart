@@ -1,8 +1,9 @@
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/song_track_adapter/song_track_adapter.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flute_music_player/flute_music_player.dart';
 
-class MusicUtils {
+class TrackUtils {
   static Future<List<Track>> getAllTracks() async {
     List<Track> tracks = [];
     SongTrackAdapter adapter = SongTrackAdapter(null);
@@ -15,7 +16,8 @@ class MusicUtils {
             name: adapter.getName(),
             duration: adapter.getDuration(),
             path: adapter.getPath(),
-            author: adapter.getAuthor());
+            author: adapter.getAuthor(),
+            album: adapter.getAlbum());
         tracks.add(t);
       }
     });
@@ -25,5 +27,9 @@ class MusicUtils {
     });
 
     return tracks;
+  }
+
+  static List<Track> getCachedAllTracks(){
+    return GetItReference.getIt.get<List<Track>>();
   }
 }

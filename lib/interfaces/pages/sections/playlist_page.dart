@@ -1,6 +1,7 @@
 import 'package:droptune/interfaces/pages/generics/details/playlist_details.dart';
 import 'package:droptune/interfaces/pages/generics/playlist_edit.dart';
 import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/track_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -18,7 +19,7 @@ class PlaylistPage extends StatefulWidget {
 class _PlaylistPageState extends State<PlaylistPage> {
   final Playlist mainPlaylist = Playlist(
       name: "All tracks",
-      tracks: GetItReference.getIt.get<List<Track>>(),
+      tracks: TrackUtils.getCachedAllTracks(),
       coverImage: AssetImage('assets/images/all_tracks.png'));
 
   final List<Playlist> playlists = [

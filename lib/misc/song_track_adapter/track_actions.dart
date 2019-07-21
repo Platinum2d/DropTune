@@ -1,3 +1,4 @@
+import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
@@ -9,4 +10,5 @@ abstract class TrackActions {
   Duration getDuration();
   String getPath();
   Author getAuthor();
+  Album getAlbum();
 }

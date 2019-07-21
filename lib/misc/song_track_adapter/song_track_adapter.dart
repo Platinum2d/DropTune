@@ -1,4 +1,5 @@
 import 'package:droptune/misc/song_track_adapter/track_actions.dart';
+import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
@@ -43,5 +44,8 @@ class SongTrackAdapter implements TrackActions{
     return Author(name: song.artist, tracks: []);
   }
 
-
+  @override
+  Album getAlbum() {
+    return Album(coverImage: getCoverImage(), name: song.album, tracks: [], id: song.albumId);
+  }
 }

@@ -1,7 +1,9 @@
 import 'package:droptune/interfaces/pages/generics/albums_grid.dart';
 import 'package:droptune/interfaces/pages/generics/lists/authors_list.dart';
 import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
+import 'package:droptune/misc/album_utils.dart';
 import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/track_utils.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -185,11 +187,11 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
             tabs: widget.tabs),
         body: TabBarView(controller: controller, children: <Widget>[
           TracksList(
-            tracks: GetItReference.getIt.get<List<Track>>(),
+            tracks: TrackUtils.getCachedAllTracks(),
             playlist: Playlist(name: "All tracks"),
           ),
           AlbumsGrid(
-            albums: widget.albums,
+            albums: AlbumUtils.getCachedAllAlbums(),
           ),
           AuthorsList(
             authors: widget.authors,
