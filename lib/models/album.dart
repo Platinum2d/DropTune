@@ -8,7 +8,7 @@ class Album {
     this.id,
     @required this.coverImage,
     @required this.name,
-    @required this.tracks,
+    this.tracks,
   });
 
   final int id;

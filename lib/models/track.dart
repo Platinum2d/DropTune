@@ -1,3 +1,4 @@
+import 'package:droptune/models/album.dart';
 import 'package:flutter/material.dart';
 
 import 'package:droptune/models/author.dart';
@@ -10,7 +11,8 @@ class Track {
       @required this.name,
       @required this.duration,
       @required this.path,
-      @required this.author});
+      @required this.author,
+        @required this.album});
 
   final int id;
   final AssetImage coverImage;
@@ -19,5 +21,6 @@ class Track {
   final Duration duration;
   final String path;
   final Author author;
+  final Album album;
 /*final User user;*/
 }
