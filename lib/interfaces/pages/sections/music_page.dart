@@ -1,6 +1,7 @@
 import 'package:droptune/interfaces/pages/generics/albums_grid.dart';
 import 'package:droptune/interfaces/pages/generics/lists/authors_list.dart';
 import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
+import 'package:droptune/misc/database/database_client.dart';
 import 'package:droptune/misc/utils/album_utils.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/utils/track_utils.dart';
@@ -11,7 +12,6 @@ import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class MusicPage extends StatefulWidget {
-
   final List<Album> albums = [
     Album(
         coverImage: AssetImage('assets/images/default_song_image.jpg'),
@@ -22,37 +22,44 @@ class MusicPage extends StatefulWidget {
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
               coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),Track(
+              author: Author(name: "AC/DC", tracks: [])),
+          Track(
               name: "Thunderstruck",
               path: "",
               duration: Duration(minutes: 3, seconds: 1),
@@ -112,37 +119,44 @@ class MusicPage extends StatefulWidget {
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
           coverImage: AssetImage('assets/images/default_song_image.jpg'),
-          author: Author(name: "AC/DC", tracks: [])),Track(
+          author: Author(name: "AC/DC", tracks: [])),
+      Track(
           name: "Thunderstruck",
           path: "",
           duration: Duration(minutes: 3, seconds: 1),
@@ -188,7 +202,9 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
         body: TabBarView(controller: controller, children: <Widget>[
           TracksList(
             tracks: TrackUtils.getCachedAllTracks(),
-            playlist: Playlist(name: "All tracks"),
+            playlist: Playlist(
+              name: "All tracks",
+            ),
           ),
           AlbumsGrid(
             albums: AlbumUtils.getCachedAllAlbums(),
