@@ -24,33 +24,33 @@ class Routing {
         .pushReplacement(MaterialPageRoute(builder: (context) => toPush));
   }
 
-  static goToSplashPage(context, {bool clearStack}) {
+  static goToSplashPage(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.root,
         clearStack: clearStack, transition: TransitionType.native);
   }
 
-  static goToLogin(context, {bool clearStack}) {
+  static goToLogin(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.login,
         clearStack: clearStack, transition: TransitionType.native);
   }
 
-  static goToRegister(context, {bool clearStack}) {
+  static goToRegister(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.register,
         clearStack: clearStack, transition: TransitionType.native);
   }
 
-  static goToAccessHub(context, {bool clearStack}) {
+  static goToAccessHub(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.accessHub,
         clearStack: clearStack, transition: TransitionType.native);
   }
 
-  static goToMainPage(context, {bool clearStack}) {
+  static goToMainPage(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.mainPage,
         clearStack: clearStack, transition: TransitionType.native);
   }
 
   static goToPlayingPage(context, Track track, Playlist playlist,
-      {bool clearStack}) {
+      {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(
           context,
@@ -67,14 +67,14 @@ class Routing {
           ));
   }
 
-  static goToAuthorDetails(context, Author author, {bool clearStack}) {
+  static goToAuthorDetails(context, Author author, {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(context, AuthorDetailsPage(author));
     else
       _push(context, AuthorDetailsPage(author));
   }
 
-  static goToPlaylistDetails(context, Playlist playlist, {bool clearStack}) {
+  static goToPlaylistDetails(context, Playlist playlist, {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(
           context,
@@ -89,7 +89,7 @@ class Routing {
           ));
   }
 
-  static goToAlbumDetails(context, Album album, int index, {bool clearStack}) {
+  static goToAlbumDetails(context, Album album, int index, {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(
           context,
@@ -106,7 +106,7 @@ class Routing {
           ));
   }
 
-  static goToQueue(context, List<Track> tracks, {bool clearStack}) {
+  static goToQueue(context, List<Track> tracks, {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(context, QueuePage(tracks));
     else
