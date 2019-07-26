@@ -1,17 +1,10 @@
 import 'package:droptune/interfaces/pages/sections/music_page.dart';
-import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/pages/sections/playlist_page.dart';
 import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
-import 'package:droptune/misc/get_it_reference.dart';
-import 'package:droptune/misc/permissions/permissions_helper.dart';
-import 'package:droptune/misc/permissions/permissions_hub.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
-import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/scheduler.dart';
 
 class MainPage extends StatefulWidget {
   @override

@@ -1,4 +1,5 @@
 import 'package:droptune/interfaces/pages/generics/playlist_edit.dart';
+import 'package:droptune/misc/database/database_client.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/misc/utils/track_utils.dart';
@@ -17,81 +18,25 @@ class PlaylistPage extends StatefulWidget {
 
 class _PlaylistPageState extends State<PlaylistPage> {
   final Playlist mainPlaylist = Playlist(
+      id: -1,
       tracks: TrackUtils.getCachedAllTracks(),
       name: "All tracks",
       coverImage: AssetImage('assets/images/all_tracks.png'));
 
-  final List<Playlist> playlists = [
-    Playlist(
-        name: "Michael Jackson",
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        tracks: [Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),Track(
-            name: "Thunderstruck",
-            path: "",
-            duration: Duration(minutes: 3, seconds: 1),
-            coverImage: AssetImage('assets/images/default_song_image.jpg'),
-            author: Author(name: "AC/DC", tracks: [])),
-        ]),
-    Playlist(
-        name: "AC/DC",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-    Playlist(
-        name: "Caparezza",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-    Playlist(
-        name: "Festa da Gianvy",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-    Playlist(
-        name: "Relax1",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-    Playlist(
-        name: "Relax2",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-    Playlist(
-        name: "Relax3",
-        tracks: [],
-        coverImage: AssetImage('assets/images/default_song_image.jpg')),
-  ];
+  List<Playlist> playlists = [];
+
+  @override
+  void initState() {
+    super.initState();
+    GetItReference.getIt
+        .get<DatabaseClient>()
+        .fetchPlaylists()
+        .then((allPlaylists) {
+      setState(() {
+        playlists = allPlaylists;
+      });
+    });
+  }
 
   Image _buildImage() {
     return Image.asset(
@@ -126,9 +71,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
                       );
                     });
               },
-              onTap: () => Routing.goToPlaylistDetails(context, playlist, clearStack: false),
+              onTap: () => Routing.goToPlaylistDetails(context, playlist,
+                  clearStack: false),
               child: Hero(
-                tag: playlist.name,
+                tag: playlist.id,
                 child: image,
               ),
             ),
@@ -162,9 +108,11 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: GestureDetector(
-                      onTap: () => Routing.goToPlaylistDetails(context, mainPlaylist, clearStack: false),
+                      onTap: () => Routing.goToPlaylistDetails(
+                          context, mainPlaylist,
+                          clearStack: false),
                       child: Hero(
-                        tag: mainPlaylist.name,
+                        tag: mainPlaylist.id,
                         child: Image.asset(
                           'assets/images/all_tracks.png',
                           height: 135,

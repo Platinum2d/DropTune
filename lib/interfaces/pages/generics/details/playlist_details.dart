@@ -28,7 +28,7 @@ class PlaylistDetailsPage extends StatelessWidget {
                       fontSize: 16.0,
                     )),
                 background: Hero(
-                    tag: playlist.name,
+                    tag: playlist.id,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 300,
