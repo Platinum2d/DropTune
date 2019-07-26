@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:droptune/models/album.dart';
+import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -71,7 +72,7 @@ class DatabaseClient {
     List<Map> results = await _db.rawQuery(
         "select distinct * from tracks group by album order by album");
     List<Album> albums = new List();
-    results.forEach((t) async {
+    results.forEach((t) {
       Track track = Track.fromMap(t);
       Album album = track.album;
       albums.add(album);
@@ -79,20 +80,20 @@ class DatabaseClient {
     return albums;
   }
 
-  Future<List<Track>> fetchArtist() async {
-    List<Map> results = await _db.rawQuery(
-        "select distinct artist, album, coverImage from tracks group by artist order by artist");
-    List<Track> tracks = new List();
-    results.forEach((s) {
-      Track track = Track.fromMap(s);
-      tracks.add(track);
+  Future<List<Author>> fetchAuthors() async {
+    List<Map> results = await _db.rawQuery("select distinct author from tracks");
+    List<Author> authors = [];
+
+    results.forEach((a){
+      Author author = Author.fromMap(a);
+      authors.add(author);
     });
-    return tracks;
+
+    return authors;
   }
 
-  Future<List<Track>> fetchTrackByArtist(String artist) async {
-    List<Map> results = await _db.query("tracks",
-        columns: Track.columns, where: "artist='$artist'");
+  Future<List<Track>> fetchTracksByAuthor(String author) async {
+    List<Map> results = await _db.rawQuery("select * from tracks where author = \"$author\"");
     List<Track> tracks = new List();
     results.forEach((s) {
       Track track = Track.fromMap(s);

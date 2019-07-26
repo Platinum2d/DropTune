@@ -3,6 +3,7 @@ import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/song_track_adapter/song_track_adapter.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/album.dart';
+import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,14 @@ class _SplashPageState extends State<SplashPage> {
     GetItReference.getIt.registerSingleton<List<Album>>(albums);
   }
 
+  Future<void> _loadAuthors(DatabaseClient db) async {
+    List<Author> authors = await db.fetchAuthors();
+
+    for (Author a in authors) a.tracks = await db.fetchTracksByAuthor(a.name);
+
+    GetItReference.getIt.registerSingleton<List<Author>>(authors);
+  }
+
   Future<void> _loadTracks(DatabaseClient db) async {
     GetItReference.getIt.registerSingleton<List<Track>>(await db.fetchTracks());
   }
@@ -103,6 +112,7 @@ class _SplashPageState extends State<SplashPage> {
     if (await db.alreadyLoaded()) {
       await _loadTracks(db);
       await _loadAlbums(db);
+      await _loadAuthors(db);
       Routing.goToAccessHub(context, clearStack: true);
     } else {
       setState(() {
@@ -111,6 +121,7 @@ class _SplashPageState extends State<SplashPage> {
 
       await _registerTracks(db);
       await _loadAlbums(db);
+      await _loadAuthors(db);
       Routing.goToAccessHub(context, clearStack: true);
     }
   }

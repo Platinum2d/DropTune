@@ -4,9 +4,19 @@ import 'package:droptune/models/track.dart';
 
 class Author{
 
-  Author({this.id, @required this.name, @required this.tracks});
+  Author({@required this.name, this.tracks});
 
-  final int id;
   final String name;
-  final List<Track> tracks;
+  List<Track> tracks;
+
+  static Map<String, dynamic> toMap(Author a){
+    return {
+      "name": a.name,
+      "tracks": a.tracks
+    };
+  }
+
+  static Author fromMap(Map<String, dynamic> a){
+    return Author(name: a["author"]);
+  }
 }
