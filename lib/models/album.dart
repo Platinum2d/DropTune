@@ -1,4 +1,3 @@
-import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
 
 import 'package:droptune/models/track.dart';
@@ -14,5 +13,5 @@ class Album {
   final int id;
   final AssetImage coverImage;
   final String name;
-  final List<Track> tracks;
+  List<Track> tracks;
 }

@@ -58,7 +58,7 @@ class Track {
       duration: Duration(milliseconds: t["duration"]),
       path: t["path"],
       author: Author(name: t["author"]),
-      album: Album(name: t["album"], id: t["id"]),
+      album: Album(name: t["album"], id: t["albumId"], coverImage: AssetImage(t["coverImage"])),
     );
   }
 /*final User user;*/

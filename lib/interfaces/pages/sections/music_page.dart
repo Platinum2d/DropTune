@@ -12,106 +12,6 @@ import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
 class MusicPage extends StatefulWidget {
-  final List<Album> albums = [
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-        ]),
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-        ]),
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-        ]),
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-        ]),
-    Album(
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        name: "The Razor's edge",
-        tracks: <Track>[
-          Track(
-              name: "Thunderstruck",
-              path: "",
-              duration: Duration(minutes: 3, seconds: 1),
-              coverImage: AssetImage('assets/images/default_song_image.jpg'),
-              author: Author(name: "AC/DC", tracks: [])),
-        ]),
-  ];
-
   final List<Author> authors = [
     Author(name: "Michael Jackson", tracks: <Track>[
       Track(
@@ -200,12 +100,7 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
             indicatorColor: Colors.lightBlueAccent,
             tabs: widget.tabs),
         body: TabBarView(controller: controller, children: <Widget>[
-          TracksList(
-            tracks: TrackUtils.getCachedAllTracks(),
-            playlist: Playlist(
-              name: "All tracks",
-            ),
-          ),
+          TracksList(tracks: TrackUtils.getCachedAllTracks()),
           AlbumsGrid(
             albums: AlbumUtils.getCachedAllAlbums(),
           ),
