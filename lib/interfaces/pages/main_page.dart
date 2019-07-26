@@ -155,10 +155,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((duration) {
-      PermissionsHelper.showStoragePermissonDialog(context);
-    });
-
     return Scaffold(
       appBar: AppBar(
         actions: _appBarActions,
