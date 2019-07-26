@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,7 +20,15 @@ class DatabaseClient {
 
   Future _create(Database db, int version) async {
     await db.execute("""
-    CREATE TABLE tracks(id NUMBER, remoteId NUMBER, name TEXT, duration NUMBER, coverImage TEXT, album TEXT, path TEXT, author TEXT, albumId NUMBER)
+    CREATE TABLE tracks(id INTEGER PRIMARY KEY, remoteId NUMBER, name TEXT, duration NUMBER, coverImage TEXT, album TEXT, path TEXT, author TEXT, albumId NUMBER)
+    """);
+
+    await db.execute("""
+    CREATE TABLE playlist(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)
+    """);
+
+    await db.execute("""
+    CREATE TABLE playlist_has_tracks(track_id INTEGER, playlist_id INTEGER)
     """);
   }
 
@@ -130,5 +139,20 @@ class DatabaseClient {
       tracks.add(track);
     });
     return tracks;
+  }
+
+  Future<void> insertPlaylist(Playlist playlist) async {
+    await _db.rawQuery("insert into playlist (name) values (\"${playlist.name}\")");
+  }
+
+  Future<List<Playlist>> fetchPlaylists() async {
+    List<Map> results = await _db.rawQuery("select * from playlist");
+    List<Playlist> playlists = [];
+    results.forEach((p){
+      Playlist playlist = Playlist.fromMap(p);
+      playlists.add(playlist);
+    });
+
+    return playlists;
   }
 }
