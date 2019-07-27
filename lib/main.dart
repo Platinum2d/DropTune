@@ -43,6 +43,8 @@ class DroptuneApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
+    debugPaintSizeEnabled = false;
+
     Routes.configureRoutes(Routing.router);
     registerSingletons();
 

@@ -62,14 +62,20 @@ class _PlaylistPageState extends State<PlaylistPage> {
             borderRadius: BorderRadius.circular(15),
             child: GestureDetector(
               onLongPress: () {
-                showRoundedModalBottomSheet(
+                showRoundedModalBottomSheet<Map<String, dynamic>>(
                     context: context,
                     radius: 20,
                     builder: (context) {
                       return PlaylistEditPage(
                         playlist: playlist,
                       );
-                    });
+                    }).then((map) {
+                  setState(() {
+                    if (map != null) {
+                      if (map["deleted"]) playlists.remove(playlist);
+                    }
+                  });
+                });
               },
               onTap: () => Routing.goToPlaylistDetails(context, playlist,
                   clearStack: false),
@@ -138,27 +144,34 @@ class _PlaylistPageState extends State<PlaylistPage> {
         Padding(
           child: FlatButton(
               onPressed: () {
-                showRoundedModalBottomSheet(
+                showRoundedModalBottomSheet<Playlist>(
                     context: context,
                     radius: 20,
                     builder: (context) {
                       return PlaylistEditPage(
                         playlist: null,
                       );
-                    });
+                    }).then((playlist) {
+                  setState(() {
+                    if (playlist != null) playlists.add(playlist);
+                  });
+                });
               },
-              child: Column(
-                children: <Widget>[
-                  Image.asset(
-                    "assets/images/add_playlist_button.png",
-                    height: 80,
-                    width: 80,
-                  ),
-                  Text(
-                    "Add a playlist",
-                    style: TextStyle(color: Colors.grey[500]),
-                  )
-                ],
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/images/add_playlist_button.png",
+                      height: 80,
+                      width: 80,
+                    ),
+                    Text(
+                      "Create",
+                      style: TextStyle(color: Colors.grey[500]),
+                    )
+                  ],
+                ),
               )),
           padding: EdgeInsets.only(bottom: 10),
         ),

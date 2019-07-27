@@ -11,8 +11,15 @@ class Playlist {
 
   final int id;
   final AssetImage coverImage;
-  final String name;
-  final List<Track> tracks;
+  String name;
+  List<Track> tracks;
+
+  static Map<String, dynamic> toMap(Playlist p){
+    return {
+      'id': p.id,
+      'name': p.name
+    };
+  }
 
   static Playlist fromMap(Map p) {
     return Playlist(

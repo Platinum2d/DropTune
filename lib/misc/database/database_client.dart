@@ -4,6 +4,7 @@ import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -90,10 +91,11 @@ class DatabaseClient {
   }
 
   Future<List<Author>> fetchAuthors() async {
-    List<Map> results = await _db.rawQuery("select distinct author from tracks");
+    List<Map> results =
+        await _db.rawQuery("select distinct author from tracks");
     List<Author> authors = [];
 
-    results.forEach((a){
+    results.forEach((a) {
       Author author = Author.fromMap(a);
       authors.add(author);
     });
@@ -102,7 +104,8 @@ class DatabaseClient {
   }
 
   Future<List<Track>> fetchTracksByAuthor(String author) async {
-    List<Map> results = await _db.rawQuery("select * from tracks where author = \"$author\"");
+    List<Map> results =
+        await _db.rawQuery("select * from tracks where author = \"$author\"");
     List<Track> tracks = new List();
     results.forEach((s) {
       Track track = Track.fromMap(s);
@@ -114,8 +117,8 @@ class DatabaseClient {
   Future<int> updateTrack(Track track) async {
     int id = 0;
     // id==9999 for shared track
-    await _db
-        .update("tracks", Track.toMap(track), where: "id= ?", whereArgs: [track.id]);
+    await _db.update("tracks", Track.toMap(track),
+        where: "id= ?", whereArgs: [track.id]);
 
     return id;
   }
@@ -141,15 +144,33 @@ class DatabaseClient {
     return tracks;
   }
 
-  Future<void> insertPlaylist(Playlist playlist) async {
-    await _db.rawQuery("insert into playlist (name) values (\"${playlist.name}\")");
+  Future<Playlist> insertPlaylist(Playlist playlist) async {
+    await _db
+        .rawQuery("insert into playlist (name) values (\"${playlist.name}\")");
+
+    return Playlist(
+        id: Sqflite.firstIntValue(await _db.rawQuery(
+            "select id from playlist where name = \"${playlist.name}\"")),
+        coverImage: AssetImage("assets/images/default_song_image.jpg"),
+        name: playlist.name,
+        tracks: []);
+  }
+
+  Future<void> deletePlaylist(int id) async {
+    await _db.rawQuery("delete from playlist where id = $id");
+  }
+
+  Future<void> updatePlaylist(Playlist playlist) async {
+    await _db.update("playlist", Playlist.toMap(playlist), where: "id = ?", whereArgs: [playlist.id]);
   }
 
   Future<List<Playlist>> fetchPlaylists() async {
     List<Map> results = await _db.rawQuery("select * from playlist");
     List<Playlist> playlists = [];
-    results.forEach((p){
+    results.forEach((p) {
       Playlist playlist = Playlist.fromMap(p);
+      playlist.tracks = [];
+
       playlists.add(playlist);
     });
 
