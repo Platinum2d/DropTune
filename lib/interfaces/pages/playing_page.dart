@@ -1,4 +1,5 @@
 import 'package:droptune/interfaces/pages/queue_page.dart';
+import 'package:droptune/misc/marquee.dart';
 import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
@@ -52,12 +53,20 @@ class _PlayingPageState extends State<PlayingPage> {
   Widget _buildTitleAndSettings() {
     return Column(
       children: <Widget>[
-        Text(
-          currentTrack.name,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+        MarqueeWidget(
+          pauseDuration: Duration(milliseconds: 500),
+          backDuration: Duration(seconds: 7),
+          animationDuration: Duration(seconds: 13),
+          child: Text(
+            currentTrack.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+          ),
         ),
         Text(currentTrack.author.name,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,

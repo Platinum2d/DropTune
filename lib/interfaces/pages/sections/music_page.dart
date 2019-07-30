@@ -30,12 +30,6 @@ class MusicPage extends StatefulWidget {
 class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    TabController controller = TabController(
-      initialIndex: 0,
-      length: 3,
-      vsync: this,
-    );
-
     return DefaultTabController(
         initialIndex: 0,
         length: 3,

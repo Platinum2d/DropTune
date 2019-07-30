@@ -13,7 +13,10 @@ class TrackEntry extends StatelessWidget {
   final Playlist playlist;
   final Function removeTrackFromPlaylistCallback;
 
-  TrackEntry({@required this.track, this.playlist, this.removeTrackFromPlaylistCallback});
+  TrackEntry(
+      {@required this.track,
+      this.playlist,
+      this.removeTrackFromPlaylistCallback});
 
   Future _buildTrackOptions(BuildContext context) {
     return showRoundedModalBottomSheet(
@@ -26,8 +29,7 @@ class TrackEntry extends StatelessWidget {
           );
         }).then((map) {
       if (map != null) {
-        if (map["removedFromPlaylist"])
-          removeTrackFromPlaylistCallback(track);
+        if (map["removedFromPlaylist"]) removeTrackFromPlaylistCallback(track);
       }
     });
   }
@@ -51,7 +53,11 @@ class TrackEntry extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            subtitle: Text(track.author.name),
+            subtitle: Text(
+              track.author.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
