@@ -3,12 +3,17 @@ import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
-class TracksList extends StatelessWidget {
+class TracksList extends StatefulWidget {
   final List<Track> tracks;
   final Playlist playlist;
 
   TracksList({@required this.tracks, this.playlist});
 
+  @override
+  _TracksListState createState() => _TracksListState();
+}
+
+class _TracksListState extends State<TracksList> {
   @override
   Widget build(BuildContext context) {
     Widget emptyMessage = Center(
@@ -26,18 +31,24 @@ class TracksList extends StatelessWidget {
       ),
     );
 
-    if (tracks.length > 0)
+    if (widget.tracks.length > 0)
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             child: TrackEntry(
-              track: tracks[index],
-              playlist: playlist,
+              track: widget.tracks[index],
+              playlist: widget.playlist,
+              removeTrackFromPlaylistCallback: (track) {
+                setState(() {
+                  widget.tracks.remove(track);
+                  widget.playlist.tracks.remove(track);
+                });
+              },
             ),
             padding: EdgeInsets.only(bottom: 7),
           );
         },
-        itemCount: tracks.length,
+        itemCount: widget.tracks.length,
       );
     else
       return emptyMessage;

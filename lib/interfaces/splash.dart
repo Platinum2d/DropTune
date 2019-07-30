@@ -53,7 +53,6 @@ class _SplashPageState extends State<SplashPage> {
     songs = await MusicFinder.allSongs();
     List<Song> list = new List.from(songs);
     if (list == null || list.length == 0) {
-      print("List-> $list");
       Navigator.of(context).pop(true);
       Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
         return Center(
@@ -75,7 +74,7 @@ class _SplashPageState extends State<SplashPage> {
             path: adapter.getPath(),
             id: adapter.getId(),
             remoteId: adapter.getRemoteId());
-        db.insertTrack(t);
+        await db.insertTrack(t);
         cached.add(t);
       }
       cached.sort((Track a, Track b) {
@@ -107,12 +106,12 @@ class _SplashPageState extends State<SplashPage> {
   void load(BuildContext context) async {
     var db = new DatabaseClient();
     await db.create();
-    GetItReference.getIt.registerSingleton<DatabaseClient>(db);
 
     if (await db.alreadyLoaded()) {
       await _loadTracks(db);
       await _loadAlbums(db);
       await _loadAuthors(db);
+      GetItReference.getIt.registerSingleton<DatabaseClient>(db);
       Routing.goToAccessHub(context, clearStack: true);
     } else {
       setState(() {
@@ -122,6 +121,7 @@ class _SplashPageState extends State<SplashPage> {
       await _registerTracks(db);
       await _loadAlbums(db);
       await _loadAuthors(db);
+      GetItReference.getIt.registerSingleton<DatabaseClient>(db);
       Routing.goToAccessHub(context, clearStack: true);
     }
   }

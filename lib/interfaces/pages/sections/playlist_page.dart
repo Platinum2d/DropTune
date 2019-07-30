@@ -3,9 +3,7 @@ import 'package:droptune/misc/database/database_client.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/misc/utils/track_utils.dart';
-import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
-import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_modal/rounded_modal.dart';
 
@@ -77,8 +75,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   });
                 });
               },
-              onTap: () => Routing.goToPlaylistDetails(context, playlist,
-                  clearStack: false),
+              onTap: () {
+                Routing.goToPlaylistDetails(context, playlist,
+                    clearStack: false);
+              },
               child: Hero(
                 tag: playlist.id,
                 child: image,

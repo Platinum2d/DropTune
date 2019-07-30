@@ -11,8 +11,9 @@ import 'package:droptune/models/track.dart';
 class TrackEntry extends StatelessWidget {
   final Track track;
   final Playlist playlist;
+  final Function removeTrackFromPlaylistCallback;
 
-  TrackEntry({@required this.track, this.playlist});
+  TrackEntry({@required this.track, this.playlist, this.removeTrackFromPlaylistCallback});
 
   Future _buildTrackOptions(BuildContext context) {
     return showRoundedModalBottomSheet(
@@ -23,7 +24,12 @@ class TrackEntry extends StatelessWidget {
             track: track,
             playlist: playlist,
           );
-        });
+        }).then((map) {
+      if (map != null) {
+        if (map["removedFromPlaylist"])
+          removeTrackFromPlaylistCallback(track);
+      }
+    });
   }
 
   @override
@@ -40,7 +46,11 @@ class TrackEntry extends StatelessWidget {
               backgroundImage: track.coverImage,
               radius: 25,
             ),
-            title: Text(track.name, maxLines: 1, overflow: TextOverflow.ellipsis,),
+            title: Text(
+              track.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             subtitle: Text(track.author.name),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,

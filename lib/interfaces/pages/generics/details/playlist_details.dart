@@ -1,4 +1,6 @@
 import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
+import 'package:droptune/misc/database/database_client.dart';
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';
 
@@ -42,10 +44,26 @@ class PlaylistDetailsPage extends StatelessWidget {
           ),
         ];
       },
-      body: TracksList(
-        tracks: playlist.tracks,
-        playlist: playlist,
-      ),
+      body: playlist.id == -1
+          ? TracksList(
+              tracks: playlist.tracks,
+              playlist: playlist,
+            )
+          : FutureBuilder(
+              future: GetItReference.getIt
+                  .get<DatabaseClient>()
+                  .fetchPlaylistTracks(playlist),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done)
+                  return TracksList(
+                    tracks: snapshot.data,
+                    playlist: playlist,
+                  );
+                else
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+              }),
     ));
   }
 }

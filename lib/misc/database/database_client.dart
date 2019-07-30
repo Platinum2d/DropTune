@@ -19,6 +19,11 @@ class DatabaseClient {
     _db = await openDatabase(dbpath, version: 1, onCreate: this._create);
   }
 
+  Future reset() async {
+    _db.close();
+    create();
+  }
+
   Future _create(Database db, int version) async {
     await db.execute("""
     CREATE TABLE tracks(id INTEGER PRIMARY KEY, remoteId NUMBER, name TEXT, duration NUMBER, coverImage TEXT, album TEXT, path TEXT, author TEXT, albumId NUMBER)
@@ -29,7 +34,12 @@ class DatabaseClient {
     """);
 
     await db.execute("""
-    CREATE TABLE playlist_has_tracks(track_id INTEGER, playlist_id INTEGER)
+    CREATE TABLE playlist_has_tracks
+      (track_id INTEGER, 
+      playlist_id INTEGER,
+      FOREIGN KEY(track_id) REFERENCES track(id) ON DELETE CASCADE,
+      FOREIGN KEY(playlist_id) REFERENCES playlist(id) ON DELETE CASCADE
+      )
     """);
   }
 
@@ -47,13 +57,8 @@ class DatabaseClient {
   }
 
   Future<bool> alreadyLoaded() async {
-    var count = Sqflite.firstIntValue(
-        await _db.rawQuery("SELECT COUNT(*) FROM tracks"));
-    if (count > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return Sqflite.firstIntValue(
+            await _db.rawQuery("SELECT COUNT(*) FROM tracks LIMIT 5")) > 0;
   }
 
   Future<List<Track>> fetchTracks() async {
@@ -161,7 +166,8 @@ class DatabaseClient {
   }
 
   Future<void> updatePlaylist(Playlist playlist) async {
-    await _db.update("playlist", Playlist.toMap(playlist), where: "id = ?", whereArgs: [playlist.id]);
+    await _db.update("playlist", Playlist.toMap(playlist),
+        where: "id = ?", whereArgs: [playlist.id]);
   }
 
   Future<List<Playlist>> fetchPlaylists() async {
@@ -175,5 +181,32 @@ class DatabaseClient {
     });
 
     return playlists;
+  }
+
+  Future<void> insertTrackInPlaylist(Track track, Playlist playlist) async {
+    await _db.rawQuery(
+        "insert into playlist_has_tracks values (${track.id}, ${playlist.id})");
+  }
+
+  Future<List<Track>> fetchPlaylistTracks(Playlist playlist) async {
+    List<Map> results = await _db.rawQuery("""
+      select tracks.*
+      from tracks join playlist_has_tracks as pht on tracks.id = pht.track_id
+      where pht.playlist_id = ${playlist.id}
+      order by tracks.name
+    """);
+
+    List<Track> tracks = [];
+    results.forEach((entry) {
+      Track track = Track.fromMap(entry);
+      tracks.add(track);
+    });
+
+    return tracks;
+  }
+
+  Future<void> deleteTrackFromPlaylist(Track track, Playlist playlist) async {
+    await _db.rawQuery(
+        "delete from playlist_has_tracks where track_id = ${track.id} and playlist_id = ${playlist.id}");
   }
 }
