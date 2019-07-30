@@ -36,20 +36,22 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    return Scaffold(
-        appBar: TabBar(
-            isScrollable: true,
-            controller: controller,
-            indicatorColor: Colors.lightBlueAccent,
-            tabs: widget.tabs),
-        body: TabBarView(controller: controller, children: <Widget>[
-          TracksList(tracks: TrackUtils.getCachedAllTracks()),
-          AlbumsGrid(
-            albums: AlbumUtils.getCachedAllAlbums(),
-          ),
-          AuthorsList(
-            authors: AuthorUtils.getAllCachedAuthors(),
-          )
-        ]));
+    return DefaultTabController(
+        initialIndex: 0,
+        length: 3,
+        child: Scaffold(
+            appBar: TabBar(
+                isScrollable: true,
+                indicatorColor: Colors.lightBlueAccent,
+                tabs: widget.tabs),
+            body: TabBarView(children: <Widget>[
+              TracksList(tracks: TrackUtils.getCachedAllTracks()),
+              AlbumsGrid(
+                albums: AlbumUtils.getCachedAllAlbums(),
+              ),
+              AuthorsList(
+                authors: AuthorUtils.getAllCachedAuthors(),
+              )
+            ])));
   }
 }
