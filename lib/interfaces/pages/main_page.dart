@@ -68,38 +68,9 @@ class _MainPageState extends State<MainPage> {
                 clearStack: false); /* the current playlist MUST be passed! */
           },
           child: Visibility(
-            child: Container(
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          Provider.of<String>(context),
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "• The Razor's Edge",
-                          style: TextStyle(color: Colors.grey[400]),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    child: Icon(
-                      Icons.pause,
-                    ),
-                    padding: EdgeInsets.only(right: 20),
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(color: Color(0xfff4f8f9)),
-              //decoration: BoxDecoration(color: Colors.red),
+            child: ChangeNotifierProvider(
+              builder: (context) => widget.player,
+              child: OverlayBarWidget(),
             ),
             visible: overlayVisibility,
           ),
