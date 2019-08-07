@@ -61,6 +61,10 @@ class DatabaseClient {
             await _db.rawQuery("SELECT COUNT(*) FROM tracks LIMIT 5")) > 0;
   }
 
+  Future<List<Map>> fetchRawTracks() async {
+    return await _db.rawQuery("select * from tracks");
+  }
+
   Future<List<Track>> fetchTracks() async {
     List<Map> results =
         await _db.query("tracks", columns: Track.columns, orderBy: "name");
@@ -128,6 +132,10 @@ class DatabaseClient {
     return id;
   }
 
+  Future<void> deleteTrack (Track track) async {
+    await _db.rawDelete("delete from tracks where id = ${track.id}");
+  }
+
   Future<List<Track>> searchTrack(String q) async {
     List<Map> results =
         await _db.rawQuery("select * from songs where title like '%$q%'");
@@ -139,7 +147,7 @@ class DatabaseClient {
     return tracks;
   }
 
-  Future<List<Track>> fetchTracksById(int id) async {
+  Future<List<Track>> fetchTrackById(int id) async {
     List<Map> results = await _db.rawQuery("select * from songs where id=$id");
     List<Track> tracks = new List();
     results.forEach((s) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:droptune/models/author.dart';
 
-class Track {
+class Track implements Comparable<Track> {
   static List<String> columns = [
     "id",
     "remoteId",
@@ -61,5 +61,12 @@ class Track {
       album: Album(name: t["album"], id: t["albumId"], coverImage: AssetImage(t["coverImage"])),
     );
   }
+
+  @override
+  int compareTo(Track other) {
+    return this.path.compareTo(other.path);
+  }
 /*final User user;*/
+
+
 }

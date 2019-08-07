@@ -5,6 +5,7 @@ import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -50,7 +51,7 @@ class _MainPageState extends State<MainPage> {
         onPressed: () {}));
   }
 
-  Widget _buildNavigationBar() {
+  Widget _buildNavigationBar(context) {
     Track t = Track(
         coverImage: AssetImage("assets/images/the_razors_edge.png"),
         name: "The Razor's Edge",
@@ -77,7 +78,7 @@ class _MainPageState extends State<MainPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "AC/DC ",
+                          Provider.of<String>(context),
                           style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.bold),
@@ -155,7 +156,7 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
       ),
       body: _buildPageView(),
-      bottomNavigationBar: _buildNavigationBar(),
+      bottomNavigationBar: _buildNavigationBar(context),
     );
   }
 }

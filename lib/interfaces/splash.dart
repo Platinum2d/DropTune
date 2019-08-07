@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:droptune/misc/database/database_client.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/song_track_adapter/song_track_adapter.dart';
@@ -7,6 +8,7 @@ import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -14,38 +16,38 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  bool isLoadingForTheFirstTime = false;
-
-  @override
-  void initState() {
-    super.initState();
-    load(context);
-  }
-
   @override
   Widget build(BuildContext context) {
-    Widget built = Scaffold(
-        body: Container(
-      alignment: Alignment(0, 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset(
-            'assets/images/droptune_logo.png',
-            height: 125,
-            width: 125,
+    return Consumer<String>(
+      builder: (context, string, value) {
+        return Scaffold(
+            body: Container(
+          alignment: Alignment(0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/droptune_logo.png',
+                height: 125,
+                width: 125,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: FutureBuilder(
+                  future: load(context),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done)
+                      return Text("Setting up, please wait...");
+                    else
+                      return Text("Done");
+                  },
+                ),
+              )
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(isLoadingForTheFirstTime
-                ? "Initial set up is running, please wait..."
-                : "Setting up, please wait..."),
-          )
-        ],
-      ),
-    ));
-
-    return built;
+        ));
+      },
+    );
   }
 
   Future<void> _registerTracks(DatabaseClient db) async {
@@ -65,15 +67,7 @@ class _SplashPageState extends State<SplashPage> {
       List<Track> cached = [];
       for (Song song in list) {
         adapter.song = song;
-        Track t = Track(
-            name: adapter.getName(),
-            coverImage: adapter.getCoverImage(),
-            album: adapter.getAlbum(),
-            author: adapter.getAuthor(),
-            duration: adapter.getDuration(),
-            path: adapter.getPath(),
-            id: adapter.getId(),
-            remoteId: adapter.getRemoteId());
+        Track t = adapter.toTrack();
         await db.insertTrack(t);
         cached.add(t);
       }
@@ -103,24 +97,43 @@ class _SplashPageState extends State<SplashPage> {
     GetItReference.getIt.registerSingleton<List<Track>>(await db.fetchTracks());
   }
 
-  void load(BuildContext context) async {
-    var db = new DatabaseClient();
+  Future<void> _registerNewTracks(DatabaseClient db) async {
+    List<Song> allSongs = await MusicFinder.allSongs();
+    List<Track> registeredTracks = await db.fetchTracks();
+    List<String> registeredTracksPaths = [];
+    List<String> allTracksPaths = [];
+    SongTrackAdapter adapter = SongTrackAdapter(null);
+
+    for (Track t in registeredTracks) registeredTracksPaths.add(t.path);
+    for (Song s in allSongs) allTracksPaths.add(s.uri);
+
+    allSongs.forEach((Song s){
+      adapter.song = s;
+      if (!registeredTracksPaths.contains(adapter.getPath()))
+        db.insertTrack(adapter.toTrack());
+    });
+
+    registeredTracks.forEach((Track t){
+      if (!allTracksPaths.contains(t.path))
+        db.deleteTrack(t);
+    });
+  }
+
+  Future<void> load(BuildContext context) async {
+    var db = DatabaseClient();
     await db.create();
 
     if (await db.alreadyLoaded()) {
-      await _loadTracks(db);
-      await _loadAlbums(db);
-      await _loadAuthors(db);
+      await _registerNewTracks(db);
+      _loadTracks(db);
+      _loadAlbums(db);
+      _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
       Routing.goToAccessHub(context, clearStack: true);
     } else {
-      setState(() {
-        isLoadingForTheFirstTime = true;
-      });
-
       await _registerTracks(db);
-      await _loadAlbums(db);
-      await _loadAuthors(db);
+      _loadAlbums(db);
+      _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
       Routing.goToAccessHub(context, clearStack: true);
     }

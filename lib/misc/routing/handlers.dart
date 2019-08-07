@@ -6,6 +6,7 @@ import 'package:droptune/interfaces/pages/playing_page.dart';
 import 'package:droptune/interfaces/splash.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -29,5 +30,10 @@ var registerHandler = Handler(
 
 var mainPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return MainPage();
+  return Provider<String>(
+    builder: (context) {
+      return "io sono un'altra stringa";
+    },
+    child: MainPage(),
+  );
 });

@@ -36,11 +36,15 @@ class AuthorEntry extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            onTap: (){
+            onTap: () {
               Routing.goToAuthorDetails(context, author, clearStack: false);
             },
             leading: _buildLeadingText(),
-            title: Text(author.name),
+            title: Text(
+              author.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 10),

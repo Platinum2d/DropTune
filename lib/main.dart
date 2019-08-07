@@ -12,6 +12,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:droptune/interfaces/splash.dart';
 import 'package:droptune/misc/routing/routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(DroptuneApp());
@@ -26,13 +27,13 @@ class DroptuneApp extends StatelessWidget {
     try {
       songs = await MusicFinder.allSongs();
       return songs;
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
   }
 
-  void registerSingletons(){
+  void registerSingletons() {
     GetItReference.getIt.registerSingleton<PermissionsHub>(PermissionsHub());
   }
 
@@ -63,8 +64,7 @@ class DroptuneApp extends StatelessWidget {
           brightness: Brightness.light,
           fontFamily: "Poppins",
           buttonColor: Color(0xffd9ffff),
-          appBarTheme:
-              AppBarTheme(color: Color(0xfffafafa), elevation: 0),
+          appBarTheme: AppBarTheme(color: Color(0xfffafafa), elevation: 0),
           buttonTheme: ButtonThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(buttonRadius))),
@@ -76,7 +76,10 @@ class DroptuneApp extends StatelessWidget {
               border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(inputRadius)))),
-      home: SplashPage(),
+      home: Provider<String>(
+        builder: (context) => "io sono una stringa del provider",
+        child: SplashPage(),
+      ),
     );
   }
 }
