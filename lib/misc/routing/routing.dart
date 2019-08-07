@@ -31,12 +31,12 @@ class Routing {
 
   static goToLogin(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.login,
-        clearStack: clearStack, transition: TransitionType.native);
+        clearStack: clearStack, transition: TransitionType.inFromRight);
   }
 
   static goToRegister(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.register,
-        clearStack: clearStack, transition: TransitionType.native);
+        clearStack: clearStack, transition: TransitionType.inFromRight);
   }
 
   static goToAccessHub(context, {bool clearStack = false}) {
@@ -46,7 +46,7 @@ class Routing {
 
   static goToMainPage(context, {bool clearStack = false}) {
     Routing.router.navigateTo(context, Routes.mainPage,
-        clearStack: clearStack, transition: TransitionType.native);
+        clearStack: clearStack, transition: TransitionType.inFromRight);
   }
 
   static goToPlayingPage(context, Track track, Playlist playlist,
