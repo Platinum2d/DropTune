@@ -1,4 +1,4 @@
-import 'package:droptune/interfaces/pages/playing_page_slider.dart';
+import 'package:droptune/interfaces/pages/playing_page/playing_page_slider.dart';
 import 'package:droptune/interfaces/pages/queue_page.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';

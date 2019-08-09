@@ -1,7 +1,7 @@
 import 'package:droptune/interfaces/pages/generics/details/album_details.dart';
 import 'package:droptune/interfaces/pages/generics/details/author_details.dart';
 import 'package:droptune/interfaces/pages/generics/details/playlist_details.dart';
-import 'package:droptune/interfaces/pages/playing_page.dart';
+import 'package:droptune/interfaces/pages/playing_page/playing_page.dart';
 import 'package:droptune/interfaces/pages/queue_page.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
