@@ -4,6 +4,7 @@ import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
 import 'package:droptune/misc/utils/album_utils.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/utils/author_utils.dart';
+import 'package:droptune/misc/utils/playlist_utils.dart';
 import 'package:droptune/misc/utils/track_utils.dart';
 import 'package:droptune/models/author.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
                 indicatorColor: Colors.lightBlueAccent,
                 tabs: widget.tabs),
             body: TabBarView(children: <Widget>[
-              TracksList(tracks: TrackUtils.getCachedAllTracks()),
+              TracksList(tracks: TrackUtils.getCachedAllTracks(), playlist: PlaylistUtils.getMainPlaylistSignature(),),
               AlbumsGrid(
                 albums: AlbumUtils.getCachedAllAlbums(),
               ),

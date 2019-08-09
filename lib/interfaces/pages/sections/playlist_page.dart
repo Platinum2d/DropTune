@@ -76,8 +76,18 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 });
               },
               onTap: () {
-                Routing.goToPlaylistDetails(context, playlist,
-                    clearStack: false);
+                if (playlist.tracks.isEmpty)
+                  GetItReference.getIt
+                      .get<DatabaseClient>()
+                      .fetchPlaylistTracks(playlist)
+                      .then((playlistTracks) {
+                    playlist.tracks = playlistTracks;
+                    Routing.goToPlaylistDetails(context, playlist,
+                        clearStack: false);
+                  });
+                else
+                  Routing.goToPlaylistDetails(context, playlist,
+                      clearStack: false);
               },
               child: Hero(
                 tag: playlist.id,

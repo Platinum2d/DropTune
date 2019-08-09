@@ -103,16 +103,12 @@ class _SplashPageState extends State<SplashPage> {
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
-      /*GetItReference.getIt
-          .registerSingleton<DroptunePlayer>(DroptunePlayer(tracks: []));*/ //Queue restore!
       Routing.goToAccessHub(context, clearStack: true);
     } else {
       await _registerTracks(db);
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
-      GetItReference.getIt
-          .registerSingleton<DroptunePlayer>(DroptunePlayer(queueTracks: []));
       Routing.goToAccessHub(context, clearStack: true);
     }
   }

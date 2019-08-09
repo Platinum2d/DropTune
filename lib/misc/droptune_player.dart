@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/foundation.dart';
 
@@ -6,11 +7,12 @@ class DroptunePlayer with ChangeNotifier {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isReproducing = false;
 
-  final List<Track> queueTracks;
+  List<Track> queueTracks;
+  Playlist reproducingPlaylist;
   int _reproducingIndex = 0;
   Duration position;
 
-  DroptunePlayer({@required this.queueTracks}) {
+  DroptunePlayer({@required this.queueTracks, @required this.reproducingPlaylist}) {
     audioPlayer.setUrl(queueTracks[0].path);
     position = Duration(seconds: 0);
   }

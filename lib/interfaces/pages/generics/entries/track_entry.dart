@@ -1,5 +1,9 @@
 import 'package:droptune/interfaces/pages/playing_page/playing_page.dart';
 import 'package:droptune/interfaces/pages/generics/track_options.dart';
+import 'package:droptune/misc/droptune_player.dart';
+import 'package:droptune/misc/get_it_reference.dart';
+import 'package:droptune/misc/queue_generators/queue_generator.dart';
+import 'package:droptune/misc/queue_generators/sorted_queue_generator.dart';
 import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
@@ -12,6 +16,8 @@ class TrackEntry extends StatelessWidget {
   final Track track;
   final Playlist playlist;
   final Function removeTrackFromPlaylistCallback;
+
+  final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
 
   TrackEntry(
       {@required this.track,
@@ -41,6 +47,16 @@ class TrackEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
+              if (playlist.compareTo(_player.reproducingPlaylist) != 0) {
+                QueueGenerator queueGenerator = SortedQueueGenerator(sortingKey: (a, b){
+                  return a.compareTo(b);
+                });
+                _player.queueTracks = queueGenerator.createQueue(playlist.tracks);
+              }
+
+              _player.reproducingPlaylist = playlist;
+              _player.moveToTrack(track);
+
               Routing.goToPlayingPage(context,);
             },
             leading: CircleAvatar(

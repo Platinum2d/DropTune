@@ -18,7 +18,7 @@ class MarqueeWidget extends StatefulWidget {
 }
 
 class _MarqueeWidgetState extends State<MarqueeWidget> {
-  ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController(initialScrollOffset: 0.0);
 
   @override
   void initState() {

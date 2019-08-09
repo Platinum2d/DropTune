@@ -5,15 +5,19 @@ import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
+import 'package:droptune/misc/utils/playlist_utils.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
-  final DroptunePlayer player = DroptunePlayer(queueTracks: GetItReference.getIt.get<List<Track>>());
+  final DroptunePlayer player = DroptunePlayer(
+      queueTracks: GetItReference.getIt.get<List<Track>>(),
+      reproducingPlaylist: PlaylistUtils.getMainPlaylistSignature());
 
   @override
   State createState() {
+    /* queue restore! */
     GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
     return _MainPageState();
   }
@@ -62,7 +66,8 @@ class _MainPageState extends State<MainPage> {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Routing.goToPlayingPage(context, clearStack: false); /* the current playlist MUST be passed! */
+            Routing.goToPlayingPage(context,
+                clearStack: false); /* the current playlist MUST be passed! */
           },
           child: Visibility(
             child: ChangeNotifierProvider(

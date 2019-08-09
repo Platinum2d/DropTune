@@ -31,8 +31,16 @@ class _QueuePageState extends State<QueuePage> {
         backgroundImage: t.coverImage,
         radius: 25,
       ),
-      title: Text(t.name),
-      subtitle: Text(t.author.name),
+      title: Text(
+        t.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(
+        t.author.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: Icon(Icons.reorder),
     );
 

@@ -8,10 +8,6 @@ import 'package:flutter/material.dart';
 
 class PlayingPage extends StatefulWidget {
   final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
-  final Playlist _fakePlaylist = Playlist(
-    name: "fake playlist",
-    coverImage: AssetImage("assets/images/default_song_cover.jpg"),
-  );
 
   @override
   State createState() {
@@ -178,8 +174,8 @@ class _PlayingPageState extends State<PlayingPage> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         }),
-                    widget._fakePlaylist != null &&
-                            widget._fakePlaylist.name != "All tracks"
+                    widget._player.reproducingPlaylist != null &&
+                            widget._player.reproducingPlaylist.name != "All tracks"
                         ? Column(
                             children: <Widget>[
                               Text(
@@ -188,7 +184,7 @@ class _PlayingPageState extends State<PlayingPage> {
                                 style: TextStyle(fontSize: 13),
                               ),
                               Text(
-                                widget._fakePlaylist.name,
+                                widget._player.reproducingPlaylist.name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500, fontSize: 15),
                               )
