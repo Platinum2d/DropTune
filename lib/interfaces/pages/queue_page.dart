@@ -20,8 +20,6 @@ class _QueuePageState extends State<QueuePage> {
       if (newIndex > oldIndex) {
         newIndex -= 1;
       }
-      /*final Track item = widget.queue.removeAt(oldIndex);
-      widget.queue.insert(newIndex, item);*/
       GetItReference.getIt.get<DroptunePlayer>().moveTrack(oldIndex, newIndex);
     });
   }

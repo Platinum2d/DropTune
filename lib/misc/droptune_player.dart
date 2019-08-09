@@ -86,13 +86,12 @@ class DroptunePlayer with ChangeNotifier {
         target < 0 ||
         target >= queueTracks.length) return;
 
-    //if (toMove == _reproducingIndex) _reproducingIndex = target;
     Track currentTrack = getCurrentTrack();
     Track trackToMove = queueTracks[toMove];
     queueTracks.remove(queueTracks[toMove]);
     queueTracks.insert(target, trackToMove);
 
-    _reproducingIndex = _getTrackIndex(currentTrack);
+    _reproducingIndex = _getTrackIndex(currentTrack); //inefficient!
     notifyListeners();
   }
 
