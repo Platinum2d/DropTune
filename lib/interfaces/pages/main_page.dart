@@ -1,15 +1,20 @@
+import 'package:droptune/interfaces/pages/overlay_bar.dart';
 import 'package:droptune/interfaces/pages/sections/music_page.dart';
 import 'package:droptune/interfaces/pages/sections/playlist_page.dart';
 import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
+import 'package:droptune/misc/droptune_player.dart';
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
-import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
+  final DroptunePlayer player = DroptunePlayer(queueTracks: GetItReference.getIt.get<List<Track>>());
+
   @override
   State createState() {
+    GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
     return _MainPageState();
   }
 }
@@ -52,20 +57,12 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildNavigationBar(context) {
-    Track t = Track(
-        coverImage: AssetImage("assets/images/the_razors_edge.png"),
-        name: "The Razor's Edge",
-        duration: Duration(minutes: 3, seconds: 1),
-        path: '',
-        author: Author(name: 'AC/DC', tracks: <Track>[]));
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Routing.goToPlayingPage(context, t, null,
-                clearStack: false); /* the current playlist MUST be passed! */
+            Routing.goToPlayingPage(context, clearStack: false); /* the current playlist MUST be passed! */
           },
           child: Visibility(
             child: ChangeNotifierProvider(

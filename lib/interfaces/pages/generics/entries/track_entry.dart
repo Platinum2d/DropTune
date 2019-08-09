@@ -41,8 +41,7 @@ class TrackEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
-              Routing.goToPlayingPage(context, track, playlist,
-                  clearStack: false);
+              Routing.goToPlayingPage(context,);
             },
             leading: CircleAvatar(
               backgroundImage: track.coverImage,

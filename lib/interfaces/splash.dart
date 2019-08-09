@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:droptune/misc/database/database_client.dart';
+import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/song_track_adapter/song_track_adapter.dart';
 import 'package:droptune/misc/routing/routing.dart';
@@ -8,7 +9,9 @@ import 'package:droptune/models/author.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/scheduler.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -16,40 +19,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<String>(
-      builder: (context, string, value) {
-        return Scaffold(
-            body: Container(
-          alignment: Alignment(0, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/droptune_logo.png',
-                height: 125,
-                width: 125,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: FutureBuilder(
-                  future: load(context),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done)
-                      return Text("Setting up, please wait...");
-                    else
-                      return Text("Done");
-                  },
-                ),
-              )
-            ],
-          ),
-        ));
-      },
-    );
-  }
-
   Future<void> _registerTracks(DatabaseClient db) async {
     var songs;
     songs = await MusicFinder.allSongs();
@@ -97,8 +66,14 @@ class _SplashPageState extends State<SplashPage> {
     GetItReference.getIt.registerSingleton<List<Track>>(await db.fetchTracks());
   }
 
-  Future<void> _registerNewTracks(DatabaseClient db) async {
-    List<Song> allSongs = await MusicFinder.allSongs();
+  Future<void> _synchronizeDatabases(DatabaseClient db) async {
+    const MethodChannel _channel = const MethodChannel('music_finder');
+    List<dynamic> mySongs = await _channel.invokeMethod('getSongs', {
+      "handlePermissions": true,
+      "executeAfterPermissionGranted": true,
+    });
+
+    List<Song> allSongs = mySongs.map((m) => new Song.fromMap(m)).toList();
     List<Track> registeredTracks = await db.fetchTracks();
     List<String> registeredTracksPaths = [];
     List<String> allTracksPaths = [];
@@ -107,15 +82,14 @@ class _SplashPageState extends State<SplashPage> {
     for (Track t in registeredTracks) registeredTracksPaths.add(t.path);
     for (Song s in allSongs) allTracksPaths.add(s.uri);
 
-    allSongs.forEach((Song s){
+    allSongs.forEach((Song s) {
       adapter.song = s;
       if (!registeredTracksPaths.contains(adapter.getPath()))
         db.insertTrack(adapter.toTrack());
     });
 
-    registeredTracks.forEach((Track t){
-      if (!allTracksPaths.contains(t.path))
-        db.deleteTrack(t);
+    registeredTracks.forEach((Track t) {
+      if (!allTracksPaths.contains(t.path)) db.deleteTrack(t);
     });
   }
 
@@ -124,18 +98,49 @@ class _SplashPageState extends State<SplashPage> {
     await db.create();
 
     if (await db.alreadyLoaded()) {
-      await _registerNewTracks(db);
-      _loadTracks(db);
+      //await _synchronizeDatabases(db);
+      await _loadTracks(db);
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
+      /*GetItReference.getIt
+          .registerSingleton<DroptunePlayer>(DroptunePlayer(tracks: []));*/ //Queue restore!
       Routing.goToAccessHub(context, clearStack: true);
     } else {
       await _registerTracks(db);
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
+      GetItReference.getIt
+          .registerSingleton<DroptunePlayer>(DroptunePlayer(queueTracks: []));
       Routing.goToAccessHub(context, clearStack: true);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    load(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Container(
+      alignment: Alignment(0, 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(
+            'assets/images/droptune_logo.png',
+            height: 125,
+            width: 125,
+          ),
+          Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text("Setting up, please wait..."))
+        ],
+      ),
+    ));
   }
 }

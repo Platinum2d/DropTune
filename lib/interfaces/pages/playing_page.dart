@@ -1,4 +1,7 @@
+import 'package:droptune/interfaces/pages/playing_page_slider.dart';
 import 'package:droptune/interfaces/pages/queue_page.dart';
+import 'package:droptune/misc/droptune_player.dart';
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/marquee.dart';
 import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
@@ -6,16 +9,18 @@ import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlayingPage extends StatefulWidget {
-  final Track currentTrackArtifical;
-  final Playlist playlist;
-
-  PlayingPage(this.currentTrackArtifical, {this.playlist});
+  final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
+  final Playlist _fakePlaylist = Playlist(
+    name: "fake playlist",
+    coverImage: AssetImage("assets/images/default_song_cover.jpg"),
+  );
 
   @override
   State createState() {
-    return _PlayingPageState(currentTrackArtifical);
+    return _PlayingPageState();
   }
 }
 
@@ -44,11 +49,10 @@ class _PlayingPageState extends State<PlayingPage> {
         author: Author(name: "AC/DC", tracks: [])),
   ];
 
-  Track currentTrack;
   double _sliderProgress = 0;
   bool dismissed = false;
 
-  _PlayingPageState(this.currentTrack);
+  _PlayingPageState();
 
   Widget _buildTitleAndSettings() {
     return Column(
@@ -58,12 +62,12 @@ class _PlayingPageState extends State<PlayingPage> {
           backDuration: Duration(seconds: 7),
           animationDuration: Duration(seconds: 13),
           child: Text(
-            currentTrack.name,
+            widget._player.getCurrentTrack().name,
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
           ),
         ),
-        Text(currentTrack.author.name,
+        Text(widget._player.getCurrentTrack().author.name,
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -78,16 +82,7 @@ class _PlayingPageState extends State<PlayingPage> {
   Widget _buildSlider(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: Slider(
-          activeColor: Colors.cyan,
-          value: _sliderProgress,
-          max: 100,
-          inactiveColor: Colors.grey[400],
-          onChanged: (double newProgress) {
-            setState(() {
-              _sliderProgress = newProgress;
-            });
-          }),
+      child: PlayingPageSlider(),
     );
   }
 
@@ -103,11 +98,20 @@ class _PlayingPageState extends State<PlayingPage> {
             )),
         Flexible(
           flex: 20,
-          child: Padding(
-            padding: EdgeInsets.all(7),
-            child: Transform.rotate(
-                angle: 3.14,
-                child: Image.asset('assets/images/forward_button.png')),
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                widget._player.moveToPreviousTrack();
+              });
+            },
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.all(7),
+                child: Transform.rotate(
+                    angle: 3.14,
+                    child: Image.asset('assets/images/forward_button.png')),
+              ),
+            ),
           ),
         ),
         Flexible(
@@ -115,11 +119,19 @@ class _PlayingPageState extends State<PlayingPage> {
             child: Padding(
               padding: EdgeInsets.all(15),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    widget._player.isReproducing
+                        ? widget._player.pause()
+                        : widget._player.resume();
+                  });
+                },
                 child: Container(
                   alignment: Alignment(0, 0),
                   child: Icon(
-                    Icons.pause,
+                    !widget._player.isReproducing
+                        ? Icons.play_arrow
+                        : Icons.pause,
                     size: 40,
                     color: Colors.white,
                   ),
@@ -135,9 +147,18 @@ class _PlayingPageState extends State<PlayingPage> {
             )),
         Flexible(
             flex: 20,
-            child: Padding(
-              padding: EdgeInsets.all(7),
-              child: Image.asset('assets/images/forward_button.png'),
+            child: GestureDetector(
+              onTap: (){
+                setState(() {
+                  widget._player.moveToNextTrack();
+                });
+              },
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.all(7),
+                  child: Image.asset('assets/images/forward_button.png'),
+                ),
+              ),
             )),
         Flexible(
             flex: 11,
@@ -169,7 +190,7 @@ class _PlayingPageState extends State<PlayingPage> {
               image: DecorationImage(
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.15), BlendMode.dstATop),
-                  image: currentTrack.coverImage,
+                  image: widget._player.getCurrentTrack().coverImage,
                   fit: BoxFit.cover)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,8 +208,8 @@ class _PlayingPageState extends State<PlayingPage> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         }),
-                    widget.playlist != null &&
-                            widget.playlist.name != "All tracks"
+                    widget._fakePlaylist != null &&
+                            widget._fakePlaylist.name != "All tracks"
                         ? Column(
                             children: <Widget>[
                               Text(
@@ -197,7 +218,7 @@ class _PlayingPageState extends State<PlayingPage> {
                                 style: TextStyle(fontSize: 13),
                               ),
                               Text(
-                                widget.playlist.name,
+                                widget._fakePlaylist.name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500, fontSize: 15),
                               )

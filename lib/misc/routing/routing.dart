@@ -49,22 +49,11 @@ class Routing {
         clearStack: clearStack, transition: TransitionType.inFromRight);
   }
 
-  static goToPlayingPage(context, Track track, Playlist playlist,
-      {bool clearStack = false}) {
+  static goToPlayingPage(context, {bool clearStack = false}) {
     if (clearStack)
-      _pushReplacement(
-          context,
-          PlayingPage(
-            track,
-            playlist: playlist,
-          ));
+      _pushReplacement(context, PlayingPage());
     else
-      _push(
-          context,
-          PlayingPage(
-            track,
-            playlist: playlist,
-          ));
+      _push(context, PlayingPage());
   }
 
   static goToAuthorDetails(context, Author author, {bool clearStack = false}) {
@@ -74,7 +63,8 @@ class Routing {
       _push(context, AuthorDetailsPage(author));
   }
 
-  static goToPlaylistDetails(context, Playlist playlist, {bool clearStack = false}) {
+  static goToPlaylistDetails(context, Playlist playlist,
+      {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(
           context,
@@ -89,7 +79,8 @@ class Routing {
           ));
   }
 
-  static goToAlbumDetails(context, Album album, int index, {bool clearStack = false}) {
+  static goToAlbumDetails(context, Album album, int index,
+      {bool clearStack = false}) {
     if (clearStack)
       _pushReplacement(
           context,
