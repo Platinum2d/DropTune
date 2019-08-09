@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:droptune/models/track.dart';
 
-class Playlist {
+class Playlist implements Comparable<Playlist> {
   Playlist(
       {this.id,
       @required this.coverImage,
@@ -14,11 +14,8 @@ class Playlist {
   String name;
   List<Track> tracks;
 
-  static Map<String, dynamic> toMap(Playlist p){
-    return {
-      'id': p.id,
-      'name': p.name
-    };
+  static Map<String, dynamic> toMap(Playlist p) {
+    return {'id': p.id, 'name': p.name};
   }
 
   static Playlist fromMap(Map p) {
@@ -26,5 +23,10 @@ class Playlist {
         id: p["id"],
         name: p["name"],
         coverImage: AssetImage("assets/images/default_song_image.jpg"));
+  }
+
+  @override
+  int compareTo(Playlist other) {
+    return other.id == this.id ? 0 : -1;
   }
 }
