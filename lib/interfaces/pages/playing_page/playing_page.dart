@@ -5,7 +5,6 @@ import 'package:droptune/misc/marquee.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PlayingPage extends StatefulWidget {
   final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
@@ -58,9 +57,7 @@ class _PlayingPageState extends State<PlayingPage>
   Widget _buildSlider(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: ChangeNotifierProvider(
-        builder: (context) => GetItReference.getIt.get<DroptunePlayer>(),
-        child: PlayingPageSlider(),),
+      child: PlayingPageSlider(),
     );
   }
 
