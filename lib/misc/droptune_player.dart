@@ -84,6 +84,12 @@ class DroptunePlayer with ChangeNotifier {
     notifyListeners();
   }
 
+  void seekTo(Duration newPosition){
+    position = newPosition;
+    audioPlayer.seek(newPosition);
+    notifyListeners();
+  }
+
   void pause() {
     audioPlayer.pause();
     isReproducing = false;
