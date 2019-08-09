@@ -12,6 +12,7 @@ class PlayingPageSlider extends StatefulWidget {
 class _PlayingPageSliderState extends State<PlayingPageSlider> {
   Duration _currentPosition;
   var _listenerSubscription;
+  bool _wasReproducing;
 
   @override
   void initState() {
@@ -68,6 +69,7 @@ class _PlayingPageSliderState extends State<PlayingPageSlider> {
                 .toDouble(),
             inactiveColor: Colors.grey[400],
             onChangeStart: (value) {
+              _wasReproducing = widget.player.isReproducing;
               widget.player.pause();
             },
             onChanged: (newProgress) {
@@ -77,7 +79,7 @@ class _PlayingPageSliderState extends State<PlayingPageSlider> {
             },
             onChangeEnd: (newProgress) {
               widget.player.seekTo(Duration(milliseconds: newProgress.toInt()));
-              widget.player.resume();
+              if (_wasReproducing) widget.player.resume();
             },
           ),
         )
