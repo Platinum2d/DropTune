@@ -30,24 +30,58 @@ class _PlayingPageSliderState extends State<PlayingPageSlider> {
       }
     });
 
-    return Slider(
-      activeColor: Colors.cyan,
-      value: _currentPosition.inMilliseconds.toDouble(),
-      min: 0,
-      max: widget.player.getCurrentTrack().duration.inMilliseconds.toDouble(),
-      inactiveColor: Colors.grey[400],
-      onChangeStart: (value) {
-        widget.player.pause();
-      },
-      onChanged: (newProgress) {
-        setState(() {
-          _currentPosition = Duration(milliseconds: newProgress.toInt());
-        });
-      },
-      onChangeEnd: (newProgress) {
-        widget.player.seekTo(Duration(milliseconds: newProgress.toInt()));
-        widget.player.resume();
-      },
+    int currentMinutes = _currentPosition.inMinutes;
+    int currentSeconds =
+        _currentPosition.inSeconds - 60 * _currentPosition.inMinutes;
+
+    int durationMinutes = widget.player.getCurrentTrack().duration.inMinutes;
+    int durationSeconds = (widget.player.getCurrentTrack().duration.inSeconds - 60 * durationMinutes);
+
+
+    return Stack(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(currentMinutes.toString() +
+                  ":" +
+                  (currentSeconds < 10 ? "0" : "") +
+                  currentSeconds.toString()),
+              Text(durationMinutes.toString() +
+                  ":" + (durationSeconds < 10 ? "0" : "") +
+                  durationSeconds.toString())
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: Slider(
+            activeColor: Colors.cyan,
+            value: _currentPosition.inMilliseconds.toDouble(),
+            min: 0,
+            max: widget.player
+                .getCurrentTrack()
+                .duration
+                .inMilliseconds
+                .toDouble(),
+            inactiveColor: Colors.grey[400],
+            onChangeStart: (value) {
+              widget.player.pause();
+            },
+            onChanged: (newProgress) {
+              setState(() {
+                _currentPosition = Duration(milliseconds: newProgress.toInt());
+              });
+            },
+            onChangeEnd: (newProgress) {
+              widget.player.seekTo(Duration(milliseconds: newProgress.toInt()));
+              widget.player.resume();
+            },
+          ),
+        )
+      ],
     );
   }
 

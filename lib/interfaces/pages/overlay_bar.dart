@@ -23,7 +23,7 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget>
   @override
   Widget build(BuildContext context) {
     DroptunePlayer player = Provider.of<DroptunePlayer>(context);
-    
+
     player.isReproducing
         ? _playPauseAnimationController.forward()
         : _playPauseAnimationController.reverse();
