@@ -70,6 +70,7 @@ class _MainPageState extends State<MainPage> {
               child: OverlayBarWidget(),
             ),
             visible: overlayVisibility,
+            maintainState: true,
           ),
         ),
         BottomNavigationBar(
