@@ -12,9 +12,19 @@ class DroptunePlayer with ChangeNotifier {
   int _reproducingIndex = 0;
   Duration position;
 
-  DroptunePlayer({@required this.queueTracks, @required this.reproducingPlaylist}) {
+  DroptunePlayer(
+      {@required this.queueTracks, @required this.reproducingPlaylist}) {
     audioPlayer.setUrl(queueTracks[0].path);
     position = Duration(seconds: 0);
+
+    audioPlayer.onAudioPositionChanged.listen((p) {
+      position = p;
+      notifyListeners();
+    });
+
+    audioPlayer.onPlayerCompletion.listen((_) {
+      moveToNextTrack();
+    });
   }
 
   Track moveTo(int index) {
@@ -75,11 +85,11 @@ class DroptunePlayer with ChangeNotifier {
     return queueTracks[_reproducingIndex];
   }
 
-  int _getTrackIndex(Track track){
+  int _getTrackIndex(Track track) {
     for (int i = 0; i < queueTracks.length; i++)
       if (track.compareTo(queueTracks[i]) == 0) return i;
 
-      return -1;
+    return -1;
   }
 
   void moveTrack(int toMove, int target) {
@@ -97,11 +107,11 @@ class DroptunePlayer with ChangeNotifier {
     notifyListeners();
   }
 
-  void enqueue(Track track){
+  void enqueue(Track track) {
     queueTracks.insert(_reproducingIndex + 1, track);
   }
 
-  void seekTo(Duration newPosition){
+  void seekTo(Duration newPosition) {
     position = newPosition;
     audioPlayer.seek(newPosition);
     notifyListeners();
