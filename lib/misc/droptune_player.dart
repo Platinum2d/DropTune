@@ -97,6 +97,10 @@ class DroptunePlayer with ChangeNotifier {
     notifyListeners();
   }
 
+  void enqueue(Track track){
+    queueTracks.insert(_reproducingIndex + 1, track);
+  }
+
   void seekTo(Duration newPosition){
     position = newPosition;
     audioPlayer.seek(newPosition);

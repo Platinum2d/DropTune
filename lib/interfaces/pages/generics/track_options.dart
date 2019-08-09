@@ -1,4 +1,5 @@
 import 'package:droptune/misc/database/database_client.dart';
+import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 class TrackOptions extends StatefulWidget {
   final Track track;
   final Playlist playlist;
+
+  final DroptunePlayer player = GetItReference.getIt.get<DroptunePlayer>();
 
   TrackOptions({@required this.track, this.playlist});
 
@@ -88,7 +91,8 @@ class _TrackOptionsState extends State<TrackOptions> {
           title: Text("Add to playlist")),
       _buildTile(
           action: () {
-            print("2");
+            widget.player.enqueue(widget.track);
+            Navigator.pop(context);
           },
           leadingImage: AssetImage('assets/images/queue_icon.png'),
           title: Text("Add to queue")),
