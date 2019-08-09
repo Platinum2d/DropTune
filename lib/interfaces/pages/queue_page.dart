@@ -1,5 +1,5 @@
-import 'package:droptune/interfaces/pages/generics/entries/track_entry.dart';
-import 'package:droptune/misc/utils/droptune_utils.dart';
+import 'package:droptune/misc/droptune_player.dart';
+import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 
@@ -15,19 +15,19 @@ class QueuePage extends StatefulWidget {
 }
 
 class _QueuePageState extends State<QueuePage> {
-
   void _onReorder(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) {
         newIndex -= 1;
       }
-      final Track item =  widget.queue.removeAt(oldIndex);
-      widget.queue.insert(newIndex, item);
+      /*final Track item = widget.queue.removeAt(oldIndex);
+      widget.queue.insert(newIndex, item);*/
+      GetItReference.getIt.get<DroptunePlayer>().moveTrack(oldIndex, newIndex);
     });
   }
 
   Widget _buildTile(Track t) {
-    return ListTile(
+    ListTile tile = ListTile(
       key: Key(t.id.toString()),
       leading: CircleAvatar(
         backgroundImage: t.coverImage,
@@ -37,6 +37,16 @@ class _QueuePageState extends State<QueuePage> {
       subtitle: Text(t.author.name),
       trailing: Icon(Icons.reorder),
     );
+
+    return t.compareTo(
+                GetItReference.getIt.get<DroptunePlayer>().getCurrentTrack()) !=
+            0
+        ? tile
+        : Container(
+            key: Key(t.id.toString()),
+            color: Colors.cyan,
+            child: tile,
+          );
   }
 
   @override

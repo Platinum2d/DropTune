@@ -1,15 +1,10 @@
 import 'package:droptune/interfaces/pages/playing_page/playing_page_slider.dart';
-import 'package:droptune/interfaces/pages/queue_page.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/marquee.dart';
-import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
-import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
-import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PlayingPage extends StatefulWidget {
   final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
@@ -25,31 +20,6 @@ class PlayingPage extends StatefulWidget {
 }
 
 class _PlayingPageState extends State<PlayingPage> {
-  List<Track> _trackss = [
-    Track(
-        id: 1,
-        name: "Thunderstruck",
-        path: "",
-        duration: Duration(minutes: 3, seconds: 1),
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        author: Author(name: "AC/DC", tracks: [])),
-    Track(
-        id: 1,
-        name: "Thunderstruck",
-        path: "",
-        duration: Duration(minutes: 3, seconds: 1),
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        author: Author(name: "AC/DC", tracks: [])),
-    Track(
-        id: 1,
-        name: "Thunderstruck",
-        path: "",
-        duration: Duration(minutes: 3, seconds: 1),
-        coverImage: AssetImage('assets/images/default_song_image.jpg'),
-        author: Author(name: "AC/DC", tracks: [])),
-  ];
-
-  double _sliderProgress = 0;
   bool dismissed = false;
 
   _PlayingPageState();
@@ -148,7 +118,7 @@ class _PlayingPageState extends State<PlayingPage> {
         Flexible(
             flex: 20,
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
                   widget._player.moveToNextTrack();
                 });
@@ -231,7 +201,11 @@ class _PlayingPageState extends State<PlayingPage> {
                             EdgeInsets.only(right: 15, top: 10, bottom: 10),
                         child: GestureDetector(
                           onTap: () {
-                            Routing.goToQueue(context, _trackss,
+                            Routing.goToQueue(
+                                context,
+                                GetItReference.getIt
+                                    .get<DroptunePlayer>()
+                                    .queueTracks,
                                 clearStack: false);
                           },
                           child: Image(
