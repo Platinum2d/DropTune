@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class DroptunePlayer with ChangeNotifier {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isReproducing = false;
+
   final List<Track> queueTracks;
   int _reproducingIndex = 0;
   Duration position;
@@ -72,15 +73,26 @@ class DroptunePlayer with ChangeNotifier {
     return queueTracks[_reproducingIndex];
   }
 
+  int _getTrackIndex(Track track){
+    for (int i = 0; i < queueTracks.length; i++)
+      if (track.compareTo(queueTracks[i]) == 0) return i;
+
+      return -1;
+  }
+
   void moveTrack(int toMove, int target) {
     if (toMove < 0 ||
         toMove >= queueTracks.length ||
         target < 0 ||
         target >= queueTracks.length) return;
 
+    //if (toMove == _reproducingIndex) _reproducingIndex = target;
+    Track currentTrack = getCurrentTrack();
     Track trackToMove = queueTracks[toMove];
     queueTracks.remove(queueTracks[toMove]);
     queueTracks.insert(target, trackToMove);
+
+    _reproducingIndex = _getTrackIndex(currentTrack);
     notifyListeners();
   }
 
