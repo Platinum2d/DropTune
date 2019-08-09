@@ -15,10 +15,19 @@ class PlayingPage extends StatefulWidget {
   }
 }
 
-class _PlayingPageState extends State<PlayingPage> {
+class _PlayingPageState extends State<PlayingPage>
+    with TickerProviderStateMixin {
   bool dismissed = false;
+  AnimationController _playPauseAnimationController;
 
   _PlayingPageState();
+
+  @override
+  void initState() {
+    super.initState();
+    _playPauseAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+  }
 
   Widget _buildTitleAndSettings() {
     return Column(
@@ -87,19 +96,22 @@ class _PlayingPageState extends State<PlayingPage> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    widget._player.isReproducing
-                        ? widget._player.pause()
-                        : widget._player.resume();
+                    if (widget._player.isReproducing) {
+                      widget._player.pause();
+                      _playPauseAnimationController.reverse();
+                    } else {
+                      widget._player.resume();
+                      _playPauseAnimationController.forward();
+                    }
                   });
                 },
                 child: Container(
                   alignment: Alignment(0, 0),
-                  child: Icon(
-                    !widget._player.isReproducing
-                        ? Icons.play_arrow
-                        : Icons.pause,
-                    size: 40,
+                  child: AnimatedIcon(
+                    icon: AnimatedIcons.play_pause,
+                    progress: _playPauseAnimationController,
                     color: Colors.white,
+                    size: 40.0,
                   ),
                   height: 100,
                   width: 100,
@@ -138,6 +150,10 @@ class _PlayingPageState extends State<PlayingPage> {
 
   @override
   Widget build(BuildContext context) {
+    widget._player.isReproducing
+        ? _playPauseAnimationController.forward()
+        : _playPauseAnimationController.reverse();
+
     return Dismissible(
       background: DecoratedBox(decoration: BoxDecoration(color: Colors.white)),
       onResize: () {
@@ -175,7 +191,8 @@ class _PlayingPageState extends State<PlayingPage> {
                           Navigator.of(context).pop();
                         }),
                     widget._player.reproducingPlaylist != null &&
-                            widget._player.reproducingPlaylist.name != "All tracks"
+                            widget._player.reproducingPlaylist.name !=
+                                "All tracks"
                         ? Column(
                             children: <Widget>[
                               Text(

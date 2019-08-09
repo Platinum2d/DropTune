@@ -8,10 +8,25 @@ class OverlayBarWidget extends StatefulWidget {
   _OverlayBarWidgetState createState() => _OverlayBarWidgetState();
 }
 
-class _OverlayBarWidgetState extends State<OverlayBarWidget> {
+class _OverlayBarWidgetState extends State<OverlayBarWidget>
+    with TickerProviderStateMixin {
+  AnimationController _playPauseAnimationController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _playPauseAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+  }
+
   @override
   Widget build(BuildContext context) {
     DroptunePlayer player = Provider.of<DroptunePlayer>(context);
+    
+    player.isReproducing
+        ? _playPauseAnimationController.forward()
+        : _playPauseAnimationController.reverse();
 
     return Container(
       height: 50,
@@ -23,12 +38,17 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  player.getCurrentTrack().name,
+                  player
+                      .getCurrentTrack()
+                      .name,
                   style: TextStyle(
                       color: Colors.black54, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  " • " + player.getCurrentTrack().author.name,
+                  " • " + player
+                      .getCurrentTrack()
+                      .author
+                      .name,
                   style: TextStyle(color: Colors.grey[400]),
                 )
               ],
@@ -36,11 +56,18 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget> {
           ),
           GestureDetector(
             onTap: () {
-              player.isReproducing ? player.pause() : player.resume();
+              if (player.isReproducing) {
+                player.pause();
+                _playPauseAnimationController.reverse();
+              } else {
+                player.resume();
+                _playPauseAnimationController.forward();
+              }
             },
             child: Padding(
               child:
-                  Icon(!player.isReproducing ? Icons.play_arrow : Icons.pause),
+              AnimatedIcon(icon: AnimatedIcons.play_pause,
+                  progress: _playPauseAnimationController),
               padding: EdgeInsets.only(right: 20),
             ),
           )
