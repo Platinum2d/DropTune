@@ -1,4 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:droptune/models/album.dart';
+import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/foundation.dart';
@@ -8,11 +10,37 @@ class DroptunePlayer with ChangeNotifier {
   bool isReproducing = false;
 
   List<Track> queueTracks;
-  Playlist reproducingPlaylist;
+
+  Playlist _playlist;
+  Album _album;
+  Author _author;
+
+  set reproducingPlaylist(Playlist playlist){
+    _album = null;
+    _author = null;
+    _playlist = playlist;
+  }
+
+  set reproducingAlbum(Album album){
+    _author = null;
+    _playlist = null;
+    _album = album;
+  }
+
+  set reproducingAuthor(Author author){
+    _album = null;
+    _playlist = null;
+    _author = author;
+  }
+
+  get reproducingPlaylist => _playlist;
+  get reproducingAlbum => _album;
+  get reproducingAuthor => _author;
+
   int _reproducingIndex = 0;
   Duration position;
 
-  DroptunePlayer({@required this.queueTracks, @required this.reproducingPlaylist}) {
+  DroptunePlayer({@required this.queueTracks}) {
     audioPlayer.setUrl(queueTracks[0].path);
     position = Duration(seconds: 0);
     audioPlayer.onPlayerCompletion.listen((_){
@@ -23,6 +51,8 @@ class DroptunePlayer with ChangeNotifier {
       notifyListeners();
     });
   }
+
+
 
   Track moveTo(int index) {
     if (index < 0) {
@@ -131,6 +161,8 @@ class DroptunePlayer with ChangeNotifier {
     isReproducing = true;
     notifyListeners();
   }
+
+
 
   @override
   void dispose() {
