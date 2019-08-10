@@ -31,6 +31,41 @@ class _PlayingPageState extends State<PlayingPage>
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
   }
 
+  Widget _buildMainTitle() {
+    String groupType;
+    String title;
+
+
+
+    if (widget._player.reproducingPlaylist != null) {
+      if (widget._player.reproducingPlaylist.id < 0) return Container();
+
+      groupType = "playlist";
+      title = widget._player.reproducingPlaylist.name;
+    } else if (widget._player.reproducingAlbum != null) {
+      groupType = "album";
+      title = widget._player.reproducingAlbum.name;
+    } else {
+      groupType = "author";
+      title = widget._player.reproducingAuthor.name;
+    }
+
+    return Column(
+      children: <Widget>[
+        Text(
+          "Reproducing from " + groupType,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 13),
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 15),
+        )
+      ],
+    );
+  }
+
   Widget _buildTitleAndSettings() {
     DroptunePlayer myPlayer = widget._player;
 
@@ -179,24 +214,7 @@ class _PlayingPageState extends State<PlayingPage>
                         onPressed: () {
                           Navigator.of(context).pop();
                         }),
-                    widget._player.reproducingPlaylist != null &&
-                            widget._player.reproducingPlaylist.name !=
-                                "All tracks"
-                        ? Column(
-                            children: <Widget>[
-                              Text(
-                                "Reproducing from playlist",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 13),
-                              ),
-                              Text(
-                                widget._player.reproducingPlaylist.name,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 15),
-                              )
-                            ],
-                          )
-                        : Container(),
+                        _buildMainTitle(),
                     Container(
                       child: Padding(
                         padding:

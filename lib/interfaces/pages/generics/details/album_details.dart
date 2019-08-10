@@ -1,5 +1,6 @@
 import 'package:droptune/interfaces/pages/generics/lists/tracks_list.dart';
 import 'package:droptune/models/album.dart';
+import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';
 
 class AlbumDetailsPage extends StatelessWidget {
@@ -51,6 +52,7 @@ class AlbumDetailsPage extends StatelessWidget {
       },
       body: TracksList(
         tracks: album.tracks,
+        album: album,
       ),
     ));
   }

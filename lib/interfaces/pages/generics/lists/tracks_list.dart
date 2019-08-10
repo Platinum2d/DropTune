@@ -1,4 +1,6 @@
 import 'package:droptune/interfaces/pages/generics/entries/track_entry.dart';
+import 'package:droptune/models/album.dart';
+import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,11 @@ import 'package:flutter/material.dart';
 class TracksList extends StatefulWidget {
   final List<Track> tracks;
   final Playlist playlist;
+  final Album album;
+  final Author author;
 
-  TracksList({@required this.tracks, this.playlist});
+
+  TracksList({@required this.tracks, this.playlist, this.author, this.album});
 
   @override
   _TracksListState createState() => _TracksListState();
@@ -38,6 +43,8 @@ class _TracksListState extends State<TracksList> {
             child: TrackEntry(
               track: widget.tracks[index],
               playlist: widget.playlist,
+              album: widget.album,
+              author: widget.author,
               removeTrackFromPlaylistCallback: (track) {
                 setState(() {
                   widget.tracks.remove(track);

@@ -16,7 +16,7 @@ class AuthorDetailsPage extends StatelessWidget {
         child: ListView.builder(itemBuilder: (BuildContext context, int index) {
           Track track = author.tracks[index];
 
-          return TrackEntry(track: track,);
+          return TrackEntry(track: track, author: author,);
 
         }, itemCount: author.tracks.length,),
       ),

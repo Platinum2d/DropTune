@@ -12,13 +12,13 @@ import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   final DroptunePlayer player = DroptunePlayer(
-      queueTracks: GetItReference.getIt.get<List<Track>>(),
-      reproducingPlaylist: PlaylistUtils.getMainPlaylistSignature());
+      queueTracks: GetItReference.getIt.get<List<Track>>(),);
 
   @override
   State createState() {
     /* queue restore! */
     GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
+    player.reproducingPlaylist = PlaylistUtils.getMainPlaylistSignature();
     return _MainPageState();
   }
 }
