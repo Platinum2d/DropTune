@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:droptune/models/track.dart';
 
-class Author{
+class Author implements Comparable<Author>{
 
   Author({@required this.name, this.tracks});
 
@@ -19,4 +19,11 @@ class Author{
   static Author fromMap(Map<String, dynamic> a){
     return Author(name: a["author"]);
   }
+
+  @override
+  int compareTo(Author other) {
+    return this.name.compareTo(other.name);
+  }
+
+
 }
