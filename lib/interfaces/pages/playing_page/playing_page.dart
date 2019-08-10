@@ -25,11 +25,6 @@ class _PlayingPageState extends State<PlayingPage>
   _PlayingPageState();
 
   @override
-  void dispose() {
-    return;
-  }
-
-  @override
   void initState() {
     super.initState();
     _playPauseAnimationController =
