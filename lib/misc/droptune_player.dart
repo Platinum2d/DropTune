@@ -15,6 +15,13 @@ class DroptunePlayer with ChangeNotifier {
   DroptunePlayer({@required this.queueTracks, @required this.reproducingPlaylist}) {
     audioPlayer.setUrl(queueTracks[0].path);
     position = Duration(seconds: 0);
+    audioPlayer.onPlayerCompletion.listen((_){
+      moveToNextTrack();
+    });
+    audioPlayer.onAudioPositionChanged.listen((p){
+      position = p;
+      notifyListeners();
+    });
   }
 
   Track moveTo(int index) {
@@ -123,5 +130,10 @@ class DroptunePlayer with ChangeNotifier {
     audioPlayer.resume();
     isReproducing = true;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    return;
   }
 }

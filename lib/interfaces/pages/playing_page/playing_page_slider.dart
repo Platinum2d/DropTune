@@ -1,43 +1,33 @@
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlayingPageSlider extends StatefulWidget {
-  final DroptunePlayer player = GetItReference.getIt.get<DroptunePlayer>();
-
   @override
   _PlayingPageSliderState createState() => _PlayingPageSliderState();
 }
 
 class _PlayingPageSliderState extends State<PlayingPageSlider> {
-  Duration _currentPosition;
-  var _listenerSubscription;
   bool _wasReproducing;
+  DroptunePlayer _player;
 
   @override
   void initState() {
     super.initState();
-    _currentPosition = widget.player.position;
   }
 
   @override
   Widget build(BuildContext context) {
-    _listenerSubscription =
-        widget.player.audioPlayer.onAudioPositionChanged.listen((p) {
-      if (mounted) {
-        setState(() {
-          _currentPosition = p;
-        });
-      }
-    });
+    _player = Provider.of<DroptunePlayer>(context);
 
-    int currentMinutes = _currentPosition.inMinutes;
+    int currentMinutes = _player.position.inMinutes;
     int currentSeconds =
-        _currentPosition.inSeconds - 60 * _currentPosition.inMinutes;
+        _player.position.inSeconds - 60 * _player.position.inMinutes;
 
-    int durationMinutes = widget.player.getCurrentTrack().duration.inMinutes;
-    int durationSeconds = (widget.player.getCurrentTrack().duration.inSeconds - 60 * durationMinutes);
-
+    int durationMinutes = _player.getCurrentTrack().duration.inMinutes;
+    int durationSeconds =
+        (_player.getCurrentTrack().duration.inSeconds - 60 * durationMinutes);
 
     return Stack(
       children: <Widget>[
@@ -51,7 +41,8 @@ class _PlayingPageSliderState extends State<PlayingPageSlider> {
                   (currentSeconds < 10 ? "0" : "") +
                   currentSeconds.toString()),
               Text(durationMinutes.toString() +
-                  ":" + (durationSeconds < 10 ? "0" : "") +
+                  ":" +
+                  (durationSeconds < 10 ? "0" : "") +
                   durationSeconds.toString())
             ],
           ),
@@ -60,36 +51,26 @@ class _PlayingPageSliderState extends State<PlayingPageSlider> {
           padding: EdgeInsets.only(top: 10),
           child: Slider(
             activeColor: Colors.cyan,
-            value: _currentPosition.inMilliseconds.toDouble(),
+            value: _player.position.inMilliseconds.toDouble(),
             min: 0,
-            max: widget.player
-                .getCurrentTrack()
-                .duration
-                .inMilliseconds
-                .toDouble(),
+            max: _player.getCurrentTrack().duration.inMilliseconds.toDouble(),
             inactiveColor: Colors.grey[400],
             onChangeStart: (value) {
-              _wasReproducing = widget.player.isReproducing;
-              widget.player.pause();
+              _wasReproducing = _player.isReproducing;
+              _player.pause();
             },
             onChanged: (newProgress) {
               setState(() {
-                _currentPosition = Duration(milliseconds: newProgress.toInt());
+                _player.position = Duration(milliseconds: newProgress.toInt());
               });
             },
             onChangeEnd: (newProgress) {
-              widget.player.seekTo(Duration(milliseconds: newProgress.toInt()));
-              if (_wasReproducing) widget.player.resume();
+              _player.seekTo(Duration(milliseconds: newProgress.toInt()));
+              if (_wasReproducing) _player.resume();
             },
           ),
         )
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _listenerSubscription.cancel();
   }
 }

@@ -1,10 +1,12 @@
 import 'package:droptune/interfaces/pages/playing_page/playing_page_slider.dart';
+import 'package:droptune/interfaces/pages/playing_page/playing_page_title.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/marquee.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlayingPage extends StatefulWidget {
   final DroptunePlayer _player = GetItReference.getIt.get<DroptunePlayer>();
@@ -23,6 +25,11 @@ class _PlayingPageState extends State<PlayingPage>
   _PlayingPageState();
 
   @override
+  void dispose() {
+    return;
+  }
+
+  @override
   void initState() {
     super.initState();
     _playPauseAnimationController =
@@ -30,34 +37,21 @@ class _PlayingPageState extends State<PlayingPage>
   }
 
   Widget _buildTitleAndSettings() {
-    return Column(
-      children: <Widget>[
-        MarqueeWidget(
-          pauseDuration: Duration(milliseconds: 500),
-          backDuration: Duration(seconds: 7),
-          animationDuration: Duration(seconds: 13),
-          child: Text(
-            widget._player.getCurrentTrack().name,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
-          ),
-        ),
-        Text(widget._player.getCurrentTrack().author.name,
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.black45))
-      ],
+    DroptunePlayer myPlayer = widget._player;
+
+    return ChangeNotifierProvider(
+      builder: (context) => myPlayer,
+      child: PlayingPageTitle(),
     );
   }
 
   Widget _buildSlider(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: PlayingPageSlider(),
+      child: ChangeNotifierProvider(
+        builder: (context) => GetItReference.getIt.get<DroptunePlayer>(),
+        child: PlayingPageSlider(),
+      ),
     );
   }
 
