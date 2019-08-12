@@ -7,6 +7,7 @@ import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/foundation.dart';
+import 'package:media_notification/media_notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:convert';
@@ -83,6 +84,7 @@ class DroptunePlayer with ChangeNotifier  {
     audioPlayer.play(queueTracks[_reproducingIndex].path);
     isReproducing = true;
     notifyListeners();
+    _updateNotificationController();
     return queueTracks[_reproducingIndex];
   }
 
@@ -97,6 +99,7 @@ class DroptunePlayer with ChangeNotifier  {
     audioPlayer.play(t.path);
     isReproducing = true;
     notifyListeners();
+    _updateNotificationController();
     return t;
   }
 
@@ -105,6 +108,7 @@ class DroptunePlayer with ChangeNotifier  {
     audioPlayer.play(next.path);
     isReproducing = true;
     notifyListeners();
+    _updateNotificationController();
     return next;
   }
 
@@ -113,6 +117,7 @@ class DroptunePlayer with ChangeNotifier  {
     audioPlayer.play(previous.path);
     isReproducing = true;
     notifyListeners();
+    _updateNotificationController();
     return previous;
   }
 
@@ -150,8 +155,9 @@ class DroptunePlayer with ChangeNotifier  {
     queueTracks.remove(queueTracks[toMove]);
     queueTracks.insert(target, trackToMove);
 
-    _reproducingIndex = getTrackIndex(currentTrack); //inefficient!
+    _reproducingIndex = getTrackIndex(currentTrack);//inefficient!
     notifyListeners();
+    _updateNotificationController();
   }
 
   void enqueue(Track track){
@@ -168,18 +174,21 @@ class DroptunePlayer with ChangeNotifier  {
     audioPlayer.pause();
     isReproducing = false;
     notifyListeners();
+    _updateNotificationController();
   }
 
   void stop() {
     audioPlayer.stop();
     isReproducing = false;
     notifyListeners();
+    _updateNotificationController();
   }
 
   void resume() {
     audioPlayer.resume();
     isReproducing = true;
     notifyListeners();
+    _updateNotificationController();
   }
 
   Map<String, dynamic> toJson() => {
@@ -196,6 +205,13 @@ class DroptunePlayer with ChangeNotifier  {
     SharedPreferences.getInstance().then((sp){
       sp.setString("player", json.encode(toJson()));
     });
+  }
+
+  void _updateNotificationController() async{
+    await MediaNotification.show(
+        play: isReproducing,
+        title: getCurrentTrack().name,
+        author: getCurrentTrack().author.name);
   }
 
   @override

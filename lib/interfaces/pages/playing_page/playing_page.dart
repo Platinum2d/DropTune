@@ -1,3 +1,4 @@
+import 'package:droptune/interfaces/pages/playing_page/playing_page_pause_resume.dart';
 import 'package:droptune/interfaces/pages/playing_page/playing_page_slider.dart';
 import 'package:droptune/interfaces/pages/playing_page/playing_page_title.dart';
 import 'package:droptune/misc/droptune_player.dart';
@@ -118,40 +119,9 @@ class _PlayingPageState extends State<PlayingPage>
             ),
           ),
         ),
-        Flexible(
-            flex: 40,
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (widget._player.isReproducing) {
-                      widget._player.pause();
-                      _playPauseAnimationController.reverse();
-                    } else {
-                      widget._player.resume();
-                      _playPauseAnimationController.forward();
-                    }
-                  });
-                },
-                child: Container(
-                  alignment: Alignment(0, 0),
-                  child: AnimatedIcon(
-                    icon: AnimatedIcons.play_pause,
-                    progress: _playPauseAnimationController,
-                    color: Colors.white,
-                    size: 40.0,
-                  ),
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          alignment: Alignment(0, 0),
-                          image: AssetImage(
-                              'assets/images/pause_play_button.png'))),
-                ),
-              ),
-            )),
+        ChangeNotifierProvider(
+          builder: (context) => widget._player,
+          child: PlayingPagePauseResume(),),
         Flexible(
             flex: 20,
             child: GestureDetector(

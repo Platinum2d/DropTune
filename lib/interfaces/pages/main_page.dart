@@ -15,13 +15,14 @@ import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:media_notification/media_notification.dart';
 
 class MainPage extends StatefulWidget {
   final DroptunePlayer player = DroptunePlayer(
     queueTracks: GetItReference.getIt.get<List<Track>>(),
   );
 
-  void _restorePlayer(){
+  void _restorePlayer() {
     SharedPreferences.getInstance().then((sp) {
       String playerString = sp.getString("player");
       if (playerString != null) {
@@ -31,27 +32,56 @@ class MainPage extends StatefulWidget {
         player.position = Duration(milliseconds: restoredPlayer["position"]);
         player.queueTracks = [];
         List<dynamic> restoredTracks = restoredPlayer["queueTracks"];
-        for (var t in restoredTracks)
-          player.rawAddTrack(Track.fromMap(t));
+        for (var t in restoredTracks) player.rawAddTrack(Track.fromMap(t));
 
-        Playlist restoredPlaylist = Playlist.fromMap(restoredPlayer["reproducingPlaylist"]);
+        Playlist restoredPlaylist =
+            Playlist.fromMap(restoredPlayer["reproducingPlaylist"]);
         Album restoredAlbum = Album.fromMap(restoredPlayer["reproducingAlbum"]);
-        Author restoredAuthor = Author.fromMap(restoredPlayer["reproducingAuthor"]);
+        Author restoredAuthor =
+            Author.fromMap(restoredPlayer["reproducingAuthor"]);
 
-        if (restoredPlaylist != null) player.reproducingPlaylist = restoredPlaylist;
+        if (restoredPlaylist != null)
+          player.reproducingPlaylist = restoredPlaylist;
         if (restoredAlbum != null) player.reproducingAlbum = restoredAlbum;
         if (restoredAuthor != null) player.reproducingAuthor = restoredAuthor;
 
-        player.audioPlayer.setUrl(player.queueTracks[player.reproducingIndex].path);
+        player.audioPlayer
+            .setUrl(player.queueTracks[player.reproducingIndex].path);
         player.seekTo(player.position);
 
         GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
-      }
-      else{
+      } else {
         player.reproducingPlaylist = PlaylistUtils.getMainPlaylistSignature();
         GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
       }
+
+      _createNotificationController();
     });
+  }
+
+  void _createNotificationController() async {
+    await MediaNotification.show(
+        play: false,
+        title: player.getCurrentTrack().name,
+        author: player.getCurrentTrack().author.name);
+
+    MediaNotification.setListener('pause', () {
+      player.pause();
+    });
+
+    MediaNotification.setListener('play', () {
+      player.resume();
+    });
+
+    MediaNotification.setListener('next', () {
+      player.moveToNextTrack();
+    });
+
+    MediaNotification.setListener('prev', () {
+      player.moveToPreviousTrack();
+    });
+
+    MediaNotification.setListener('select', () {});
   }
 
   @override
@@ -69,11 +99,17 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   List<BottomNavigationBarItem> _navigationBarItems = [
     BottomNavigationBarItem(title: Text("Music"), icon: Icon(Icons.music_note)),
-    BottomNavigationBarItem(title: Text("Playlist"), icon: Icon(Icons.list)),/*
+    BottomNavigationBarItem(
+        title: Text("Playlist"),
+        icon: Icon(Icons
+            .list)), /*
     BottomNavigationBarItem(title: Text("Profile"), icon: Icon(Icons.person))*/
   ];
 
-  List<Widget> _pages = [MusicPage(), PlaylistPage(),/* ProfilePage()*/];
+  List<Widget> _pages = [
+    MusicPage(),
+    PlaylistPage(), /* ProfilePage()*/
+  ];
 
   void _hideOverlay() {
     overlayVisibility = false;
@@ -105,7 +141,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         GestureDetector(
           onTap: () {
             Routing.goToPlayingPage(context,
-                clearStack: false); /* the current playlist MUST be passed! */
+                clearStack: false);
           },
           child: Visibility(
             child: ChangeNotifierProvider(
@@ -158,12 +194,12 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    MediaNotification.hide();
     super.dispose();
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-  }
+  void didChangeAppLifecycleState(AppLifecycleState state) {}
 
   @override
   Widget build(BuildContext context) {
