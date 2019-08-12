@@ -69,11 +69,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
 
   List<BottomNavigationBarItem> _navigationBarItems = [
     BottomNavigationBarItem(title: Text("Music"), icon: Icon(Icons.music_note)),
-    BottomNavigationBarItem(title: Text("Playlist"), icon: Icon(Icons.list)),
-    BottomNavigationBarItem(title: Text("Profile"), icon: Icon(Icons.person))
+    BottomNavigationBarItem(title: Text("Playlist"), icon: Icon(Icons.list)),/*
+    BottomNavigationBarItem(title: Text("Profile"), icon: Icon(Icons.person))*/
   ];
 
-  List<Widget> _pages = [MusicPage(), PlaylistPage(), ProfilePage()];
+  List<Widget> _pages = [MusicPage(), PlaylistPage(),/* ProfilePage()*/];
 
   void _hideOverlay() {
     overlayVisibility = false;

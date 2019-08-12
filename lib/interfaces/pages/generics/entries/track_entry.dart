@@ -108,7 +108,7 @@ class TrackEntry extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Container(
+                /*Container(
                   height: 50,
                   width: 50,
                   padding: EdgeInsets.only(right: 1, top: 10, bottom: 10),
@@ -120,7 +120,7 @@ class TrackEntry extends StatelessWidget {
                         width: 20,
                         image: AssetImage("assets/images/desync_icon.png")),
                   ),
-                ),
+                ),*/
                 IconButton(
                     icon: Icon(Icons.settings),
                     onPressed: () {

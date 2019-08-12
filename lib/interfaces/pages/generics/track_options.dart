@@ -96,7 +96,7 @@ class _TrackOptionsState extends State<TrackOptions> {
           },
           leadingImage: AssetImage('assets/images/queue_icon.png'),
           title: Text("Add to queue")),
-      _buildTile(
+      /*_buildTile(
           action: () {
             print("3");
           },
@@ -107,7 +107,7 @@ class _TrackOptionsState extends State<TrackOptions> {
             print("4");
           },
           leadingImage: AssetImage('assets/images/sync_icon.png'),
-          title: Text("Synchronize")),
+          title: Text("Synchronize")),*/
       widget.playlist != null && widget.playlist.name != "All tracks"
           ? _buildTile(
               action: () {

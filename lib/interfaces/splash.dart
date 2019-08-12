@@ -103,13 +103,13 @@ class _SplashPageState extends State<SplashPage> {
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
-      Routing.goToAccessHub(context, clearStack: true);
+      Routing.goToMainPage(context, clearStack: true);
     } else {
       await _registerTracks(db);
       _loadAlbums(db);
       _loadAuthors(db);
       GetItReference.getIt.registerSingleton<DatabaseClient>(db);
-      Routing.goToAccessHub(context, clearStack: true);
+      Routing.goToMainPage(context, clearStack: true);
     }
   }
 
