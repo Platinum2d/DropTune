@@ -12,7 +12,6 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget>
     with TickerProviderStateMixin {
   AnimationController _playPauseAnimationController;
 
-
   @override
   void initState() {
     super.initState();
@@ -34,25 +33,25 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget>
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  player
-                      .getCurrentTrack()
-                      .name,
-                  style: TextStyle(
-                      color: Colors.black54, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  " • " + player
-                      .getCurrentTrack()
-                      .author
-                      .name,
-                  style: TextStyle(color: Colors.grey[400]),
-                )
-              ],
-            ),
+            child: Container(
+              alignment: Alignment(0, 0),
+              child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "  " + player.getCurrentTrack().name,
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    " • " + player.getCurrentTrack().author.name,
+                    style: TextStyle(color: Colors.grey[400]),
+                  )
+                ],
+              ),
+            ),),
           ),
           GestureDetector(
             onTap: () {
@@ -65,8 +64,8 @@ class _OverlayBarWidgetState extends State<OverlayBarWidget>
               }
             },
             child: Padding(
-              child:
-              AnimatedIcon(icon: AnimatedIcons.play_pause,
+              child: AnimatedIcon(
+                  icon: AnimatedIcons.play_pause,
                   progress: _playPauseAnimationController),
               padding: EdgeInsets.only(right: 20),
             ),

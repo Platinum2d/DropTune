@@ -15,6 +15,15 @@ class MarqueeWidget extends StatefulWidget {
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();
+
+  static MarqueeWidget droptuneDefaultMarquee({Widget child}){
+    return MarqueeWidget(
+      pauseDuration: Duration(milliseconds: 500),
+      backDuration: Duration(seconds: 7),
+      animationDuration: Duration(seconds: 13),
+      child: child,
+    );
+  }
 }
 
 class _MarqueeWidgetState extends State<MarqueeWidget> {

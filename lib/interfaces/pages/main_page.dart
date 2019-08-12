@@ -21,8 +21,7 @@ class MainPage extends StatefulWidget {
     queueTracks: GetItReference.getIt.get<List<Track>>(),
   );
 
-  @override
-  State createState() {
+  void _restorePlayer(){
     SharedPreferences.getInstance().then((sp) {
       String playerString = sp.getString("player");
       if (playerString != null) {
@@ -34,13 +33,13 @@ class MainPage extends StatefulWidget {
         for (var t in restoredTracks)
           player.queueTracks.add(Track.fromMap(t));
 
-        Playlist p = Playlist.fromMap(restoredPlayer["reproducingPlaylist"]);
-        Album a = Album.fromMap(restoredPlayer["reproducingAlbum"]);
-        Author au = Author.fromMap(restoredPlayer["reproducingAuthor"]);
+        Playlist restoredPlaylist = Playlist.fromMap(restoredPlayer["reproducingPlaylist"]);
+        Album restoredAlbum = Album.fromMap(restoredPlayer["reproducingAlbum"]);
+        Author restoredAuthor = Author.fromMap(restoredPlayer["reproducingAuthor"]);
 
-        if (p != null) player.reproducingPlaylist = p;
-        if (a != null) player.reproducingAlbum = a;
-        if (au != null) player.reproducingAuthor = au;
+        if (restoredPlaylist != null) player.reproducingPlaylist = restoredPlaylist;
+        if (restoredAlbum != null) player.reproducingAlbum = restoredAlbum;
+        if (restoredAuthor != null) player.reproducingAuthor = restoredAuthor;
 
         player.audioPlayer.setUrl(player.queueTracks[player.reproducingIndex].path);
         player.seekTo(player.position);
@@ -52,7 +51,11 @@ class MainPage extends StatefulWidget {
         GetItReference.getIt.registerSingleton<DroptunePlayer>(player);
       }
     });
+  }
 
+  @override
+  State createState() {
+    _restorePlayer();
     return _MainPageState();
   }
 }
