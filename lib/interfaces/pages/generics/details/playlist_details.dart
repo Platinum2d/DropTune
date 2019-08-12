@@ -46,6 +46,7 @@ class PlaylistDetailsPage extends StatelessWidget {
       },
       body: playlist.id == -1
           ? TracksList(
+              showInitialShuffleItem: true,
               tracks: playlist.tracks,
               playlist: playlist,
             )

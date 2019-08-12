@@ -40,7 +40,11 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
                 indicatorColor: Colors.lightBlueAccent,
                 tabs: widget.tabs),
             body: TabBarView(children: <Widget>[
-              TracksList(tracks: TrackUtils.getCachedAllTracks(), playlist: PlaylistUtils.getMainPlaylistSignature(),),
+              TracksList(
+                tracks: TrackUtils.getCachedAllTracks(),
+                playlist: PlaylistUtils.getMainPlaylistSignature(),
+                showInitialShuffleItem: true,
+              ),
               AlbumsGrid(
                 albums: AlbumUtils.getCachedAllAlbums(),
               ),
