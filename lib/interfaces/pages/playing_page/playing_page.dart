@@ -3,8 +3,12 @@ import 'package:droptune/interfaces/pages/playing_page/playing_page_title.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/marquee.dart';
+import 'package:droptune/misc/queue_generators/queue_generator.dart';
+import 'package:droptune/misc/queue_generators/shuffled_queue_generator.dart';
+import 'package:droptune/misc/queue_generators/sorted_queue_generator.dart';
 import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/playlist.dart';
+import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,11 +39,8 @@ class _PlayingPageState extends State<PlayingPage>
     String groupType;
     String title;
 
-
-
     if (widget._player.reproducingPlaylist != null) {
       if (widget._player.reproducingPlaylist.id < 0) return Container();
-
       groupType = "playlist";
       title = widget._player.reproducingPlaylist.name;
     } else if (widget._player.reproducingAlbum != null) {
@@ -59,8 +60,7 @@ class _PlayingPageState extends State<PlayingPage>
         ),
         Text(
           title,
-          style: TextStyle(
-              fontWeight: FontWeight.w500, fontSize: 15),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
         )
       ],
     );
@@ -91,9 +91,33 @@ class _PlayingPageState extends State<PlayingPage>
       children: <Widget>[
         Flexible(
             flex: 11,
-            child: Padding(
-              padding: EdgeInsets.all(9),
-              child: Image.asset('assets/images/shuffle_icon.png'),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget._player.isShuffling = !widget._player.isShuffling;
+                  QueueGenerator queueGenerator = widget._player.isShuffling
+                      ? ShuffledQueueGenerator()
+                      : SortedQueueGenerator(sortingKey: (a, b) {
+                          return a.compareTo(b);
+                        });
+
+                  Track currentTrack = widget._player.getCurrentTrack();
+                  widget._player.queueTracks =
+                      queueGenerator.createQueue(widget._player.queueTracks);
+                  widget._player.reproducingIndex =
+                      widget._player.getTrackIndex(currentTrack);
+                });
+              },
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.all(9),
+                  child: Image.asset(
+                    'assets/images/shuffle_icon.png',
+                    color:
+                        widget._player.isShuffling ? Colors.black : Colors.grey,
+                  ),
+                ),
+              ),
             )),
         Flexible(
           flex: 20,
@@ -104,12 +128,10 @@ class _PlayingPageState extends State<PlayingPage>
               });
             },
             child: Container(
-              child: Padding(
-                padding: EdgeInsets.all(7),
-                child: Transform.rotate(
-                    angle: 3.14,
-                    child: Image.asset('assets/images/forward_button.png')),
-              ),
+              padding: EdgeInsets.all(7),
+              child: Transform.rotate(
+                  angle: 3.14,
+                  child: Image.asset('assets/images/forward_button.png')),
             ),
           ),
         ),
@@ -214,7 +236,7 @@ class _PlayingPageState extends State<PlayingPage>
                         onPressed: () {
                           Navigator.of(context).pop();
                         }),
-                        _buildMainTitle(),
+                    _buildMainTitle(),
                     Container(
                       child: Padding(
                         padding:
@@ -225,8 +247,7 @@ class _PlayingPageState extends State<PlayingPage>
                                 context,
                                 GetItReference.getIt
                                     .get<DroptunePlayer>()
-                                    .queueTracks,
-                                clearStack: false);
+                                    .queueTracks);
                           },
                           child: Image(
                             color: Colors.black54,

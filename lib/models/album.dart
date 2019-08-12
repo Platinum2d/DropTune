@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:droptune/models/track.dart';
 
-class Album {
+class Album implements Comparable<Album> {
   Album({
     this.id,
     @required this.coverImage,
@@ -43,4 +43,11 @@ class Album {
   Map<String, dynamic> toJson() {
     return toMap(this);
   }
+
+  @override
+  int compareTo(Album other) {
+    return this.name.compareTo(other.name);
+  }
+
+
 }

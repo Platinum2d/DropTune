@@ -130,6 +130,8 @@ class _TrackOptionsState extends State<TrackOptions> {
             .get<DatabaseClient>()
             .insertTrackInPlaylist(widget.track, playlist)
             .then((nothing) {
+              if (widget.player.reproducingPlaylist.compareTo(playlist) == 0)
+                widget.player.addTrack(widget.track);
           Navigator.pop(context);
         });
       },

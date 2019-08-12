@@ -27,11 +27,12 @@ class MainPage extends StatefulWidget {
       if (playerString != null) {
         var restoredPlayer = json.decode(playerString);
         player.reproducingIndex = restoredPlayer["reproducingIndex"];
+        player.isShuffling = restoredPlayer["isShuffling"];
         player.position = Duration(milliseconds: restoredPlayer["position"]);
         player.queueTracks = [];
         List<dynamic> restoredTracks = restoredPlayer["queueTracks"];
         for (var t in restoredTracks)
-          player.queueTracks.add(Track.fromMap(t));
+          player.rawAddTrack(Track.fromMap(t));
 
         Playlist restoredPlaylist = Playlist.fromMap(restoredPlayer["reproducingPlaylist"]);
         Album restoredAlbum = Album.fromMap(restoredPlayer["reproducingAlbum"]);

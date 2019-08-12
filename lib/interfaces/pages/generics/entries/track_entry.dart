@@ -4,6 +4,7 @@ import 'package:droptune/misc/database/database_client.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/queue_generators/queue_generator.dart';
+import 'package:droptune/misc/queue_generators/shuffled_queue_generator.dart';
 import 'package:droptune/misc/queue_generators/sorted_queue_generator.dart';
 import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/routing/routing.dart';
@@ -55,10 +56,11 @@ class TrackEntry extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
-              QueueGenerator queueGenerator =
-                  SortedQueueGenerator(sortingKey: (a, b) {
-                return a.compareTo(b);
-              });
+              QueueGenerator queueGenerator = _player.isShuffling
+                  ? ShuffledQueueGenerator()
+                  : SortedQueueGenerator(sortingKey: (a, b) {
+                      return a.compareTo(b);
+                    });
 
               if (playlist != null &&
                   (_player.reproducingPlaylist == null ||

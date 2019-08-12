@@ -1,4 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:droptune/misc/queue_generators/queue_generator.dart';
+import 'package:droptune/misc/queue_generators/shuffled_queue_generator.dart';
+import 'package:droptune/misc/queue_generators/sorted_queue_generator.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -11,6 +14,7 @@ import 'dart:convert';
 class DroptunePlayer with ChangeNotifier  {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isReproducing = false;
+  bool isShuffling = false;
 
   List<Track> queueTracks;
 
@@ -40,9 +44,9 @@ class DroptunePlayer with ChangeNotifier  {
     _reproducingIndex = value;
   }
 
-  get reproducingPlaylist => _playlist;
-  get reproducingAlbum => _album;
-  get reproducingAuthor => _author;
+  Playlist get reproducingPlaylist => _playlist;
+  Album get reproducingAlbum => _album;
+  Author get reproducingAuthor => _author;
   int get reproducingIndex => _reproducingIndex;
 
   int _reproducingIndex = 0;
@@ -114,6 +118,13 @@ class DroptunePlayer with ChangeNotifier  {
 
   void addTrack(Track track) {
     queueTracks.add(track);
+    QueueGenerator queueGenerator = isShuffling ? ShuffledQueueGenerator() : SortedQueueGenerator();
+    queueTracks = queueGenerator.createQueue(queueTracks);
+    notifyListeners();
+  }
+
+  void rawAddTrack(Track track){
+    queueTracks.add(track);
     notifyListeners();
   }
 
@@ -121,7 +132,7 @@ class DroptunePlayer with ChangeNotifier  {
     return queueTracks[_reproducingIndex];
   }
 
-  int _getTrackIndex(Track track){
+  int getTrackIndex(Track track){
     for (int i = 0; i < queueTracks.length; i++)
       if (track.compareTo(queueTracks[i]) == 0) return i;
 
@@ -139,7 +150,7 @@ class DroptunePlayer with ChangeNotifier  {
     queueTracks.remove(queueTracks[toMove]);
     queueTracks.insert(target, trackToMove);
 
-    _reproducingIndex = _getTrackIndex(currentTrack); //inefficient!
+    _reproducingIndex = getTrackIndex(currentTrack); //inefficient!
     notifyListeners();
   }
 
@@ -173,6 +184,7 @@ class DroptunePlayer with ChangeNotifier  {
 
   Map<String, dynamic> toJson() => {
     "reproducingIndex": _reproducingIndex,
+    "isShuffling": isShuffling,
     "position": position.inMilliseconds,
     "queueTracks": queueTracks,
     "reproducingPlaylist": _playlist,
