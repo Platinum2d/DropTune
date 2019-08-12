@@ -91,32 +91,15 @@ class _PlayingPageState extends State<PlayingPage>
       children: <Widget>[
         Flexible(
             flex: 11,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  widget._player.isShuffling = !widget._player.isShuffling;
-                  QueueGenerator queueGenerator = widget._player.isShuffling
-                      ? ShuffledQueueGenerator()
-                      : SortedQueueGenerator(sortingKey: (a, b) {
-                          return a.compareTo(b);
-                        });
-
-                  Track currentTrack = widget._player.getCurrentTrack();
-                  widget._player.queueTracks =
-                      queueGenerator.createQueue(widget._player.queueTracks);
-                  widget._player.reproducingIndex =
-                      widget._player.getTrackIndex(currentTrack);
-                });
-              },
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(9),
-                  child: Image.asset(
-                    'assets/images/shuffle_icon.png',
-                    color:
-                        widget._player.isShuffling ? Colors.black : Colors.grey,
-                  ),
-                ),
+            child: Padding(
+              padding: EdgeInsets.all(9),
+              child: Visibility(
+                child: Image.asset('assets/images/repeat_icon.png'),
+                visible: false,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                
               ),
             )),
         Flexible(
@@ -186,9 +169,33 @@ class _PlayingPageState extends State<PlayingPage>
             )),
         Flexible(
             flex: 11,
-            child: Padding(
-              padding: EdgeInsets.all(9),
-              child: Image.asset('assets/images/repeat_icon.png'),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget._player.isShuffling = !widget._player.isShuffling;
+                  QueueGenerator queueGenerator = widget._player.isShuffling
+                      ? ShuffledQueueGenerator()
+                      : SortedQueueGenerator(sortingKey: (a, b) {
+                          return a.compareTo(b);
+                        });
+
+                  Track currentTrack = widget._player.getCurrentTrack();
+                  widget._player.queueTracks =
+                      queueGenerator.createQueue(widget._player.queueTracks);
+                  widget._player.reproducingIndex =
+                      widget._player.getTrackIndex(currentTrack);
+                });
+              },
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.all(9),
+                  child: Image.asset(
+                    'assets/images/shuffle_icon.png',
+                    color:
+                        widget._player.isShuffling ? Colors.black : Colors.grey,
+                  ),
+                ),
+              ),
             )),
       ],
     );
