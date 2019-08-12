@@ -19,6 +19,8 @@ class Playlist implements Comparable<Playlist> {
   }
 
   static Playlist fromMap(Map p) {
+    if (p == null) return null;
+
     return Playlist(
         id: p["id"],
         name: p["name"],
@@ -28,5 +30,9 @@ class Playlist implements Comparable<Playlist> {
   @override
   int compareTo(Playlist other) {
     return other.id == this.id ? 0 : -1;
+  }
+
+  Map<String, dynamic> toJson(){
+    return toMap(this);
   }
 }

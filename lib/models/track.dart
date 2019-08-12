@@ -49,6 +49,8 @@ class Track implements Comparable<Track> {
     };
   }
 
+
+
   static Track fromMap(Map<String, dynamic> t) {
     return Track(
       id: t["id"],
@@ -66,7 +68,8 @@ class Track implements Comparable<Track> {
   int compareTo(Track other) {
     return this.path.compareTo(other.path);
   }
-/*final User user;*/
 
-
+  Map<String, dynamic> toJson(){
+    return toMap(this);
+  }
 }

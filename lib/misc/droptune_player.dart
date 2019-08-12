@@ -4,8 +4,11 @@ import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DroptunePlayer with ChangeNotifier {
+import 'dart:convert';
+
+class DroptunePlayer with ChangeNotifier  {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isReproducing = false;
 
@@ -33,9 +36,14 @@ class DroptunePlayer with ChangeNotifier {
     _author = author;
   }
 
+  set reproducingIndex(int value) {
+    _reproducingIndex = value;
+  }
+
   get reproducingPlaylist => _playlist;
   get reproducingAlbum => _album;
   get reproducingAuthor => _author;
+  int get reproducingIndex => _reproducingIndex;
 
   int _reproducingIndex = 0;
   Duration position;
@@ -48,6 +56,7 @@ class DroptunePlayer with ChangeNotifier {
     });
     audioPlayer.onAudioPositionChanged.listen((p){
       position = p;
+      save();
       notifyListeners();
     });
   }
@@ -162,7 +171,20 @@ class DroptunePlayer with ChangeNotifier {
     notifyListeners();
   }
 
+  Map<String, dynamic> toJson() => {
+    "reproducingIndex": _reproducingIndex,
+    "position": position.inMilliseconds,
+    "queueTracks": queueTracks,
+    "reproducingPlaylist": _playlist,
+    "reproducingAlbum": _album,
+    "reproducingAuthor": _author
+  };
 
+  void save() {
+    SharedPreferences.getInstance().then((sp){
+      sp.setString("player", json.encode(toJson()));
+    });
+  }
 
   @override
   void dispose() {
