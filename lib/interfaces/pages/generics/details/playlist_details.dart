@@ -57,6 +57,7 @@ class PlaylistDetailsPage extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done)
                   return TracksList(
+                    showInitialShuffleItem: true,
                     tracks: snapshot.data,
                     playlist: playlist,
                   );

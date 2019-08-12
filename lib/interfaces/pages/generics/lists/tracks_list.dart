@@ -3,6 +3,7 @@ import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/queue_generators/queue_generator.dart';
 import 'package:droptune/misc/queue_generators/shuffled_queue_generator.dart';
+import 'package:droptune/misc/routing/routing.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -31,26 +32,31 @@ class TracksList extends StatefulWidget {
 class _TracksListState extends State<TracksList> {
   DroptunePlayer player;
 
-  ListTile _buildShuffleItem() {
+  ListTile _buildShuffleItem(context) {
     return ListTile(
-      onTap: (){
+      onTap: () {
         QueueGenerator queueGenerator = ShuffledQueueGenerator();
-        if (widget.playlist != null){
+        if (widget.playlist != null) {
           player.reproducingPlaylist = widget.playlist;
-          player.queueTracks = queueGenerator.createQueue(widget.playlist.tracks);
+          List<Track> separatedTracks = List.from(widget.playlist.tracks);
+          player.queueTracks = queueGenerator.createQueue(separatedTracks);
         }
 
-        if (widget.album != null){
+        if (widget.album != null) {
           player.reproducingAlbum = widget.album;
-          player.queueTracks = queueGenerator.createQueue(widget.album.tracks);
+          List<Track> separatedTracks = List.from(widget.album.tracks);
+          player.queueTracks = queueGenerator.createQueue(separatedTracks);
         }
 
-        if (widget.author != null){
+        if (widget.author != null) {
           player.reproducingAuthor = widget.author;
-          player.queueTracks = queueGenerator.createQueue(widget.author.tracks);
+          List<Track> separatedTracks = List.from(widget.author.tracks);
+          player.queueTracks = queueGenerator.createQueue(separatedTracks);
         }
 
+        player.isShuffling = true;
         player.moveTo(0);
+        Routing.goToPlayingPage(context);
       },
       leading: Container(
         padding: EdgeInsets.all(14),
@@ -61,7 +67,7 @@ class _TracksListState extends State<TracksList> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext generalContext) {
     player = GetItReference.getIt.get<DroptunePlayer>();
 
     Widget emptyMessage = Center(
@@ -82,27 +88,30 @@ class _TracksListState extends State<TracksList> {
     if (widget.tracks.length > 0)
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
+          if (index == 0)
+            return widget.showInitialShuffleItem
+                ? _buildShuffleItem(generalContext)
+                : Container();
+
+          TrackEntry entryToReturn = TrackEntry(
+            track: widget.tracks[index - 1],
+            playlist: widget.playlist,
+            album: widget.album,
+            author: widget.author,
+            removeTrackFromPlaylistCallback: (track) {
+              setState(() {
+                widget.tracks.remove(track);
+                widget.playlist.tracks.remove(track);
+              });
+            },
+          );
+
           return Padding(
-            child: index > 0
-                ? TrackEntry(
-                    track: widget.tracks[index],
-                    playlist: widget.playlist,
-                    album: widget.album,
-                    author: widget.author,
-                    removeTrackFromPlaylistCallback: (track) {
-                      setState(() {
-                        widget.tracks.remove(track);
-                        widget.playlist.tracks.remove(track);
-                      });
-                    },
-                  )
-                : widget.showInitialShuffleItem
-                    ? _buildShuffleItem()
-                    : Container(),
+            child: entryToReturn,
             padding: EdgeInsets.only(bottom: 7),
           );
         },
-        itemCount: widget.tracks.length,
+        itemCount: widget.tracks.length + 1,
       );
     else
       return emptyMessage;

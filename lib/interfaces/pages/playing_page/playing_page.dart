@@ -150,8 +150,9 @@ class _PlayingPageState extends State<PlayingPage>
                         });
 
                   Track currentTrack = widget._player.getCurrentTrack();
+                  List<Track> separatedTracks = List.from(widget._player.queueTracks);
                   widget._player.queueTracks =
-                      queueGenerator.createQueue(widget._player.queueTracks);
+                      queueGenerator.createQueue(separatedTracks);
                   widget._player.reproducingIndex =
                       widget._player.getTrackIndex(currentTrack);
                 });

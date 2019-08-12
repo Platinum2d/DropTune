@@ -65,22 +65,25 @@ class TrackEntry extends StatelessWidget {
               if (playlist != null &&
                   (_player.reproducingPlaylist == null ||
                       _player.reproducingPlaylist.compareTo(playlist) != 0)) {
+                List<Track> separatedTracks = List.from(playlist.tracks);
                 _player.queueTracks =
-                    queueGenerator.createQueue(playlist.tracks);
+                    queueGenerator.createQueue(separatedTracks);
                 _player.reproducingPlaylist = playlist;
               }
 
               if (album != null &&
                   (_player.reproducingAlbum == null ||
                       _player.reproducingAlbum.compareTo(album) != 0)) {
-                _player.queueTracks = queueGenerator.createQueue(album.tracks);
+                List<Track> separatedTracks = List.from(album.tracks);
+                _player.queueTracks = queueGenerator.createQueue(separatedTracks);
                 _player.reproducingAlbum = album;
               }
 
               if (author != null &&
                   (_player.reproducingAuthor == null ||
                       _player.reproducingAuthor.compareTo(author) != 0)) {
-                _player.queueTracks = queueGenerator.createQueue(author.tracks);
+                List<Track> separatedTracks = List.from(author.tracks);
+                _player.queueTracks = queueGenerator.createQueue(separatedTracks);
                 _player.reproducingAuthor = author;
               }
 

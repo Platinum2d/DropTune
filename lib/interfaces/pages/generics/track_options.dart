@@ -19,6 +19,7 @@ class TrackOptions extends StatefulWidget {
 
 class _TrackOptionsState extends State<TrackOptions> {
   bool _isSelectingPlaylist = false;
+  var padding = EdgeInsets.only(left: 20, right: 20, top: 15);
 
   Widget _buildImageAndTitle() {
     return SingleChildScrollView(
@@ -84,6 +85,7 @@ class _TrackOptionsState extends State<TrackOptions> {
       _buildTile(
           action: () {
             setState(() {
+              padding = EdgeInsets.only(top: 0);
               _isSelectingPlaylist = true;
             });
           },
@@ -113,8 +115,9 @@ class _TrackOptionsState extends State<TrackOptions> {
               action: () {
                 GetItReference.getIt
                     .get<DatabaseClient>()
-                    .deleteTrackFromPlaylist(widget.track, widget.playlist).then((nothing){
-                      Navigator.pop(context, {"removedFromPlaylist": true});
+                    .deleteTrackFromPlaylist(widget.track, widget.playlist)
+                    .then((nothing) {
+                  Navigator.pop(context, {"removedFromPlaylist": true});
                 });
               },
               leadingImage: AssetImage('assets/images/remove_icon.png'),
@@ -130,8 +133,8 @@ class _TrackOptionsState extends State<TrackOptions> {
             .get<DatabaseClient>()
             .insertTrackInPlaylist(widget.track, playlist)
             .then((nothing) {
-              if (widget.player.reproducingPlaylist.compareTo(playlist) == 0)
-                widget.player.addTrack(widget.track);
+          if (widget.player.reproducingPlaylist.compareTo(playlist) == 0)
+            widget.player.addTrack(widget.track);
           Navigator.pop(context);
         });
       },
@@ -152,15 +155,16 @@ class _TrackOptionsState extends State<TrackOptions> {
         await GetItReference.getIt.get<DatabaseClient>().fetchPlaylists();
     List<Widget> entries = [];
 
-    for (Playlist playlist in playlists) {
-      entries.add(_buildPlaylistEntry(playlist, context));
-      entries.add(Divider(
-        color: Colors.grey,
-      ));
+    if (playlists.length > 0) {
+      for (Playlist playlist in playlists) {
+        entries.add(_buildPlaylistEntry(playlist, context));
+        entries.add(Divider(
+          color: Colors.grey,
+        ));
+      }
+
+      entries.removeLast();
     }
-
-    entries.removeLast();
-
     return entries;
   }
 
@@ -173,7 +177,7 @@ class _TrackOptionsState extends State<TrackOptions> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(100), topRight: Radius.circular(100))),
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 15),
+          padding: padding,
           child: _isSelectingPlaylist
               ? FutureBuilder(
                   future: _buildPlaylistSelectingMenu(context),
@@ -181,11 +185,28 @@ class _TrackOptionsState extends State<TrackOptions> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       List<Widget> children = [
                         Padding(
-                          child: Text(
-                            "Playlist",
-                            style: TextStyle(fontSize: 18),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(text: '\nAdd '),
+                                TextSpan(
+                                    text: widget.track.name,
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                TextSpan(text: ' to a playlist'),
+                              ],
+                            ),
                           ),
-                          padding: EdgeInsets.only(bottom: 15),
+                          padding:
+                              EdgeInsets.only(bottom: 15, left: 15, right: 15),
+                        ),
+                        Divider(
+                          color: Colors.grey,
                         )
                       ];
                       children.addAll(snapshot.data);
