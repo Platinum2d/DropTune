@@ -23,7 +23,7 @@ class TracksList extends StatefulWidget {
       this.playlist,
       this.author,
       this.album,
-      this.showInitialShuffleItem = false});
+      this.showInitialShuffleItem = true});
 
   @override
   _TracksListState createState() => _TracksListState();

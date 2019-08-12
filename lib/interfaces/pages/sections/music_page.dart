@@ -43,7 +43,6 @@ class _MusicPageState extends State<MusicPage> with TickerProviderStateMixin {
               TracksList(
                 tracks: TrackUtils.getCachedAllTracks(),
                 playlist: PlaylistUtils.getMainPlaylistSignature(),
-                showInitialShuffleItem: true,
               ),
               AlbumsGrid(
                 albums: AlbumUtils.getCachedAllAlbums(),
