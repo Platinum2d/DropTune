@@ -1,15 +1,19 @@
+import 'package:droptune/interfaces/pages/queue_page_item.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/models/track.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QueuePage extends StatefulWidget {
   final List<Track> queue;
+  DroptunePlayer player;
 
   QueuePage(this.queue);
 
   @override
   State createState() {
+    player = GetItReference.getIt.get<DroptunePlayer>();
     return _QueuePageState();
   }
 }
@@ -25,34 +29,10 @@ class _QueuePageState extends State<QueuePage> {
   }
 
   Widget _buildTile(Track t) {
-    ListTile tile = ListTile(
+    return ChangeNotifierProvider(
       key: Key(t.id.toString()),
-      leading: CircleAvatar(
-        backgroundImage: t.coverImage,
-        radius: 25,
-      ),
-      title: Text(
-        t.name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        t.author.name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      trailing: Icon(Icons.reorder),
-    );
-
-    return t.compareTo(
-                GetItReference.getIt.get<DroptunePlayer>().getCurrentTrack()) !=
-            0
-        ? tile
-        : Container(
-            key: Key(t.id.toString()),
-            color: Colors.cyan,
-            child: tile,
-          );
+      builder: (context) => widget.player,
+      child: QueuePageItem(track: t,),);
   }
 
   @override
