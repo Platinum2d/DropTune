@@ -83,6 +83,7 @@ class DroptunePlayer with ChangeNotifier  {
     _reproducingIndex = index;
 
     audioPlayer.play(queueTracks[_reproducingIndex].path);
+    seekTo(Duration(seconds: 0));
     isReproducing = true;
     notifyListeners();
     _updateNotificationController();
