@@ -15,7 +15,7 @@ class _PlayingPagePauseResumeState extends State<PlayingPagePauseResume>
   void initState() {
     super.initState();
     _playPauseAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
   }
 
   @override
