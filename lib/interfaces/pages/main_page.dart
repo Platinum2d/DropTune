@@ -7,6 +7,7 @@ import 'package:droptune/interfaces/pages/sections/profile/profile_page.dart';
 import 'package:droptune/misc/droptune_player.dart';
 import 'package:droptune/misc/get_it_reference.dart';
 import 'package:droptune/misc/routing/routing.dart';
+import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/misc/utils/playlist_utils.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
@@ -62,7 +63,7 @@ class MainPage extends StatefulWidget {
   void _createNotificationController() async {
     await MediaNotification.show(
         play: false,
-        title: player.getCurrentTrack().name,
+        title: DroptuneUtils.trimTrackTitle(title: player.getCurrentTrack().name),
         author: player.getCurrentTrack().author.name);
 
     MediaNotification.setListener('pause', () {

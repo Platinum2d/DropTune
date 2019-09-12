@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:droptune/misc/queue_generators/queue_generator.dart';
 import 'package:droptune/misc/queue_generators/shuffled_queue_generator.dart';
 import 'package:droptune/misc/queue_generators/sorted_queue_generator.dart';
+import 'package:droptune/misc/utils/droptune_utils.dart';
 import 'package:droptune/models/album.dart';
 import 'package:droptune/models/author.dart';
 import 'package:droptune/models/playlist.dart';
@@ -210,7 +211,7 @@ class DroptunePlayer with ChangeNotifier  {
   void _updateNotificationController() async{
     await MediaNotification.show(
         play: isReproducing,
-        title: getCurrentTrack().name,
+        title: DroptuneUtils.trimTrackTitle(title: getCurrentTrack().name),
         author: getCurrentTrack().author.name);
   }
 
