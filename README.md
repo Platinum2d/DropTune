@@ -1,6 +1,8 @@
-# droptune
+<img src="https://github.com/Platinum2d/Droptune/blob/master/assets/images/droptune_logo.png" height="300" width="300">
 
-Droptune official application
+Droptune official repository
+
+## A simple and fast Flutter music reproducer
 
 ## Getting Started
 
